@@ -16,6 +16,7 @@ This container can be used to install snakemake and conda and facilitate the ins
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Update base OS packages (always necessary) and install wget
     apt-get -y update
+    apt-get -y update -q
     apt-get -y install wget
 
 # Download
@@ -25,8 +26,9 @@ This container can be used to install snakemake and conda and facilitate the ins
     ./miniconda.sh -b -p /home/vagrant/miniconda
     export PATH=/root/miniconda3/bin:$PATH
     echo 'export PATH="/home/vagrant/miniconda/bin:$PATH"' >> /home/vagrant/.bashrc
-    source /home/vagrant/.bashrc
-    chown -R vagrant:vagrant /home/vagrant/miniconda
+    . /home/vagrant/.bashrc
+    ls /home/vagrant
+    chown -R $USER /home/vagrant/miniconda
 
 # Conda channel configuration
     conda config --add channels defaults
