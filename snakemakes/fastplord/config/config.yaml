@@ -1,0 +1,16 @@
+###Configuration for aribalord
+
+# path to output
+output : /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/kraken2
+# path to reads (no slash at end)
+read_path : /projects/AusGEM/i3_genomes/UoW_Salmonella_all
+# standard gene databases to use for ariba
+krakendb: ['']
+
+# MLST scheme to use
+mlst_dbs: ['Escherichia coli#1']
+
+# the output name you want for your MLST DB
+mlst_names: ['EC1']
+
+

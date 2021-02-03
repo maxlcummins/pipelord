@@ -1,24 +1,24 @@
 ### General configuration variables                                                                                                              # general
 # Prefix for output files - here the collection name or an abbreviation for the relevant manuscript might be a good choice                       # general   
-prefix: ST95_all                                                                                                                          # general
+prefix: test                                                                                                                          # general
 # Path to project directory where you want your output to go                                                                                     # general
 # Path to short-reads. Here it is assumed that your reads are set up as read pairs - analysis is unlikely to work if this isnt the case.         # general
-raw_reads:                                                                                        # general
+raw_reads: test_data/assemblies                                                                                   # general
 # Path to assemblies. These may be your initial input as sometimes it can be hard to source read for large collections                           # general
-assemblies: /projects/AusGEM/Users/Max/Manuscripts/ST95/data/assemblies/ST95_all                                         # general
+assemblies: test_data/assemblies                                        # general
 # Path to blast executable                                                                                                                       # general
 blast_bin: /usr/local/ncbi-blast-2.8.1+/bin
 # Path to master output directory
 outdir: /projects/AusGEM/Users/Max/Manuscripts/ST95/output                                                                                              # general
 # Filtered reads (via fastp)
-reads:
+reads: test_data/assemblies
 
 ### Kraken2lord
 krakendb: /projects/AusGEM/databases/kraken2/bacteria
 
 ### Abricatelord                                                                                                                                # abricatelord
 # Path to gene db location                                                                                                                      # abricatelord
-gene_db_location: /home/malcummi/Data/miniconda3/envs/abricate/db                                                                               # abricatelord
+gene_db_location:                                                                                # abricatelord
 # Name of gene databases you want to screen for                                                                                                 # abricatelord
 gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', 'pCERC4', 'pAPEC_O1_ColBM', 'pAPEC_O2_ColV', 'pUTI89','pBCE049_1','pSF_088_nores','pU1_F51_B10'] # abricatelord                                                                                                                         # abricatelord
 #gene_dbs: ['EC_custom']
