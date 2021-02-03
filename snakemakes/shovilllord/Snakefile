@@ -17,7 +17,7 @@ rule shovill:
     input:
         r1 = config['reads']+"/{sample}.R1.fastq.gz",
         r2 = config['reads']+"/{sample}.R2.fastq.gz"
-    output:      
+    output:
         directory(config['outdir']+"/{prefix}/shovill"+"/assemblies/{sample}.out")
     #log:
         #config['outdir']+"shovill"+"/logs/shovill{sample}.log"

@@ -2,7 +2,7 @@ import re
 import subprocess
 import os
 
-configfile: "/projects/AusGEM/Users/Max/Manuscripts/ST95/snakemake/masterconfigs/masterconfig_plasdb.yaml"
+configfile: "misc/masterconfig.yaml"
 
 # Get assemblies
 sample_ids, = glob_wildcards(config['assemblies']+"/{sample}.fasta")
