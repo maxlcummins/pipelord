@@ -9,7 +9,7 @@ assemblies: test_data/assemblies                                        # genera
 # Path to blast executable                                                                                                                       # general
 blast_bin: /usr/local/ncbi-blast-2.8.1+/bin
 # Path to master output directory
-outdir: /projects/AusGEM/Users/Max/Manuscripts/ST95/output                                                                                              # general
+outdir: test_data/output                                                                                          # general
 # Filtered reads (via fastp)
 reads: test_data/assemblies
 
