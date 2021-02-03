@@ -8,6 +8,8 @@ configfile: "misc/masterconfig.yaml"
 sample_ids, = glob_wildcards(config['raw_reads']+"/{sample}.R1.fastq.gz")
 prefix = config['prefix']
 
+logs = config['base_log_outdir']
+
 print(sample_ids)
 
 # one rule to rule them all
@@ -26,6 +28,8 @@ rule run_fastp:
         r2_filt = config['outdir']+"/{prefix}/fastp/{sample}.R2.fastq.gz",
         json = config['outdir']+"/{prefix}/fastp/{sample}.fastp.json",
         html = config['outdir']+"/{prefix}/fastp/{sample}.fastp.html"
+    log:
+        config['base_log_outdir']+"/fastp/run"
     conda:
         "config/fastp.yaml"
     priority: 9

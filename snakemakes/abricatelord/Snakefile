@@ -12,6 +12,9 @@ maxthreads = snakemake.utils.available_cpu_count()
 db_location = config['gene_db_location']
 gene_dbs = expand(config['gene_dbs'])
 
+logs = config['base_log_outdir']
+
+
 
 # if os.path.isdir('data/databases/custom'):
 #    print('Custom DBs already downloaded')
@@ -42,6 +45,8 @@ rule abricate_run:
         assembly = config['assemblies']+"/{sample}.fasta",
     output:
         config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab"
+    log:
+        config['base_log_outdir']+"/abricate/run"
     conda:
         "config/abricate.yaml"
     threads:
@@ -60,6 +65,8 @@ rule summarise:
         config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab"
     output:
         config['outdir']+"/{prefix}/abricate/"+"{gene_db}.txt"
+    log:
+        config['base_log_outdir']+"/abricate/summarise"
     conda:
         "config/abricate.yaml"
     threads:

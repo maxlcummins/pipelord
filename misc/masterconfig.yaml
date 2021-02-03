@@ -9,18 +9,23 @@ assemblies: test_data/assemblies                                        # genera
 # Path to blast executable                                                                                                                       # general
 blast_bin: /usr/local/ncbi-blast-2.8.1+/bin
 # Path to master output directory
-outdir: /projects/AusGEM/Users/Max/Manuscripts/ST95/output                                                                                              # general
+outdir: test_data/output                                                                                          # general
 # Filtered reads (via fastp)
 reads: test_data/assemblies
 
+# Base output directory for logs
+base_log_outdir: test_data/logs
+
+
 ### Kraken2lord
-krakendb: /projects/AusGEM/databases/kraken2/bacteria
+krakendb: 
+
 
 ### Abricatelord                                                                                                                                # abricatelord
 # Path to gene db location                                                                                                                      # abricatelord
 gene_db_location:                                                                                # abricatelord
 # Name of gene databases you want to screen for                                                                                                 # abricatelord
-gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', 'pCERC4', 'pAPEC_O1_ColBM', 'pAPEC_O2_ColV', 'pUTI89','pBCE049_1','pSF_088_nores','pU1_F51_B10'] # abricatelord                                                                                                                         # abricatelord
+gene_dbs: #['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', 'pCERC4', 'pAPEC_O1_ColBM', 'pAPEC_O2_ColV', 'pUTI89','pBCE049_1','pSF_088_nores','pU1_F51_B10'] # abricatelord                                                                                                                         # abricatelord
 #gene_dbs: ['EC_custom']
 # Minimum nucleotide ID (default for abricate is 75)                                                                                            # abricatelord
 abricate_minimum_id: 75                                                                                                                         # abricatelord

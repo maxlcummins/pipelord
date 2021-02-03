@@ -1,8 +1,9 @@
-configfile:
-    "/home/malcummi/Data/pipelord/combined_config.yaml"
-    #"/projects/AusGEM/Djordjevic_genomes/config.yaml"
+configfile: "misc/masterconfig.yaml"
+
 sample_ids, = glob_wildcards(config['reads']+"/{sample}.R1.fastq.gz")
 prefix = config['prefix']
+
+logs = config['base_log_outdir']
 
 
 print(sample_ids,)
@@ -13,14 +14,14 @@ rule all:
         expand(config['outdir']+"/{prefix}/shovill"+"/final_assemblies/{sample}.fasta", sample=sample_ids, prefix=prefix)
 
 
-rule shovill:
+rule shovill_run:
     input:
         r1 = config['reads']+"/{sample}.R1.fastq.gz",
         r2 = config['reads']+"/{sample}.R2.fastq.gz"
     output:
         directory(config['outdir']+"/{prefix}/shovill"+"/assemblies/{sample}.out")
-    #log:
-        #config['outdir']+"shovill"+"/logs/shovill{sample}.log"
+    log:
+        config['base_log_outdir']+"/shovill/run"
     conda:
         "config/shovill.yaml"
     shell:
@@ -33,6 +34,8 @@ rule rename:
         config['outdir']+"/{prefix}/shovill"+"/assemblies/{sample}.out"
     output:
         config['outdir']+"/{prefix}/shovill"+"/final_assemblies/{sample}.fasta"
+    log:
+        config['base_log_outdir']+"/shovill/rename"
     shell:
         "cp {input}/contigs.fa {output}"
 
