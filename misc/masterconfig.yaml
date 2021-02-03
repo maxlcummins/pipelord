@@ -3,7 +3,7 @@
 prefix: test                                                                                                                          # general
 # Path to project directory where you want your output to go                                                                                     # general
 # Path to short-reads. Here it is assumed that your reads are set up as read pairs - analysis is unlikely to work if this isnt the case.         # general
-raw_reads: test_data/assemblies                                                                                   # general
+raw_reads: test_data/reads                                                                                   # general
 # Path to assemblies. These may be your initial input as sometimes it can be hard to source read for large collections                           # general
 assemblies: test_data/assemblies                                        # general
 # Path to blast executable                                                                                                                       # general
