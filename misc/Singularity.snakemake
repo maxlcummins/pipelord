@@ -7,8 +7,8 @@ AUTHOR max.cummins@uts.edu.au
 %help
 This container can be used to install snakemake and conda and facilitate the installation and running of snakemake workflows in pipelord2.0
 
-%files
-
+%environment
+export PATH=/root/miniconda3/bin:$PATH
 
 %post
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -16,19 +16,13 @@ This container can be used to install snakemake and conda and facilitate the ins
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Update base OS packages (always necessary) and install wget
     apt-get -y update
-    apt-get -y update -q
     apt-get -y install wget
 
 # Download
-    mkdir -p ~/miniconda3
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
     chmod +x miniconda.sh
-    ./miniconda.sh -b -p /home/vagrant/miniconda
+    ./miniconda.sh -b -p /root/miniconda3
     export PATH=/root/miniconda3/bin:$PATH
-    echo 'export PATH="/home/vagrant/miniconda/bin:$PATH"' >> /home/vagrant/.bashrc
-    . /home/vagrant/.bashrc
-    ls /home/vagrant
-    chown -R $USER /home/vagrant/miniconda
 
 # Conda channel configuration
     conda config --add channels defaults
