@@ -2,7 +2,7 @@ import re
 import subprocess
 import os
 
-configfile: "pipelord2.0/misc/masterconfig.yaml"
+configfile: "misc/masterconfig.yaml"
 
 # Get raw_reads
 sample_ids, = glob_wildcards(config['raw_reads']+"/{sample}.R1.fastq.gz")
