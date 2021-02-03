@@ -1,0 +1,22 @@
+##Configuration file for abricatelord
+#Path to assemblies to be screened by abricate
+#assemblies: /home/malcummi/Data/Manuscripts/2020/AVC171/AVC171/assemblies/HC50_1106
+assemblies: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/shovill/final_assemblies
+#Path to gene db location
+gene_db_location: /home/malcummi/Data/miniconda3/envs/abricate/db
+#Name of gene databases you want to screen for
+#gene_dbs: ['ISfinder_Feb_2020','EC_custom_Feb_2020', 'card', 'plasmidfinder', 'ecoh', 'ncbi', 'vfdb', 'colV_zoetis', 'Salmonella_PIAs']
+#gene_dbs: ['ISfinder_Feb_2020','EC_custom_Feb_2020', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis']
+#working on line below
+#gene_dbs: ['pAVC171-IncF','ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis']
+gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', colV_zoetis, 'Salmonella_PIAs']
+#ST95 Manuscript #gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', 'pCERC4', 'pAPEC_O1_ColBM', 'pAPEC_O2_ColV', 'pUTI89','pBCE049_1','pSF_088_nores','pU1_F51_B10']
+#Output directory path (should end in '/')
+#outdir: /home/malcummi/Data/Manuscripts/2020/AVC171/other_analysis/Steve_848/
+outdir: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/abricate/
+#Output prefix
+prefix: Salmonella
+#minimum nucleotide ID (default for abricate is 75)
+minimum_id: 75
+#minimum coverage (default for abricate is 0)
+minimum_id: 0

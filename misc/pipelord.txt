@@ -1,0 +1,26 @@
+Bootstrap: docker
+From: continuumio/miniconda3:4.4.10
+
+%labels
+AUTHOR max.cummins@uts.edu.au
+
+%help
+This container can be used to install snakemake and conda and facilitate the installation and running of snakemake workflows in pipelord2.0
+
+%environment
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# This sets global environment variables for anything run within the container
+export PATH="/opt/conda/bin:/usr/local/bin:/usr/bin:/bin:"
+unset CONDA_DEFAULT_ENV
+export ANACONDA_HOME=/opt/conda
+
+%post
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# This is going to be executed after the base container has been downloaded
+export PATH=/opt/conda/bin:$PATH
+conda config --add channels defaults
+conda config --add channels conda-forge
+conda config --add channels bioconda
+conda install --yes snakemake=5.32.0
+conda install --yes -c anaconda git
+conda clean --index-cache --tarballs --packages --yes

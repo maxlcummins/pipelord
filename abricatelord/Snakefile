@@ -1,0 +1,70 @@
+import re
+import subprocess
+import os
+
+configfile: "/projects/AusGEM/Users/Max/Manuscripts/ST95/snakemake/masterconfigs/masterconfig_plasdb.yaml"
+
+# Get assemblies
+sample_ids, = glob_wildcards(config['assemblies']+"/{sample}.fasta")
+prefix = config['prefix']
+maxthreads = snakemake.utils.available_cpu_count()
+
+db_location = config['gene_db_location']
+gene_dbs = expand(config['gene_dbs'])
+
+
+# if os.path.isdir('data/databases/custom'):
+#    print('Custom DBs already downloaded')
+#
+# else:
+#    subprocess.call("mkdir -p data/databases/custom", shell=True)
+#    subprocess.call("wget https://raw.githubusercontent.com/CJREID/custom_DBs/master/EC_custom.fa -O data/databases/custom/EC_custom.fa", shell=True)
+#    subprocess.call("wget https://raw.githubusercontent.com/CJREID/custom_DBs/master/E_coli_phylogroup.fa -O data/databases/custom/E_coli_phylogroup.fa", shell=True)
+#    subprocess.call("wget https://raw.githubusercontent.com/CJREID/custom_DBs/master/srst2_EcOH.fa -O data/databases/custom/srst2_EcOH.fa", shell=True)
+#
+#
+#custom_dbs, = glob_wildcards("data/databases/custom/{custom_db}.fa")
+
+print(sample_ids)
+print(db_location)
+print(gene_dbs)
+
+
+rule all:
+    input:
+        expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab",
+               sample=sample_ids, gene_db=gene_dbs, prefix=prefix),
+        #expand(config['outdir']+"/{prefix}/abricate/"+"{gene_db}.txt", prefix=prefix, gene_db=gene_dbs)
+
+rule abricate_run:
+    input:
+        # db = "{gene_db}", gene_db=gene_dbs,
+        assembly = config['assemblies']+"/{sample}.fasta",
+    output:
+        config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab"
+    conda:
+        "config/abricate.yaml"
+    threads:
+        6
+    params:
+        db = "{gene_db}", gene_db = gene_dbs,
+        datadir = config['gene_db_location'],
+        #minid = config['minimum_id'],
+        #mincov = config['minimum_cov']
+    shell:
+        "abricate --nopath --datadir {params.datadir} --db {params.db} {input.assembly} > {output}"
+
+# in beta
+rule summarise:
+    input:
+        config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab"
+    output:
+        config['outdir']+"/{prefix}/abricate/"+"{gene_db}.txt"
+    conda:
+        "config/abricate.yaml"
+    threads:
+        maxthreads
+    params:
+        gene_db = config['outdir']+"/{gene_db}/abricate"
+    shell:
+        "abricate --summary {params.gene_db}/*/*.tab >> {output}"

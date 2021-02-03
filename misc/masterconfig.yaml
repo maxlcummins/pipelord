@@ -1,0 +1,1006 @@
+### General configuration variables                                                                                                              # general
+# Prefix for output files - here the collection name or an abbreviation for the relevant manuscript might be a good choice                       # general   
+prefix: ST95_all                                                                                                                          # general
+# Path to project directory where you want your output to go                                                                                     # general
+# Path to short-reads. Here it is assumed that your reads are set up as read pairs - analysis is unlikely to work if this isnt the case.         # general
+raw_reads:                                                                                        # general
+# Path to assemblies. These may be your initial input as sometimes it can be hard to source read for large collections                           # general
+assemblies: /projects/AusGEM/Users/Max/Manuscripts/ST95/data/assemblies/ST95_all                                         # general
+# Path to blast executable                                                                                                                       # general
+blast_bin: /usr/local/ncbi-blast-2.8.1+/bin
+# Path to master output directory
+outdir: /projects/AusGEM/Users/Max/Manuscripts/ST95/output                                                                                              # general
+# Filtered reads (via fastp)
+reads:
+
+### Kraken2lord
+krakendb: /projects/AusGEM/databases/kraken2/bacteria
+
+### Abricatelord                                                                                                                                # abricatelord
+# Path to gene db location                                                                                                                      # abricatelord
+gene_db_location: /home/malcummi/Data/miniconda3/envs/abricate/db                                                                               # abricatelord
+# Name of gene databases you want to screen for                                                                                                 # abricatelord
+gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', 'pCERC4', 'pAPEC_O1_ColBM', 'pAPEC_O2_ColV', 'pUTI89','pBCE049_1','pSF_088_nores','pU1_F51_B10'] # abricatelord                                                                                                                         # abricatelord
+#gene_dbs: ['EC_custom']
+# Minimum nucleotide ID (default for abricate is 75)                                                                                            # abricatelord
+abricate_minimum_id: 75                                                                                                                         # abricatelord
+# Minimum coverage (default for abricate is 0)                                                                                                  # abricatelord
+abricate_minimum_id: 0                                                                                                                          # abricatelord
+
+###Configuration for BLASTlord                                                                                                                  # BLASTlord
+# Path to blast databases:                                                                                                                       # BLASTlord
+BLAST_dbs: /home/malcummi/Data/BlastDBs                                                                                                         # BLASTlord
+# Path to blast directory:                                                                                                                      # BLASTlord
+#outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/enterobase_poultry/pUTI89                                                 # BLASTlord
+
+#Configuration for BIGSI
+bigsi_refseq: /projects/AusGEM/Users/Max/Manuscripts/ST95/data/bigsi
+
+
+
+# #path to bin with blast executables:
+# blast_bin: /usr/local/ncbi-blast-2.8.1+/bin
+# ##Configuration file for pointfinderlord
+# #Path to assemblies to be screened by pointfinder
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pointfinder
+# #Output prefix
+# prefix: AVC171_all
+# #Species
+# #E. coli
+# species: "-s escherichia_coli"
+# #species: "-s salmonella"
+# #Use the one below where you have multiple species
+# #species: ""
+# ###Configuration for aribalord
+
+# # path to output
+# output : /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/kraken2
+# # path to reads (no slash at end)
+# read_path : /projects/AusGEM/i3_genomes/UoW_Salmonella_all
+# # standard gene databases to use for ariba
+# krakendb: ['']
+
+# # MLST scheme to use
+# mlst_dbs: ['Escherichia coli#1']
+
+# # the output name you want for your MLST DB
+# mlst_names: ['EC1']
+
+
+# ###Configuration for pangenomelord
+# Use genus if you have a collection all of the same genus.
+# If you want to use genus unhash the usegenus and genus lines immediately below. 
+# Make sure you also hash the second instance of usegenus and genus below so there is only one value for each in this script.
+# Also make sure to replace the genus appropriately
+#usegenus: '--usegenus --genus '
+genus: '--usegenus --genus Escherichia --species coli'
+# Use below if you don't have a collection all of the same genus.
+# #genus: ' '
+# Percent of samples a gene must be in to be considered core. Defaults to 99 in Roary
+roary_core_req: 99
+# param: '--compliant --centre '
+#     #Here you should configure the max number of threads so that we can parallelize with '-j'. You should know how many CPUs you have on the cluster you are working on.
+#     #If you do not you can exit this and type the command 'lscpus' or check at https://ihpc.research.uts.edu.au/pages/about/hardware
+# max_threads: 36
+# ##Configuration file for abricatelord
+# #Path to assemblies to be screened by abricate
+# #assemblies: /home/malcummi/Data/Manuscripts/2020/AVC171/AVC171/assemblies/HC50_1106
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path (should end in '/')
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/phagelord/ST95_all/
+# #Path to phastaf bin (make sure it ends in a /)
+# phastaf_exec_path: /home/malcummi/Data/tools/phastaf/bin/
+
+# ###Configuration for bwa_samtools workflow
+
+# # path to reads
+# read_path: /home/mlcummin/Data/Snakemake_workflows/SRA_download/BIGSI
+
+# #path to reference fasta
+# ref_path: /home/mlcummin/Data/plasmidlord/SGI1_variants
+
+# #path to output
+# output: /home/mlcummin/BIGSI_SGI1_analysis
+
+# # plasmidlord.py options
+# bin_size: 250
+# tick_size: 100
+
+# ##Configuration file for pMLSTlord
+# #Path to assemblies to be screened by pMLSTlord
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pMLST
+# #Output prefix
+# prefix: AVC171_all
+# #Scheme
+# #incF
+# pmlst_scheme: "incf"
+# #Reads or assemblies
+# #Below is for fastas. If you want to use reads, unhash the line below it and replace it with the path the kma
+# input_type: "-mp /usr/local/ncbi-blast-ihpc-2.8.1+/bin/blastn"
+# #input_type: ""##Configuration file for pointfinderlord
+
+### Pointfinder config
+# #Species
+# #E. coli
+pointfinder_species: "-s escherichia_coli"
+# #pointfinder_species: "-s salmonella"
+# #Use the one below where you have multiple species
+# #pointfinder_species: ""
+
+
+# ###Configuration file
+# #
+# ## path to reads - do not end in a slash
+# reads : /projects/AusGEM/i3_genomes/UoW_Salmonella_all
+# #
+# ##path to output directory - do not end in a slash:
+# output : /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/shovill
+# #
+# ##Configuration file for sistrlord
+# #Path to assemblies to be screened by sistr
+# #Path to assemblies. No slash at the end.
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/Enterobase_wild_animal_Senftenbergs/
+# #Path to output directory. 
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/exploration/enterobase_wild_animal_senftenbergs
+# #Prefix for output file
+# prefix: Salmonella##Configuration file for abricatelord
+# #Path to assemblies to be screened by abricate
+# #assemblies: /home/malcummi/Data/Manuscripts/2020/AVC171/AVC171/assemblies/HC50_1106
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/shovill/final_assemblies
+# #Path to gene db location
+# gene_db_location: /home/malcummi/Data/miniconda3/envs/abricate/db
+# #Name of gene databases you want to screen for
+# #gene_dbs: ['ISfinder_Feb_2020','EC_custom_Feb_2020', 'card', 'plasmidfinder', 'ecoh', 'ncbi', 'vfdb', 'colV_zoetis', 'Salmonella_PIAs']
+# #gene_dbs: ['ISfinder_Feb_2020','EC_custom_Feb_2020', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis']
+# #working on line below
+# #gene_dbs: ['pAVC171-IncF','ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis']
+# gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', colV_zoetis, 'Salmonella_PIAs']
+# #ST95 Manuscript #gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', 'pCERC4', 'pAPEC_O1_ColBM', 'pAPEC_O2_ColV', 'pUTI89','pBCE049_1','pSF_088_nores','pU1_F51_B10']
+# #Output directory path (should end in '/')
+# #outdir: /home/malcummi/Data/Manuscripts/2020/AVC171/other_analysis/Steve_848/
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/abricate/
+# #Output prefix
+# prefix: Salmonella
+# #minimum nucleotide ID (default for abricate is 75)
+# minimum_id: 75
+# #minimum coverage (default for abricate is 0)
+# minimum_id: 0
+# ###Configuration for aribalord
+
+# # path to output
+# output : /home/mlcummin/Data/Manuscripts/Femoral_Head_2019/output/ariba
+# # path to reads
+# read_path : /home/mlcummin/Data/Manuscripts/Femoral_Head_2019/reads
+# # standard gene databases to use for ariba
+# gene_dbs: ['plasmidfinder', 'resfinder', 'virulencefinder']
+
+# # MLST scheme to use
+# mlst_dbs: ['Escherichia coli#1']
+
+# # the output name you want for your MLST DB
+# mlst_names: ['EC1']
+
+
+# ###Configuration for aribalord
+
+# # path to output
+# output: /Users/maxcummins/test_curl/BIGSIlord/output
+
+# # path to reads
+# fasta: /Users/maxcummins/test_curl/BIGSIlord/References
+
+
+# ###Configuration for bwa_samtools workflow
+
+# # path to reads:
+# assembly_path: /projects/AusGEM/ColV/Poultry_only
+
+# #path to blast databases:
+# ref_dbs: /home/malcummi/Data/BlastDBs
+
+# #path to output directory:
+# output: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/enterobase_poultry/pUTI89
+
+# #path to bin with blast executables:
+# blast_bin: /usr/local/ncbi-blast-2.8.1+/bin
+# ##Configuration file for pointfinderlord
+# #Path to assemblies to be screened by pointfinder
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pointfinder
+# #Output prefix
+# prefix: AVC171_all
+# #Species
+# #E. coli
+# species: "-s escherichia_coli"
+# #species: "-s salmonella"
+# #Use the one below where you have multiple species
+# #species: ""
+# ###Configuration for aribalord
+
+# # path to output
+# output : /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/kraken2
+# # path to reads (no slash at end)
+# read_path : /projects/AusGEM/i3_genomes/UoW_Salmonella_all
+# # standard gene databases to use for ariba
+# krakendb: ['']
+
+# # MLST scheme to use
+# mlst_dbs: ['Escherichia coli#1']
+
+# # the output name you want for your MLST DB
+# mlst_names: ['EC1']
+
+
+# ###Configuration for pangenomelord
+
+#     # path to reads
+# assembly_path: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/HC50_1106
+#     #path to output directory:
+# output: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pangenome/HC50_1106
+#     # Use genus if you have a collection all of the same genus.
+#     # If you want to use genus unhash the usegenus and genus lines immediately below. 
+#     # Make sure you also hash the second instance of usegenus and genus below so there is only one value for each in this script.
+#     # Also make sure to replace the genus appropriately
+#     #usegenus: '--usegenus --genus '
+# genus: '--usegenus --genus Escherichia --species coli'
+#     # Use below if you don't have a collection all of the same genus.
+# #genus: ' '
+
+# param: '--compliant --centre '
+#     #Here you should configure the max number of threads so that we can parallelize with '-j'. You should know how many CPUs you have on the cluster you are working on.
+#     #If you do not you can exit this and type the command 'lscpus' or check at https://ihpc.research.uts.edu.au/pages/about/hardware
+# max_threads: 36
+# ##Configuration file for abricatelord
+# #Path to assemblies to be screened by abricate
+# #assemblies: /home/malcummi/Data/Manuscripts/2020/AVC171/AVC171/assemblies/HC50_1106
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path (should end in '/')
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/phagelord/ST95_all/
+# #Path to phastaf bin (make sure it ends in a /)
+# phastaf_exec_path: /home/malcummi/Data/tools/phastaf/bin/
+
+
+# # path to assemblies
+# assemblies: /home/malcummi/Data/Manuscripts/Femoral_Head_2019/output/assemblies/final_assemblies
+
+# #path for output
+# output : /home/malcummi/Data/Manuscripts/Femoral_Head_2019/output/phylosift
+
+# #path to phylosift
+# phylosift: /home/malcummi/Data/PhyloSift
+# ###Configuration for bwa_samtools workflow
+
+# # path to reads
+# read_path: /home/mlcummin/Data/Snakemake_workflows/SRA_download/BIGSI
+
+# #path to reference fasta
+# ref_path: /home/mlcummin/Data/plasmidlord/SGI1_variants
+
+# #path to output
+# output: /home/mlcummin/BIGSI_SGI1_analysis
+
+# # plasmidlord.py options
+# bin_size: 250
+# tick_size: 100
+
+# ##Configuration file for pMLSTlord
+# #Path to assemblies to be screened by pMLSTlord
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pMLST
+# #Output prefix
+# prefix: AVC171_all
+# #Scheme
+# #incF
+# pmlst_scheme: "incf"
+# #Reads or assemblies
+# #Below is for fastas. If you want to use reads, unhash the line below it and replace it with the path the kma
+# input_type: "-mp /usr/local/ncbi-blast-ihpc-2.8.1+/bin/blastn"
+# #input_type: ""##Configuration file for pointfinderlord
+# #Path to assemblies to be screened by pointfinder
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pointfinder
+# #Output prefix
+# prefix: AVC171_all
+# #Species
+# #E. coli
+# species: "-s escherichia_coli"
+# #species: "-s salmonella"
+# #Use the one below where you have multiple species
+# #species: ""
+# ###Configuration file
+# #
+# ## path to reads - do not end in a slash
+# reads : /projects/AusGEM/i3_genomes/UoW_Salmonella_all
+# #
+# ##path to output directory - do not end in a slash:
+# output : /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/shovill
+# #
+# ##Configuration file for sistrlord
+# #Path to assemblies to be screened by sistr
+# #Path to assemblies. No slash at the end.
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/Enterobase_wild_animal_Senftenbergs/
+# #Path to output directory. 
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/exploration/enterobase_wild_animal_senftenbergs
+# #Prefix for output file
+# prefix: Salmonella
+
+##Configuration file for snippy_snakemake
+# #Path to read directory
+# reads: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/Agona_200/
+# #Path to assemblies to be used in snippy. These must end in ".fasta"
+# assemblies: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/Agona_no_ref
+# #Path to directory containing reference fasta file/s. This can be the same as your reads folder or just a folder called 'ref' in your snplord folder.
+# #Note: Reference must be formatted to end in ".fa", not ".fasta", ".fsa" or anything else.
+snp_refs: /projects/AusGEM/Users/Max/Manuscripts/ST95/data/refs_ST95_all_snp
+#Gubbins params
+params: -f 25
+
+
+
+
+    
+
+# sample_ids : /home/mlcummin/Data/Manuscripts/Ronnie_German/accessions/ST635_Max.txt 
+
+# output : /home/mlcummin/Data/Manuscripts/Ronnie_German/reads/ST635
+
+
+# ##Configuration file for abricatelord
+# #Path to assemblies to be screened by abricate
+# #assemblies: /home/malcummi/Data/Manuscripts/2020/AVC171/AVC171/assemblies/HC50_1106
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/shovill/final_assemblies
+# #Path to gene db location
+# gene_db_location: /home/malcummi/Data/miniconda3/envs/abricate/db
+# #Name of gene databases you want to screen for
+# #gene_dbs: ['ISfinder_Feb_2020','EC_custom_Feb_2020', 'card', 'plasmidfinder', 'ecoh', 'ncbi', 'vfdb', 'colV_zoetis', 'Salmonella_PIAs']
+# #gene_dbs: ['ISfinder_Feb_2020','EC_custom_Feb_2020', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis']
+# #working on line below
+# #gene_dbs: ['pAVC171-IncF','ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis']
+# gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', colV_zoetis, 'Salmonella_PIAs']
+# #ST95 Manuscript #gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', 'pCERC4', 'pAPEC_O1_ColBM', 'pAPEC_O2_ColV', 'pUTI89','pBCE049_1','pSF_088_nores','pU1_F51_B10']
+# #Output directory path (should end in '/')
+# #outdir: /home/malcummi/Data/Manuscripts/2020/AVC171/other_analysis/Steve_848/
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/abricate/
+# #Output prefix
+# prefix: Salmonella
+# #minimum nucleotide ID (default for abricate is 75)
+# minimum_id: 75
+# #minimum coverage (default for abricate is 0)
+# minimum_id: 0
+# \n
+# ###Configuration for aribalord
+
+# # path to output
+# output : /home/mlcummin/Data/Manuscripts/Femoral_Head_2019/output/ariba
+# # path to reads
+# read_path : /home/mlcummin/Data/Manuscripts/Femoral_Head_2019/reads
+# # standard gene databases to use for ariba
+# gene_dbs: ['plasmidfinder', 'resfinder', 'virulencefinder']
+
+# # MLST scheme to use
+# mlst_dbs: ['Escherichia coli#1']
+
+# # the output name you want for your MLST DB
+# mlst_names: ['EC1']
+
+
+# \n
+# ###Configuration for aribalord
+
+# # path to output
+# output: /Users/maxcummins/test_curl/BIGSIlord/output
+
+# # path to reads
+# fasta: /Users/maxcummins/test_curl/BIGSIlord/References
+
+
+# \n
+# ###Configuration for bwa_samtools workflow
+
+# # path to reads:
+# assembly_path: /projects/AusGEM/ColV/Poultry_only
+
+# #path to blast databases:
+# ref_dbs: /home/malcummi/Data/BlastDBs
+
+# #path to output directory:
+# output: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/enterobase_poultry/pUTI89
+
+# #path to bin with blast executables:
+# blast_bin: /usr/local/ncbi-blast-2.8.1+/bin
+# \n
+# \n
+# ##Configuration file for pointfinderlord
+# #Path to assemblies to be screened by pointfinder
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pointfinder
+# #Output prefix
+# prefix: AVC171_all
+# #Species
+# #E. coli
+# species: "-s escherichia_coli"
+# #species: "-s salmonella"
+# #Use the one below where you have multiple species
+# #species: ""
+# \n
+# ###Configuration for aribalord
+
+# # path to output
+# output : /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/kraken2
+# # path to reads (no slash at end)
+# read_path : /projects/AusGEM/i3_genomes/UoW_Salmonella_all
+# # standard gene databases to use for ariba
+# krakendb: ['']
+
+# # MLST scheme to use
+# mlst_dbs: ['Escherichia coli#1']
+
+# # the output name you want for your MLST DB
+# mlst_names: ['EC1']
+
+
+# \n
+# ###Configuration for pangenomelord
+
+#     # path to reads
+# assembly_path: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/HC50_1106
+#     #path to output directory:
+# output: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pangenome/HC50_1106
+#     # Use genus if you have a collection all of the same genus.
+#     # If you want to use genus unhash the usegenus and genus lines immediately below. 
+#     # Make sure you also hash the second instance of usegenus and genus below so there is only one value for each in this script.
+#     # Also make sure to replace the genus appropriately
+#     #usegenus: '--usegenus --genus '
+# genus: '--usegenus --genus Escherichia --species coli'
+#     # Use below if you don't have a collection all of the same genus.
+# #genus: ' '
+
+# param: '--compliant --centre '
+#     #Here you should configure the max number of threads so that we can parallelize with '-j'. You should know how many CPUs you have on the cluster you are working on.
+#     #If you do not you can exit this and type the command 'lscpus' or check at https://ihpc.research.uts.edu.au/pages/about/hardware
+# max_threads: 36
+# \n
+# ##Configuration file for abricatelord
+# #Path to assemblies to be screened by abricate
+# #assemblies: /home/malcummi/Data/Manuscripts/2020/AVC171/AVC171/assemblies/HC50_1106
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path (should end in '/')
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/phagelord/ST95_all/
+# #Path to phastaf bin (make sure it ends in a /)
+# phastaf_exec_path: /home/malcummi/Data/tools/phastaf/bin/
+
+# \n
+
+# # path to assemblies
+# assemblies: /home/malcummi/Data/Manuscripts/Femoral_Head_2019/output/assemblies/final_assemblies
+
+# #path for output
+# output : /home/malcummi/Data/Manuscripts/Femoral_Head_2019/output/phylosift
+
+# #path to phylosift
+# phylosift: /home/malcummi/Data/PhyloSift
+# \n
+# ###Configuration for bwa_samtools workflow
+
+# # path to reads
+# read_path: /home/mlcummin/Data/Snakemake_workflows/SRA_download/BIGSI
+
+# #path to reference fasta
+# ref_path: /home/mlcummin/Data/plasmidlord/SGI1_variants
+
+# #path to output
+# output: /home/mlcummin/BIGSI_SGI1_analysis
+
+# # plasmidlord.py options
+# bin_size: 250
+# tick_size: 100
+
+# \n
+# ##Configuration file for pMLSTlord
+# #Path to assemblies to be screened by pMLSTlord
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pMLST
+# #Output prefix
+# prefix: AVC171_all
+# #Scheme
+# #incF
+# pmlst_scheme: "incf"
+# #Reads or assemblies
+# #Below is for fastas. If you want to use reads, unhash the line below it and replace it with the path the kma
+# input_type: "-mp /usr/local/ncbi-blast-ihpc-2.8.1+/bin/blastn"
+# #input_type: ""\n
+# ##Configuration file for pointfinderlord
+# #Path to assemblies to be screened by pointfinder
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pointfinder
+# #Output prefix
+# prefix: AVC171_all
+# #Species
+# #E. coli
+# species: "-s escherichia_coli"
+# #species: "-s salmonella"
+# #Use the one below where you have multiple species
+# #species: ""
+# \n
+# \n
+# ###Configuration file
+# #
+# ## path to reads - do not end in a slash
+# reads : /projects/AusGEM/i3_genomes/UoW_Salmonella_all
+# #
+# ##path to output directory - do not end in a slash:
+# output : /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/shovill
+# #
+# \n
+# ##Configuration file for sistrlord
+# #Path to assemblies to be screened by sistr
+# #Path to assemblies. No slash at the end.
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/Enterobase_wild_animal_Senftenbergs/
+# #Path to output directory. 
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/exploration/enterobase_wild_animal_senftenbergs
+# #Prefix for output file
+# prefix: Salmonella\n
+# ##Configuration file for snippy_snakemake
+# #Path to read directory
+# reads: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/Agona_200/
+# #Path to assemblies to be used in snippy. These must end in ".fasta"
+# assemblies: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/Agona_no_ref
+# #Path to directory containing reference fasta file/s. This can be the same as your reads folder or just a folder called 'ref' in your snplord folder.
+# #Note: Reference must be formatted to end in ".fa", not ".fasta", ".fsa" or anything else.
+# ref: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/data/refs
+# #Output directory path. This should end with a '/'
+# outdir: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/analysis/snp
+# #Output prefix
+# prefix: Agona_195
+
+
+
+# #Gubbins params
+# gubbins:
+#  params: -f 25
+
+
+
+
+    
+
+# \n
+# sample_ids : /home/mlcummin/Data/Manuscripts/Ronnie_German/accessions/ST635_Max.txt 
+
+# output : /home/mlcummin/Data/Manuscripts/Ronnie_German/reads/ST635
+
+
+# \n
+# \n
+# ##Configuration file for abricatelord
+# #Path to assemblies to be screened by abricate
+# #assemblies: /home/malcummi/Data/Manuscripts/2020/AVC171/AVC171/assemblies/HC50_1106
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/shovill/final_assemblies
+# #Path to gene db location
+# gene_db_location: /home/malcummi/Data/miniconda3/envs/abricate/db
+# #Name of gene databases you want to screen for
+# #gene_dbs: ['ISfinder_Feb_2020','EC_custom_Feb_2020', 'card', 'plasmidfinder', 'ecoh', 'ncbi', 'vfdb', 'colV_zoetis', 'Salmonella_PIAs']
+# #gene_dbs: ['ISfinder_Feb_2020','EC_custom_Feb_2020', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis']
+# #working on line below
+# #gene_dbs: ['pAVC171-IncF','ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis']
+# gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', colV_zoetis, 'Salmonella_PIAs']
+# #ST95 Manuscript #gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', 'pCERC4', 'pAPEC_O1_ColBM', 'pAPEC_O2_ColV', 'pUTI89','pBCE049_1','pSF_088_nores','pU1_F51_B10']
+# #Output directory path (should end in '/')
+# #outdir: /home/malcummi/Data/Manuscripts/2020/AVC171/other_analysis/Steve_848/
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/abricate/
+# #Output prefix
+# prefix: Salmonella
+# #minimum nucleotide ID (default for abricate is 75)
+# minimum_id: 75
+# #minimum coverage (default for abricate is 0)
+# minimum_id: 0
+# ###Configuration for aribalord
+
+# # path to output
+# output : /home/mlcummin/Data/Manuscripts/Femoral_Head_2019/output/ariba
+# # path to reads
+# read_path : /home/mlcummin/Data/Manuscripts/Femoral_Head_2019/reads
+# # standard gene databases to use for ariba
+# gene_dbs: ['plasmidfinder', 'resfinder', 'virulencefinder']
+
+# # MLST scheme to use
+# mlst_dbs: ['Escherichia coli#1']
+
+# # the output name you want for your MLST DB
+# mlst_names: ['EC1']
+
+
+# ###Configuration for aribalord
+
+# # path to output
+# output: /Users/maxcummins/test_curl/BIGSIlord/output
+
+# # path to reads
+# fasta: /Users/maxcummins/test_curl/BIGSIlord/References
+
+
+# ###Configuration for bwa_samtools workflow
+
+# # path to reads:
+# assembly_path: /projects/AusGEM/ColV/Poultry_only
+
+# #path to blast databases:
+# ref_dbs: /home/malcummi/Data/BlastDBs
+
+# #path to output directory:
+# output: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/enterobase_poultry/pUTI89
+
+# #path to bin with blast executables:
+# blast_bin: /usr/local/ncbi-blast-2.8.1+/bin
+# ##Configuration file for pointfinderlord
+# #Path to assemblies to be screened by pointfinder
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pointfinder
+# #Output prefix
+# prefix: AVC171_all
+# #Species
+# #E. coli
+# species: "-s escherichia_coli"
+# #species: "-s salmonella"
+# #Use the one below where you have multiple species
+# #species: ""
+# ###Configuration for aribalord
+
+# # path to output
+# output : /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/kraken2
+# # path to reads (no slash at end)
+# read_path : /projects/AusGEM/i3_genomes/UoW_Salmonella_all
+# # standard gene databases to use for ariba
+# krakendb: ['']
+
+# # MLST scheme to use
+# mlst_dbs: ['Escherichia coli#1']
+
+# # the output name you want for your MLST DB
+# mlst_names: ['EC1']
+
+
+# ###Configuration for pangenomelord
+
+#     # path to reads
+# assembly_path: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/HC50_1106
+#     #path to output directory:
+# output: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pangenome/HC50_1106
+#     # Use genus if you have a collection all of the same genus.
+#     # If you want to use genus unhash the usegenus and genus lines immediately below. 
+#     # Make sure you also hash the second instance of usegenus and genus below so there is only one value for each in this script.
+#     # Also make sure to replace the genus appropriately
+#     #usegenus: '--usegenus --genus '
+# genus: '--usegenus --genus Escherichia --species coli'
+#     # Use below if you don't have a collection all of the same genus.
+# #genus: ' '
+
+# param: '--compliant --centre '
+#     #Here you should configure the max number of threads so that we can parallelize with '-j'. You should know how many CPUs you have on the cluster you are working on.
+#     #If you do not you can exit this and type the command 'lscpus' or check at https://ihpc.research.uts.edu.au/pages/about/hardware
+# max_threads: 36
+# ##Configuration file for abricatelord
+# #Path to assemblies to be screened by abricate
+# #assemblies: /home/malcummi/Data/Manuscripts/2020/AVC171/AVC171/assemblies/HC50_1106
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path (should end in '/')
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/phagelord/ST95_all/
+# #Path to phastaf bin (make sure it ends in a /)
+# phastaf_exec_path: /home/malcummi/Data/tools/phastaf/bin/
+
+
+# # path to assemblies
+# assemblies: /home/malcummi/Data/Manuscripts/Femoral_Head_2019/output/assemblies/final_assemblies
+
+# #path for output
+# output : /home/malcummi/Data/Manuscripts/Femoral_Head_2019/output/phylosift
+
+# #path to phylosift
+# phylosift: /home/malcummi/Data/PhyloSift
+# ###Configuration for bwa_samtools workflow
+
+# # path to reads
+# read_path: /home/mlcummin/Data/Snakemake_workflows/SRA_download/BIGSI
+
+# #path to reference fasta
+# ref_path: /home/mlcummin/Data/plasmidlord/SGI1_variants
+
+# #path to output
+# output: /home/mlcummin/BIGSI_SGI1_analysis
+
+# # plasmidlord.py options
+# bin_size: 250
+# tick_size: 100
+
+# ##Configuration file for pMLSTlord
+# #Path to assemblies to be screened by pMLSTlord
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pMLST
+# #Output prefix
+# prefix: AVC171_all
+# #Scheme
+# #incF
+# pmlst_scheme: "incf"
+# #Reads or assemblies
+# #Below is for fastas. If you want to use reads, unhash the line below it and replace it with the path the kma
+# input_type: "-mp /usr/local/ncbi-blast-ihpc-2.8.1+/bin/blastn"
+# #input_type: ""##Configuration file for pointfinderlord
+# #Path to assemblies to be screened by pointfinder
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pointfinder
+# #Output prefix
+# prefix: AVC171_all
+# #Species
+# #E. coli
+# species: "-s escherichia_coli"
+# #species: "-s salmonella"
+# #Use the one below where you have multiple species
+# #species: ""
+# ###Configuration file
+# #
+# ## path to reads - do not end in a slash
+# reads : /projects/AusGEM/i3_genomes/UoW_Salmonella_all
+# #
+# ##path to output directory - do not end in a slash:
+# output : /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/shovill
+# #
+# ##Configuration file for sistrlord
+# #Path to assemblies to be screened by sistr
+# #Path to assemblies. No slash at the end.
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/Enterobase_wild_animal_Senftenbergs/
+# #Path to output directory. 
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/exploration/enterobase_wild_animal_senftenbergs
+# #Prefix for output file
+# prefix: Salmonella##Configuration file for snippy_snakemake
+# #Path to read directory
+# reads: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/Agona_200/
+# #Path to assemblies to be used in snippy. These must end in ".fasta"
+# assemblies: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/Agona_no_ref
+# #Path to directory containing reference fasta file/s. This can be the same as your reads folder or just a folder called 'ref' in your snplord folder.
+# #Note: Reference must be formatted to end in ".fa", not ".fasta", ".fsa" or anything else.
+# ref: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/data/refs
+# #Output directory path. This should end with a '/'
+# outdir: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/analysis/snp
+# #Output prefix
+# prefix: Agona_195
+
+
+
+# #Gubbins params
+# gubbins:
+#  params: -f 25
+
+
+
+
+    
+
+# sample_ids : /home/mlcummin/Data/Manuscripts/Ronnie_German/accessions/ST635_Max.txt 
+
+# output : /home/mlcummin/Data/Manuscripts/Ronnie_German/reads/ST635
+
+
+# ##Configuration file for abricatelord
+# #Path to assemblies to be screened by abricate
+# #assemblies: /home/malcummi/Data/Manuscripts/2020/AVC171/AVC171/assemblies/HC50_1106
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/shovill/final_assemblies
+# #Path to gene db location
+# gene_db_location: /home/malcummi/Data/miniconda3/envs/abricate/db
+# #Name of gene databases you want to screen for
+# #gene_dbs: ['ISfinder_Feb_2020','EC_custom_Feb_2020', 'card', 'plasmidfinder', 'ecoh', 'ncbi', 'vfdb', 'colV_zoetis', 'Salmonella_PIAs']
+# #gene_dbs: ['ISfinder_Feb_2020','EC_custom_Feb_2020', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis']
+# #working on line below
+# #gene_dbs: ['pAVC171-IncF','ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis']
+# gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', colV_zoetis, 'Salmonella_PIAs']
+# #ST95 Manuscript #gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848', 'pCERC4', 'pAPEC_O1_ColBM', 'pAPEC_O2_ColV', 'pUTI89','pBCE049_1','pSF_088_nores','pU1_F51_B10']
+# #Output directory path (should end in '/')
+# #outdir: /home/malcummi/Data/Manuscripts/2020/AVC171/other_analysis/Steve_848/
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/abricate/
+# #Output prefix
+# prefix: Salmonella
+# #minimum nucleotide ID (default for abricate is 75)
+# minimum_id: 75
+# #minimum coverage (default for abricate is 0)
+# minimum_id: 0
+# ###Configuration for aribalord
+
+# # path to output
+# output : /home/mlcummin/Data/Manuscripts/Femoral_Head_2019/output/ariba
+# # path to reads
+# read_path : /home/mlcummin/Data/Manuscripts/Femoral_Head_2019/reads
+# # standard gene databases to use for ariba
+# gene_dbs: ['plasmidfinder', 'resfinder', 'virulencefinder']
+
+# # MLST scheme to use
+# mlst_dbs: ['Escherichia coli#1']
+
+# # the output name you want for your MLST DB
+# mlst_names: ['EC1']
+
+
+# ###Configuration for aribalord
+
+# # path to output
+# output: /Users/maxcummins/test_curl/BIGSIlord/output
+
+# # path to reads
+# fasta: /Users/maxcummins/test_curl/BIGSIlord/References
+
+
+# ###Configuration for bwa_samtools workflow
+
+# # path to reads:
+# assembly_path: /projects/AusGEM/ColV/Poultry_only
+
+# #path to blast databases:
+# ref_dbs: /home/malcummi/Data/BlastDBs
+
+# #path to output directory:
+# output: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/enterobase_poultry/pUTI89
+
+# #path to bin with blast executables:
+# blast_bin: /usr/local/ncbi-blast-2.8.1+/bin
+# ##Configuration file for pointfinderlord
+# #Path to assemblies to be screened by pointfinder
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pointfinder
+# #Output prefix
+# prefix: AVC171_all
+# #Species
+# #E. coli
+# species: "-s escherichia_coli"
+# #species: "-s salmonella"
+# #Use the one below where you have multiple species
+# #species: ""
+# ###Configuration for aribalord
+
+# # path to output
+# output : /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/kraken2
+# # path to reads (no slash at end)
+# read_path : /projects/AusGEM/i3_genomes/UoW_Salmonella_all
+# # standard gene databases to use for ariba
+# krakendb: ['']
+
+# # MLST scheme to use
+# mlst_dbs: ['Escherichia coli#1']
+
+# # the output name you want for your MLST DB
+# mlst_names: ['EC1']
+
+
+# ###Configuration for pangenomelord
+
+#     # path to reads
+# assembly_path: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/HC50_1106
+#     #path to output directory:
+# output: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pangenome/HC50_1106
+#     # Use genus if you have a collection all of the same genus.
+#     # If you want to use genus unhash the usegenus and genus lines immediately below. 
+#     # Make sure you also hash the second instance of usegenus and genus below so there is only one value for each in this script.
+#     # Also make sure to replace the genus appropriately
+#     #usegenus: '--usegenus --genus '
+# genus: '--usegenus --genus Escherichia --species coli'
+#     # Use below if you don't have a collection all of the same genus.
+# #genus: ' '
+
+# param: '--compliant --centre '
+#     #Here you should configure the max number of threads so that we can parallelize with '-j'. You should know how many CPUs you have on the cluster you are working on.
+#     #If you do not you can exit this and type the command 'lscpus' or check at https://ihpc.research.uts.edu.au/pages/about/hardware
+# max_threads: 36
+# ##Configuration file for abricatelord
+# #Path to assemblies to be screened by abricate
+# #assemblies: /home/malcummi/Data/Manuscripts/2020/AVC171/AVC171/assemblies/HC50_1106
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path (should end in '/')
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/phagelord/ST95_all/
+# #Path to phastaf bin (make sure it ends in a /)
+# phastaf_exec_path: /home/malcummi/Data/tools/phastaf/bin/
+
+
+# # path to assemblies
+# assemblies: /home/malcummi/Data/Manuscripts/Femoral_Head_2019/output/assemblies/final_assemblies
+
+# #path for output
+# output : /home/malcummi/Data/Manuscripts/Femoral_Head_2019/output/phylosift
+
+# #path to phylosift
+# phylosift: /home/malcummi/Data/PhyloSift
+# ###Configuration for bwa_samtools workflow
+
+# # path to reads
+# read_path: /home/mlcummin/Data/Snakemake_workflows/SRA_download/BIGSI
+
+# #path to reference fasta
+# ref_path: /home/mlcummin/Data/plasmidlord/SGI1_variants
+
+# #path to output
+# output: /home/mlcummin/BIGSI_SGI1_analysis
+
+# # plasmidlord.py options
+# bin_size: 250
+# tick_size: 100
+
+# ##Configuration file for pMLSTlord
+# #Path to assemblies to be screened by pMLSTlord
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pMLST
+# #Output prefix
+# prefix: AVC171_all
+# #Scheme
+# #incF
+# pmlst_scheme: "incf"
+# #Reads or assemblies
+# #Below is for fastas. If you want to use reads, unhash the line below it and replace it with the path the kma
+# input_type: "-mp /usr/local/ncbi-blast-ihpc-2.8.1+/bin/blastn"
+# #input_type: ""##Configuration file for pointfinderlord
+# #Path to assemblies to be screened by pointfinder
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/assemblies/all
+# #Output directory path
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/pointfinder
+# #Output prefix
+# prefix: AVC171_all
+# #Species
+# #E. coli
+# species: "-s escherichia_coli"
+# #species: "-s salmonella"
+# #Use the one below where you have multiple species
+# #species: ""
+# ###Configuration file
+# #
+# ## path to reads - do not end in a slash
+# reads : /projects/AusGEM/i3_genomes/UoW_Salmonella_all
+# #
+# ##path to output directory - do not end in a slash:
+# output : /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/output/shovill
+# #
+# ##Configuration file for sistrlord
+# #Path to assemblies to be screened by sistr
+# #Path to assemblies. No slash at the end.
+# assemblies: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/Enterobase_wild_animal_Senftenbergs/
+# #Path to output directory. 
+# outdir: /projects/AusGEM/Users/Max/Manuscripts/UoW_Salmonella_all/exploration/enterobase_wild_animal_senftenbergs
+# #Prefix for output file
+# prefix: Salmonella##Configuration file for snippy_snakemake
+# #Path to read directory
+# reads: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/Agona_200/
+# #Path to assemblies to be used in snippy. These must end in ".fasta"
+# assemblies: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/Agona_no_ref
+# #Path to directory containing reference fasta file/s. This can be the same as your reads folder or just a folder called 'ref' in your snplord folder.
+# #Note: Reference must be formatted to end in ".fa", not ".fasta", ".fsa" or anything else.
+# ref: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/data/refs
+# #Output directory path. This should end with a '/'
+# outdir: /home/malcummi/Data/Manuscripts/Salmonella_AMR/Agona_assemblies/analysis/snp
+# #Output prefix
+# prefix: Agona_195
+
+
+
+# #Gubbins params
+# gubbins:
+#  params: -f 25
+
+
+
+
+    
+
+# sample_ids : /home/mlcummin/Data/Manuscripts/Ronnie_German/accessions/ST635_Max.txt 
+
+# output : /home/mlcummin/Data/Manuscripts/Ronnie_German/reads/ST635
+
+
