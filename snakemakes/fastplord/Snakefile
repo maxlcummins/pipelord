@@ -27,7 +27,7 @@ rule run_fastp:
         json = config['outdir']+"/{prefix}/fastp/{sample}.fastp.json",
         html = config['outdir']+"/{prefix}/fastp/{sample}.fastp.html"
     conda:
-        "yamls/fastp.yaml"
+        "config/fastp.yaml"
     priority: 9
     shell:
         """
