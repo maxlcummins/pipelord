@@ -2,8 +2,7 @@ import re
 import subprocess
 import os
 
-configfile:
-    "/home/malcummi/Data/pipelord/combined_config.yaml"
+configfile: "misc/masterconfig.yaml"
 
 # Get raw_reads
 sample_ids, = glob_wildcards(config['raw_reads']+"/{sample}.R1.fastq.gz")
@@ -28,7 +27,7 @@ rule run_fastp:
         json = config['outdir']+"/{prefix}/fastp/{sample}.fastp.json",
         html = config['outdir']+"/{prefix}/fastp/{sample}.fastp.html"
     conda:
-        "config/fastp.yaml"
+        "yamls/fastp.yaml"
     priority: 9
     shell:
         """
