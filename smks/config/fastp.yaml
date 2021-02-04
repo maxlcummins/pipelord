@@ -1,0 +1,14 @@
+name: fastp
+channels:
+  - bioconda
+  - r
+  - defaults
+  - conda-forge
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - fastp=0.20.1=h8b12597_0
+  - libgcc-ng=9.1.0=hdf63c60_0
+  - libstdcxx-ng=9.1.0=hdf63c60_0
+  - zlib=1.2.11=h7b6447c_3
+prefix: /home/malcummi/Data/miniconda3/envs/fastp
+
