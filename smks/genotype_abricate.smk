@@ -14,9 +14,9 @@ gene_dbs = expand(config['gene_dbs'])
 
 logs = config['base_log_outdir']
 
-print(sample_ids)
-print(db_location)
-print(gene_dbs)
+#print(sample_ids)
+#print(db_location)
+#print(gene_dbs)
 
 
 #rule all:
@@ -24,6 +24,7 @@ print(gene_dbs)
 #        expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab",
 #               sample=sample_ids, gene_db=gene_dbs, prefix=prefix),
 #        expand(config['outdir']+"/{prefix}/summaries/abricate_hits.txt", prefix=prefix)
+    #expand(config['outdir']+"/{prefix}/summaries/{gene_db}_hits.txt", gene_db=gene_dbs, prefix=prefix)
 
 rule abricate_run:
     input:
@@ -57,8 +58,25 @@ rule concatenate_abricate_hits:
         maxthreads
     shell:
         """
-        cat {input} > {output}
+        cat {input} | awk 'BEGIN{{FS=OFS=";"}} {{gsub(/\.fasta/, "", $1)}} 1' | sed -E '1s/#FILE/name/g' | grep -v "#FILE" > {output}
         """
 
+#rule abricate_summary:
+#    input:
+#        expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab", sample=sample_ids, gene_db=gene_dbs, prefix=prefix)
+#    output:
+#        config['outdir']+"/{prefix}/summaries/{gene_db}_hits.txt"
+#    log:
+#        config['base_log_outdir']+"/{prefix}/abricate/{gene_db}_summarise.log"
+#    conda:
+#        "config/abricate.yaml"
+#    threads:
+#        maxthreads
+#    shell:
+#        """
+#       abricate --summary {input} > {output}
+#        """
 
-include: "genome_assembly.smk"
+
+
+#include: "genome_assembly.smk"

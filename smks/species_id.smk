@@ -47,7 +47,7 @@ rule name_kraken2_inline:
 
     shell:
         """
-        awk 'NR == 1 {{print "name_file\t" $0; next;}}{{print FILENAME "\t" $0;}}' {input} > {output}
+        awk 'NR == 1 {{print FILENAME "\t" $0; next;}}{{print FILENAME "\t" $0;}}' {input} > {output}
         perl -p -i -e 's@\.report@@g' {output}
         """
 
@@ -55,14 +55,26 @@ rule combine_kraken2_reports:
     input:
         expand(config['outdir']+"/{prefix}/kraken2/{sample}_clean.report",sample=sample_ids, prefix=prefix)
     output:
-        summary_temp = config['outdir']+"/{prefix}/summaries/kraken2_summary_temp.txt",
+        combined_output = temp(config['outdir']+"/{prefix}/summaries/kraken2_summary_temp.txt"),
+        combined_output_cleaned = temp(config['outdir']+"/{prefix}/summaries/kraken2_summary_temp2.txt"),
+        simplified_combined = temp(config['outdir']+"/{prefix}/summaries/kraken2_summary_temp3.txt"),
+        summary_full = config['outdir']+"/{prefix}/summaries/kraken2_full_summary.txt",
         summary = config['outdir']+"/{prefix}/summaries/kraken2_summary.txt"
 
     shell:
         """
-        cat {input} > {output.summary_temp}
-        #Removes duplicate headers (in this case lines starting with filename)
-        awk 'FNR==1 {{ header = $0; print }} $0 != header' {output.summary_temp} > {output.summary}
+        # Combine the summaries
+        cat {input} > {output.combined_output}
+        # Clean sample names
+        perl -p -i -e s'@.*kraken2/@@g' {output.combined_output}
+        # Removes duplicate headers (in this case lines starting with filename)
+        awk 'FNR==1 {{ header = $0; print }} $0 != header' {output.combined_output} > {output.combined_output_cleaned}
+        # Create simple summary
+        awk '{{if ($5 == "S") print $0;}}' {output.combined_output_cleaned} | sort -nk2 -r -u | awk '{{ if (a[$1]++ == 0) print $0; }}' $@ > {output.simplified_combined}
+        # Insert a header
+        echo -e "name\tperc_frags\tnum_frags\tnum_frags_direct\trank\tncbi_taxon_id\tscientific_name" | cat - {output.simplified_combined} > {output.summary}
+        # Insert a header
+        echo -e "name\tperc_frags\tnum_frags\tnum_frags_direct\trank\tncbi_taxon_id\tscientific_name" | cat - {output.combined_output_cleaned} > {output.summary_full}
         """
 
-include: "genome_assembly.smk"
+#include: "genome_assembly.smk"

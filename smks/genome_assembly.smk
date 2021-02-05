@@ -66,8 +66,13 @@ rule clean_assembly_stats:
         stats = config['outdir']+"/{prefix}/summaries/assembly_stats.txt"
     shell:
         """
+        # Cleans file names
+        perl -p -i -e 's@.*shovill_out/@@g' {input}
+        perl -p -i -e 's@.out/contigs.fa@@g' {input}
+        # Changes column name to name rather than filename
+        perl -p -i -e 's@^filename@name@g' {input}
         #Removes duplicate headers (in this case lines starting with filename)
         awk 'FNR==1 {{ header = $0; print }} $0 != header' {input} > {output}
         """
 
-include: "read_cleaning.smk"
+#include: "read_cleaning.smk"
