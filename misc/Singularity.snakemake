@@ -30,7 +30,7 @@ export PATH=/root/miniconda3/bin:$PATH
     conda config --add channels bioconda
 
 # Installation of Snakemake
-    conda install --yes snakemake=5.32.0
+    conda install --yes snakemake=5.24.0
 
 # Installation of Git
     conda install --yes -c anaconda git
