@@ -2,10 +2,10 @@ import re
 import subprocess
 import os
 
-configfile: "misc/masterconfig.yaml"
+#configfile: "misc/masterconfig2.yaml"
 
 # Get raw_reads
-sample_ids, = glob_wildcards(config['raw_reads_path']+"/{sample}.R1.fastq.gz")
+#sample_ids, = glob_wildcards(config['raw_reads_path']+"/{sample}.R1.fastq.gz")
 prefix = config['prefix']
 maxthreads = snakemake.utils.available_cpu_count()
 

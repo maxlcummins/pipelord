@@ -2,10 +2,10 @@ import re
 import subprocess
 import os
 
-configfile: "misc/masterconfig.yaml"
+#configfile: "misc/masterconfig2.yaml"
 
 # Get assemblies
-sample_ids, = glob_wildcards(config['raw_reads_path']+"/{sample}.R1.fastq.gz")
+#sample_ids, = glob_wildcards(config['raw_reads_path']+"/{sample}.R1.fastq.gz")
 prefix = config['prefix']
 maxthreads = snakemake.utils.available_cpu_count()
 
@@ -29,7 +29,7 @@ rule mlst_run:
     input:
         assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
     output:
-        config['outdir']+"/{prefix}/mlst/{sample}_mlst.txt"
+        temp(config['outdir']+"/{prefix}/mlst/{sample}_mlst.txt")
     log:
         config['base_log_outdir']+"/{prefix}/mlst/run/{sample}.log"
     conda:

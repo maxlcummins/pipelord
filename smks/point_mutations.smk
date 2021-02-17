@@ -2,10 +2,10 @@ import re
 import subprocess
 import os
 
-configfile: "misc/masterconfig.yaml"
+#configfile: "misc/masterconfig2.yaml"
 
 # Get assemblies
-sample_ids, = glob_wildcards(config['raw_reads_path']+"/{sample}.R1.fastq.gz")
+#sample_ids, = glob_wildcards(config['raw_reads_path']+"/{sample}.R1.fastq.gz")
 prefix = config['prefix']
 maxthreads = snakemake.utils.available_cpu_count()
 
@@ -22,7 +22,7 @@ rule pointfinder_run:
     input:
         assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
     output:
-        config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results.tsv"
+        temp(config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results.tsv")
     conda:
         "config/pointfinder.yaml"
     params:
@@ -38,7 +38,7 @@ rule name_append:
     input:
         config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results.tsv"
     output:
-        config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results_named.tsv"
+        temp(config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results_named.tsv")
     shell:
         """awk 'NR == 1 {{print "name\t" $0; next;}}{{print FILENAME "\t" $0;}}' {input} > {output}"""
 

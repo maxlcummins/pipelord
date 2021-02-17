@@ -2,10 +2,10 @@ import re
 import subprocess
 import os
 
-configfile: "misc/masterconfig.yaml"
+#configfile: "misc/masterconfig2.yaml"
 
 # Get assemblies
-sample_ids, = glob_wildcards(config['raw_reads_path']+"/{sample}.R1.fastq.gz")
+#sample_ids, = glob_wildcards(config['raw_reads_path']+"/{sample}.R1.fastq.gz")
 prefix = config['prefix']
 maxthreads = snakemake.utils.available_cpu_count()
 
@@ -30,7 +30,7 @@ rule abricate_run:
     input:
         assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
     output:
-        tab = config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab",
+        tab = temp(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab"),
     log:
         config['base_log_outdir']+"/{prefix}/abricate/run/{gene_db}/{sample}.log"
     conda:

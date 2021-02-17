@@ -4,10 +4,10 @@ import os
 
 include: "genome_assembly.smk"
 
-configfile: "misc/masterconfig.yaml"
+#configfile: "misc/masterconfig2.yaml"
 
 #Get assemblies
-sample_ids, = glob_wildcards(config['raw_reads_path']+"/{sample}.R1.fastq.gz")
+#sample_ids, = glob_wildcards(config['raw_reads_path']+"/{sample}.R1.fastq.gz")
 prefix = config['prefix']
 maxthreads = snakemake.utils.available_cpu_count()
 scheme = config['pmlst_scheme']
@@ -25,7 +25,7 @@ rule pMLST_run:
 	input:
 		assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
 	output:
-		config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results.txt"
+		temp(config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results.txt")
 	log:
 		config['base_log_outdir']+"/{prefix}/pMLST/{scheme}/pMLST_run/{sample}.log"
 	conda:
@@ -60,14 +60,16 @@ rule pmlst_combine:
 		"""
 		awk 'NR == 1 {{print "name\t" $0; next;}}{{print FILENAME "\t" $0;}}' {input} | grep -E "pMLST profile|Sequence Type" | perl -p -i -e 's@pMLST profile: @@g' | awk '{{printf "%s%s",$0,NR%2?"\t":RS}}' > {output}
 		#Trim the first column to generate a column with pMLST scheme
-        perl -p -i -e 's@^.*(Inc|pBSSB1)@\1@g' {output}
-        #Trim column two to generate a column with sample names
+        perl -p -i -e 's@^.*Inc@@g' {output}
+		#Trim the first column to generate a column with pMLST scheme
+        perl -p -i -e 's@^.*pBSSB1@pBSSB1@g' {output}
+		#Trim column two to generate a column with sample names
 		perl -p -i -e 's@\t.*(inc[^/]+|pbssb1[^/]+)/@\t@g' {output}
 		# Trim column with sample names to clean them
 		perl -p -i -e 's@.out/results.txt@@g' {output}
 		#Trim pMLST column to get rid of junk text
         perl -p -i -e 's@Sequence Type: @@g' {output}
-        #Clean square brackets from pMLST names
+		#Clean square brackets from pMLST names
         perl -p -i -e 's@(\]|\[)@@g' {output}
 		#Fix scheme column names
 		perl -p -i -e 's@^@Inc@g' {output}
@@ -76,10 +78,10 @@ rule pmlst_combine:
 		#Change order of columns
 		awk -F'\t' -v OFS="\t" '{{ print $2, $1, $3}}' {output} > tmp && mv tmp {output}
 		#Insert a header
-		echo -e "name\tscheme\tpMLST" | cat - {output} > tmp && mv tmp {output}
+		echo -e "name\tpMLST_scheme\tpMLST" | cat - {output} > tmp && mv tmp {output}
 		#Remove MLST scheme/sample combinations with no hits
 		grep -v 'Unknown' {output} > tmp && mv tmp {output}
-		"""
+				"""
 
 #rule pmlst_clean:
 #	input:
