@@ -1,6 +1,8 @@
 import re
 import subprocess
 import os
+from os import path
+import git
 
 #configfile: "misc/masterconfig2.yaml"
 
@@ -9,7 +11,13 @@ import os
 prefix = config['prefix']
 maxthreads = snakemake.utils.available_cpu_count()
 
-#print(sample_ids)
+if path.exists(config['pointfinder_path']) == False:
+    print('Pointfinder directory not located')
+    os.system("git clone https://git@bitbucket.org/genomicepidemiology/pointfinder.git tools/pointfinder")
+    os.system("git clone https://git@bitbucket.org/genomicepidemiology/pointfinder_db.git tools/pointfinder/pointfinder_db")
+    #git.Git(config['pointfinder_path'].clone("bitbucket://genomicepidemiology/pointfinder.git"))
+    #git.Git(config['pointfinder_path']+"/pointfinder_db".clone("bitbucket://genomicepidemiology/pointfinder.git"))
+
 
 
 #rule all:
