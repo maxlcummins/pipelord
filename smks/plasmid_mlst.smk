@@ -2,7 +2,12 @@ import re
 import subprocess
 import os
 
-include: "genome_assembly.smk"
+if path.exists(config['pMLST_db_path']) == False:
+    print('pmlst directory not located, downloading pmlst...')
+    os.system("git clone https://git@bitbucket.org/genomicepidemiology/pmlst.git tools/pmlst")
+    os.system("git clone https://git@bitbucket.org/genomicepidemiology/pmlst_db.git tools/pmlst/pmlst_db")
+
+#include: "genome_assembly.smk"
 
 #configfile: "misc/masterconfig2.yaml"
 

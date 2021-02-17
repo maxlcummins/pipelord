@@ -12,11 +12,9 @@ prefix = config['prefix']
 maxthreads = snakemake.utils.available_cpu_count()
 
 if path.exists(config['pointfinder_path']) == False:
-    print('Pointfinder directory not located')
+    print('Pointfinder directory not located, downloading pointfinder...')
     os.system("git clone https://git@bitbucket.org/genomicepidemiology/pointfinder.git tools/pointfinder")
     os.system("git clone https://git@bitbucket.org/genomicepidemiology/pointfinder_db.git tools/pointfinder/pointfinder_db")
-    #git.Git(config['pointfinder_path'].clone("bitbucket://genomicepidemiology/pointfinder.git"))
-    #git.Git(config['pointfinder_path']+"/pointfinder_db".clone("bitbucket://genomicepidemiology/pointfinder.git"))
 
 
 

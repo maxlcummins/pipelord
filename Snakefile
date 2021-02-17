@@ -1,12 +1,16 @@
 import re
 import os
 
-configfile: "misc/masterconfig3.yaml"
+configfile: "misc/masterconfig4.yaml"
 
 outdir = config['outdir']
 prefix = config['prefix']
 gene_dbs = expand(config['gene_dbs'])
 scheme = config['pmlst_scheme']
+
+if path.exists("tools") == False:
+    print('tools directory not located, creating tools directory...')
+    os.system('mkdir tools')
 
 if config['input_type'] == 'raw_reads':
     sample_ids, = glob_wildcards(config['raw_reads_path']+"/{sample}.R1.fastq.gz")
@@ -46,7 +50,7 @@ rule all:
         expand(config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta", sample=sample_ids, prefix=config['prefix']),
         # Summaries
         #expand(config['outdir']+"/{prefix}/summaries/fastp_summary.json", prefix=config['prefix']),
-        #expand(config['outdir']+"/{prefix}/summaries/assembly_stats.txt", prefix = config['prefix']),
+        expand(config['outdir']+"/{prefix}/summaries/assembly_stats.txt", prefix = config['prefix']),
         
 
 #if config["general"]["seq_rep"] == "OTU" else [],
