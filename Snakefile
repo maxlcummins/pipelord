@@ -1,5 +1,8 @@
 import re
+import subprocess
 import os
+from os import path
+import git
 
 configfile: "misc/masterconfig4.yaml"
 
