@@ -52,13 +52,15 @@ rule all:
         expand(config['outdir']+"/{prefix}/summaries/kraken2_full_summary.txt", prefix = config['prefix']),
         expand(config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta", sample=sample_ids, prefix=config['prefix']),
         # Summaries
-        #expand(config['outdir']+"/{prefix}/summaries/fastp_summary.json", prefix=config['prefix']),
+        expand(config['outdir']+"/{prefix}/summaries/fastp_summary.json", prefix=config['prefix']),
         expand(config['outdir']+"/{prefix}/summaries/assembly_stats.txt", prefix = config['prefix']),
-        
+        #expand(config['outdir']+"/{prefix}/summaries/{prefix}_simple_summary_N"+str(config['abricateR_identity'])+"L"+str(config['abricateR_length'])+".csv", prefix=prefix)
+
 
 #if config["general"]["seq_rep"] == "OTU" else [],
 
 include: "smks/genome_assembly.smk"
+include: "smks/summarise.smk"
 include: "smks/species_id.smk"
 include: "smks/genotype_abricate.smk"
 include: "smks/point_mutations.smk"
@@ -66,4 +68,4 @@ include: "smks/strain_mlst.smk"
 include: "smks/plasmid_mlst.smk"
 
 
-#ruleorder: concatenate_abricate_hits > abricate_summary
+#ruleorder: concatenate_abricate_hits > abricate_summar
