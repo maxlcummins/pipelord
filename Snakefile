@@ -60,7 +60,7 @@ rule all:
 #if config["general"]["seq_rep"] == "OTU" else [],
 
 include: "smks/genome_assembly.smk"
-include: "smks/summarise.smk"
+#include: "smks/summarise.smk"
 include: "smks/species_id.smk"
 include: "smks/genotype_abricate.smk"
 include: "smks/point_mutations.smk"
@@ -68,4 +68,4 @@ include: "smks/strain_mlst.smk"
 include: "smks/plasmid_mlst.smk"
 
 
-#ruleorder: concatenate_abricate_hits > abricate_summar
+#ruleorder: concatenate_abricate_hits > abricate_summary
