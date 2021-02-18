@@ -19,4 +19,7 @@ Configuration of the snakemake workflow can be done via the configuration file i
 
 ```
 nohup snakemake -p -j --use-conda 1> snakemake_out.log 2> snakemake_err.log &
+
+PROCESS_ID=$!
+echo "JOB_ID =" "$PROCESS_ID" | 
 ```

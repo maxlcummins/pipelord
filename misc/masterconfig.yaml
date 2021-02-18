@@ -4,24 +4,24 @@ email: max.cummins@uts.edu.au
 ### General configuration variables                                                                                                              # general
 # Primary input type
 # Options: 'raw_reads', 'reads', 'assemblies'
-input_type: raw_reads
+input_type: assemblies
 # Prefix for output files - here the collection name or an abbreviation for the relevant manuscript might be a good choice                       # general   
-prefix: test                                                                                                                          # general
+prefix: ST95_all                                                                                                                          # general
 # Path to project directory where you want your output to go                                                                                     # general
 # Path to short-reads. Here it is assumed that your reads are set up as read pairs - analysis is unlikely to work if this isnt the case.         # general
 #raw_reads: /projects/AusGEM/i3_genomes/AVC_MLC
-raw_reads_path: /home/malcummi/Data/pipelord2_0/test_data/reads                                                               # general
+raw_reads_path:                                                             # general
 # Path to assemblies. These may be your initial input as sometimes it can be hard to source read for large collections                           # general
-#assembly_path: /home/malcummi/Data/pipelord2_0/test_data/assemblies                                     # general
+assembly_path: /projects/AusGEM/Users/Max/Manuscripts/ST95/data/assemblies/ST95_all                                    # general
 # Path to blast executable                                                                                                                       # general
 blast_bin: /usr/local/ncbi-blast-2.8.1+/bin
 # Path to master output directory
-outdir: test_data/output                                                                                # general
+outdir: /projects/AusGEM/Users/Max/Manuscripts/ST95/output                                                                           # general
 # Filtered reads (via fastp)
 #reads_path: test_data/output/test/fastp
 
 # Base output directory for logs
-base_log_outdir: test_data/output/logs
+base_log_outdir: /projects/AusGEM/Users/Max/Manuscripts/ST95
 
 ### Pointfinder config
 # Path to pointfinder directory
@@ -40,7 +40,7 @@ krakendb: /projects/AusGEM/databases/kraken2/minikraken2
 # Path to gene db location                                                                                                                      # abricatelord
 gene_db_location: data/dbs/abricate                                                                      # abricatelord
 # Name of gene databases you want to screen for                                                                                                 # abricatelord
-gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848']
+gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'vfdb', 'colV_zoetis']
 gene_plasmid_dbs: ['pCERC4', 'pAPEC_O1_ColBM', 'pAPEC_O2_ColV', 'pUTI89','pBCE049_1','pSF_088_nores','pU1_F51_B10'] # abricatelord                                                                                                                         # abricatelord
 #gene_dbs: ['EC_custom']
 # Minimum nucleotide ID (default for abricate is 75)                                                                                            # abricatelord
