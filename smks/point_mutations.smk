@@ -15,6 +15,7 @@ if path.exists(config['pointfinder_path']) == False:
     print('Pointfinder directory not located, downloading pointfinder...')
     os.system("git clone https://git@bitbucket.org/genomicepidemiology/pointfinder.git tools/pointfinder")
     os.system("git clone https://git@bitbucket.org/genomicepidemiology/pointfinder_db.git tools/pointfinder/pointfinder_db")
+    os.system(perl -p -i -e 's@.split("_")\[0\]@#.split("_")\[0\]  fix: prevented pointfinder breaking on samples with an underscore in their name@g')
 
 
 
