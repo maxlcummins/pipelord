@@ -18,4 +18,9 @@ Configuration of the snakemake workflow can be done via the configuration file i
 ## Usage
 
 ```
+<<<<<<< HEAD
 nohup snakemake -p -j --use-conda 1> snakemake_out.log 2> snakemake_err.lo
+=======
+nohup snakemake -p -j --use-conda 1> snakemake_out.log 2> snakemake_err.log &
+```
+>>>>>>> 13f967b2655d51f55d21da940ba14699d4e69c0f
