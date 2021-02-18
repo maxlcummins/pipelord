@@ -42,7 +42,7 @@ rule abricate_run:
         gene_db = gene_dbs,
         datadir = config['gene_db_location']
     shell:
-        "abricate --nopath --datadir {params.datadir} --db {params.db} {input.assembly} > {output}"
+        "abricate --nopath --datadir {params.datadir} --db {params.db} {input.assembly} > {output} 2> {log}"
 
 # in beta
 rule concatenate_abricate_hits:

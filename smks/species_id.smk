@@ -35,7 +35,7 @@ rule run_kraken2:
         "config/kraken2.yaml"
     shell:
         """
-        kraken2 --db {input.db} --use-names --report {output.report} --output {output.out} {input.assembly}
+        kraken2 --db {input.db} --use-names --report {output.report} --output {output.out} {input.assembly}  2>&1 {log}
         """
 
 rule name_kraken2_inline:

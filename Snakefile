@@ -4,7 +4,7 @@ import os
 from os import path
 import git
 
-configfile: "misc/masterconfig4.yaml"
+configfile: "misc/masterconfig.yaml"
 
 outdir = config['outdir']
 prefix = config['prefix']
@@ -54,13 +54,13 @@ rule all:
         # Summaries
         expand(config['outdir']+"/{prefix}/summaries/fastp_summary.json", prefix=config['prefix']),
         expand(config['outdir']+"/{prefix}/summaries/assembly_stats.txt", prefix = config['prefix']),
-        #expand(config['outdir']+"/{prefix}/summaries/{prefix}_simple_summary_N"+str(config['abricateR_identity'])+"L"+str(config['abricateR_length'])+".csv", prefix=prefix)
+        expand(config['outdir']+"/{prefix}/summaries/{prefix}_simple_summary_N"+str(config['abricateR_identity'])+"L"+str(config['abricateR_length'])+".csv", prefix=prefix)
 
 
 #if config["general"]["seq_rep"] == "OTU" else [],
 
 include: "smks/genome_assembly.smk"
-#include: "smks/summarise.smk"
+include: "smks/summarise.smk"
 include: "smks/species_id.smk"
 include: "smks/genotype_abricate.smk"
 include: "smks/point_mutations.smk"

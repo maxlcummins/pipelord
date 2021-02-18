@@ -32,7 +32,8 @@ rule pMLST_run:
 	output:
 		temp(config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results.txt")
 	log:
-		config['base_log_outdir']+"/{prefix}/pMLST/{scheme}/pMLST_run/{sample}.log"
+		out = config['base_log_outdir']+"/{prefix}/pMLST/{scheme}/pMLST_run/{sample}_out.log",
+		err = config['base_log_outdir']+"/{prefix}/pMLST/{scheme}/pMLST_run/{sample}_err.log"
 	conda:
 		"config/pMLST.yaml"
 	params:
@@ -46,7 +47,7 @@ rule pMLST_run:
 
 	shell:
 		"""
-		python3 {params.pmlst_script_path} -i {input} -o {params.output_dir} -p {params.pmlst_db_path} {params.pmlst_tool} -s {params.db} -x -t {params.tmp}
+		python3 {params.pmlst_script_path} -i {input} -o {params.output_dir} -p {params.pmlst_db_path} {params.pmlst_tool} -s {params.db} -x -t {params.tmp} 1> {log.out} 2> {log.err}
 		rm -rf {params.tmp}
 		"""
 
@@ -63,7 +64,7 @@ rule pmlst_combine:
 		1
 	shell:
 		"""
-		awk 'NR == 1 {{print "name\t" $0; next;}}{{print FILENAME "\t" $0;}}' {input} | grep -E "pMLST profile|Sequence Type" | perl -p -i -e 's@pMLST profile: @@g' | awk '{{printf "%s%s",$0,NR%2?"\t":RS}}' > {output}
+		awk 'NR == 1 {{print "name\t" $0; next;}}{{print FILENAME "\t" $0;}}' {input} | grep -E "pMLST profile|Sequence Type" | perl -p -e 's@pMLST profile: @@g' | awk '{{printf "%s%s",$0,NR%2?"\t":RS}}' > {output}
 		#Trim the first column to generate a column with pMLST scheme
         perl -p -i -e 's@^.*Inc@@g' {output}
 		#Trim the first column to generate a column with pMLST scheme

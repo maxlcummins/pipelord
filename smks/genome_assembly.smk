@@ -74,14 +74,15 @@ elif config['input_type'] == 'raw_reads':
             shov_out = temp(directory(config['outdir']+"/{prefix}/shovill/shovill_out/{sample}.out")),
             assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
         log:
-            config['base_log_outdir']+"/{prefix}/shovill/run/{sample}_out.log"
+            out = config['base_log_outdir']+"/{prefix}/shovill/run/{sample}_out.log",
+            err = config['base_log_outdir']+"/{prefix}/shovill/run/{sample}_err.log"
         threads:
-            4
+            8
         conda:
             "config/shovill.yaml"
         shell:
             """
-            shovill --minlen 200 --outdir {output.shov_out} --R1 {input.r1_filt} --R2 {input.r2_filt} 1> {log}
+            shovill --minlen 200 --outdir {output.shov_out} --R1 {input.r1_filt} --R2 {input.r2_filt} 1> {log.out} 2> {log.err}
             cp {output.shov_out}/contigs.fa {output.assembly}
             """
     rule run_assembly_stats:

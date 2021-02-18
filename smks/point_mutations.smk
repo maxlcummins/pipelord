@@ -31,13 +31,15 @@ rule pointfinder_run:
         temp(config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results.tsv")
     conda:
         "config/pointfinder.yaml"
+    log:
+        config['base_log_outdir']+"/{prefix}/pointfinder/pointfinder_run/{sample}.log"
     params:
         output_dir = config['outdir']+"/{prefix}/pointfinder/{sample}",
         species = config['pointfinder_species'],
         pointfinder_path =  config['pointfinder_path']
     shell:
         """
-        {params.pointfinder_path}/PointFinder.py -i {input} -o {params.output_dir} -p {params.pointfinder_path}/pointfinder_db {params.species} -m blastn -m_p /usr/local/ncbi-blast-ihpc-2.8.1+/bin/blastn
+        {params.pointfinder_path}/PointFinder.py -i {input} -o {params.output_dir} -p {params.pointfinder_path}/pointfinder_db {params.species} -m blastn -m_p /usr/local/ncbi-blast-ihpc-2.8.1+/bin/blastn 2> {log}
         """
 
 rule name_append:

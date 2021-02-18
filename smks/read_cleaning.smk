@@ -38,7 +38,7 @@ rule run_fastp:
         "config/fastp.yaml"
     shell:
         """
-        fastp -i {input.r1} -I {input.r2} -o {output.r1_filt} -O {output.r2_filt} -j {output.json} -h {output.html}
+        fastp -i {input.r1} -I {input.r2} -o {output.r1_filt} -O {output.r2_filt} -j {output.json} -h {output.html} 2>&1 {log}
         """
 
 rule run_fastp_summary:

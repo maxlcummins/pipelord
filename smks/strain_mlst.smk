@@ -31,13 +31,14 @@ rule mlst_run:
     output:
         temp(config['outdir']+"/{prefix}/mlst/{sample}_mlst.txt")
     log:
-        config['base_log_outdir']+"/{prefix}/mlst/run/{sample}.log"
+        out = config['base_log_outdir']+"/{prefix}/mlst/run/{sample}_out.log",
+        err = config['base_log_outdir']+"/{prefix}/mlst/run/{sample}_err.log"
     conda:
         "config/mlst.yaml"
     threads:
         1
     shell:
-        "mlst {input} > {output}"
+        "mlst {input} > {output} 1 > {log.out} 2> {log.err}"
 
 # in beta
 rule mlst_combine:
@@ -47,7 +48,7 @@ rule mlst_combine:
         mlst_temp = temp(config['outdir']+"/{prefix}/summaries/mlst_temp.txt"),
         mlst = config['outdir']+"/{prefix}/summaries/mlst.txt"
     log:
-        config['base_log_outdir']+"/{prefix}/mlst/combine/.log"
+        config['base_log_outdir']+"/{prefix}/mlst/combine/log"
     conda:
         "config/abricate.yaml"
     threads:
