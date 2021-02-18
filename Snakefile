@@ -46,7 +46,7 @@ rule all:
     input:
         expand(config['outdir']+"/{prefix}/summaries/mlst.txt", prefix=prefix),
         expand(config['outdir']+"/{prefix}/summaries/Pointfinder.txt", prefix=prefix),
-        expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab", sample=sample_ids, gene_db=gene_dbs, prefix=prefix),
+        #expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab", sample=sample_ids, gene_db=gene_dbs, prefix=prefix),
         expand(config['outdir']+"/{prefix}/summaries/abricate_hits.txt", prefix=prefix),
         expand(config['outdir']+"/{prefix}/summaries/pMLST.txt", prefix=config['prefix']),
         expand(config['outdir']+"/{prefix}/summaries/kraken2_full_summary.txt", prefix = config['prefix']),

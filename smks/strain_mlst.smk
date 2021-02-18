@@ -38,7 +38,7 @@ rule mlst_run:
     threads:
         1
     shell:
-        "mlst {input} > {output} 1 > {log.out} 2> {log.err}"
+        "mlst {input} > {output} 1> {log.out} 2> {log.err}"
 
 # in beta
 rule mlst_combine:

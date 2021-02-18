@@ -22,5 +22,5 @@ rule summarise_all:
     shell:
         """
         Rscript misc/abricateR.R '{input.genotype}' '{params.prefix}' '{params.outdir}' '{params.identity}' '{params.length}' '{input.amr_snps}' '{input.pmlst}'
-        echo Your Snakemake job with prefix \'{params.prefix}\' has finished running. | mail -r {params.email} -s 'Snakemake job has finished' -a snakemake.err -a snakemake.out
+        echo Your Snakemake job with prefix \'{params.prefix}\' has finished running. | mail -s 'Snakemake job has finished' -a snakemake_err.log -a snakemake_out.log {params.email}
         """
