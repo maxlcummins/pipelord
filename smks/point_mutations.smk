@@ -15,9 +15,8 @@ if path.exists(config['pointfinder_path']) == False:
     print('Pointfinder directory not located, downloading pointfinder...')
     os.system("git clone https://git@bitbucket.org/genomicepidemiology/pointfinder.git tools/pointfinder")
     os.system("git clone https://git@bitbucket.org/genomicepidemiology/pointfinder_db.git tools/pointfinder/pointfinder_db")
-    os.system(perl -p -i -e 's@.split("_")\[0\]@#.split("_")\[0\]  fix: prevented pointfinder breaking on samples with an underscore in their name@g')
-
-
+    os.system("perl -p -i -e 's@^sample_name = filename.split.*@sample_name = filename@g' tools/pointfinder/PointFinder.py")
+    os.system("perl -p -i -e 's@^sample_name = filename$@sample_name = filename # fix: removed file name split@g' tools/pointfinder/PointFinder.py")
 
 #rule all:
 #    input:
@@ -29,7 +28,7 @@ rule pointfinder_run:
     input:
         assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
     output:
-        temp(config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results.tsv")
+        config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results.tsv"
     conda:
         "config/pointfinder.yaml"
     log:
@@ -57,8 +56,6 @@ rule combine:
         expand(config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results_named.tsv", sample=sample_ids, prefix=prefix)
     output:
         temp(config['outdir']+"/{prefix}/pointfinder/Pointfinder_temp.txt")
-    threads:
-        maxthreads
     shell:
         """cat {input} > {output}"""
 
@@ -67,8 +64,6 @@ rule clean:
         config['outdir']+"/{prefix}/pointfinder/Pointfinder_temp.txt"
     output:
         config['outdir']+"/{prefix}/summaries/Pointfinder.txt"
-    threads:
-        maxthreads
     shell:
         """
         awk 'FNR==1 {{ header = $0; print }} $0 != header' {input} > {output}
