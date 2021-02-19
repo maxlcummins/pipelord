@@ -15,8 +15,7 @@ if path.exists(config['pointfinder_path']) == False:
     print('Pointfinder directory not located, downloading pointfinder...')
     os.system("git clone https://git@bitbucket.org/genomicepidemiology/pointfinder.git tools/pointfinder")
     os.system("git clone https://git@bitbucket.org/genomicepidemiology/pointfinder_db.git tools/pointfinder/pointfinder_db")
-    os.system("perl -p -i -e 's@^sample_name = filename.split.*@sample_name = filename@g' tools/pointfinder/PointFinder.py")
-    os.system("perl -p -i -e 's@^sample_name = filename$@sample_name = filename # fix: removed file name split@g' tools/pointfinder/PointFinder.py")
+    os.system("perl -p -i -e 's@^sample_name = filename.split.*@sample_name = filename.split(\".\")[0]@g' tools/pointfinder/PointFinder.py")
 
 #rule all:
 #    input:
