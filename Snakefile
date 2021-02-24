@@ -10,6 +10,7 @@ outdir = config['outdir']
 prefix = config['prefix']
 gene_dbs = expand(config['gene_dbs'])
 scheme = config['pmlst_scheme']
+email = config['email']
 
 if path.exists("tools") == False:
     print('tools directory not located, creating tools directory...')
@@ -44,20 +45,162 @@ if len([i for i in sample_ids if '.' in i]) > 0:
 
 rule all:
     input:
-        expand(config['outdir']+"/{prefix}/summaries/mlst.txt", prefix=prefix),
-        expand(config['outdir']+"/{prefix}/summaries/Pointfinder.txt", prefix=prefix),
-        #expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab", sample=sample_ids, gene_db=gene_dbs, prefix=prefix),
-        expand(config['outdir']+"/{prefix}/summaries/abricate_hits.txt", prefix=prefix),
-        expand(config['outdir']+"/{prefix}/summaries/pMLST.txt", prefix=config['prefix']),
-        expand(config['outdir']+"/{prefix}/summaries/kraken2_full_summary.txt", prefix = config['prefix']),
-        expand(config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta", sample=sample_ids, prefix=config['prefix']),
-        # Summaries
-        expand(config['outdir']+"/{prefix}/summaries/fastp_summary.json", prefix=config['prefix']) if config['input_type'] == 'raw_reads' else [],
-        expand(config['outdir']+"/{prefix}/summaries/assembly_stats.txt", prefix = config['prefix']),
-        expand(config['outdir']+"/{prefix}/summaries/{prefix}_simple_summary_N"+str(config['abricateR_identity'])+"L"+str(config['abricateR_length'])+".csv", prefix=prefix)
+        expand(config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta", sample=sample_ids, prefix=prefix),
+        expand(config['outdir']+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt", sample=sample_ids, prefix=prefix),
+        expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab", gene_db=gene_dbs, sample=sample_ids, prefix=prefix),
+        expand(config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results_named.txt", scheme=scheme, sample=sample_ids, prefix=prefix),
+        expand(config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results_named.tsv",sample=sample_ids, prefix=prefix),
+        expand(config['outdir']+"/{prefix}/kraken2/{sample}_clean.report", sample=sample_ids, prefix=prefix),
+        expand(config['outdir']+"/{prefix}/fastp/{sample}.R1.fastq.gz", sample=sample_ids, prefix=prefix) if config['input_type'] == 'raw_reads' else [],
+        expand(config['outdir']+"/{prefix}/mlst/{sample}_mlst.txt",sample=sample_ids, prefix=prefix),
 
+        # Summaries
+        #expand(config['outdir']+"/{prefix}/summaries/fastp_summary.json", prefix=config['prefix']) if config['input_type'] == 'raw_reads' else [],
+        #expand(config['outdir']+"/{prefix}/summaries/assembly_stats.txt", prefix = config['prefix']),
+        #expand(config['outdir']+"/{prefix}/summaries/{prefix}_simple_summary_N"+str(config['abricateR_identity'])+"L"+str(config['abricateR_length'])+".csv", prefix=prefix),
+        #expand(config['outdir']+"/{prefix}/summaries/mlst.txt", prefix=prefix),
+        #expand(config['outdir']+"/{prefix}/summaries/Pointfinder.txt", prefix=prefix),
+        #expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab", sample=sample_ids, gene_db=gene_dbs, prefix=prefix),
+        #expand(config['outdir']+"/{prefix}/summaries/abricate_hits.txt", prefix=prefix),
+        #expand(config['outdir']+"/{prefix}/summaries/pMLST.txt", prefix=config['prefix']),
+        #expand(config['outdir']+"/{prefix}/summaries/kraken2_full_summary.txt", prefix = config['prefix']),
 
 #if config['input_type'] == 'raw_reads' else [],
+
+onerror:
+    print("An error occurred")
+    shell("echo Your Snakemake job with prefix \'{prefix}\' has failed. | mail -s 'Snakemake job has failed' {email}")
+
+
+# Please code deities forgive my frankenstein onsuccess script. I will repackage it in a future distribution into a script... for now I just need it to run!
+onsuccess:
+#Announce expected directories and prefixes
+    shell("echo Expecting \\'{outdir}\\' as the outdirectory and \\'{prefix}\\' as the prefix")
+    shell("echo ")
+    shell("echo Writing summaries to \\'{outdir}/{prefix}/summaries\\'")
+    shell("echo ")
+    print("Generating summary files...")
+    shell("echo ")
+
+#Make directory for summaries
+    shell("mkdir -p {outdir}/{prefix}/summaries")
+
+#Concatenate summary stats
+    shell("cat {outdir}/{prefix}/shovill/assembly_stats/*.txt > {outdir}/{prefix}/summaries/temp_assembly_stats.txt")
+    #Clean sample names
+    shell("perl -p -i -e 's@.*shovill/assemblies/@@g' {outdir}/{prefix}/summaries/temp_assembly_stats.txt")
+    shell("perl -p -i -e 's@.fasta@@g' {outdir}/{prefix}/summaries/temp_assembly_stats.txt")
+    # Changes column name to name rather than filename
+    shell("perl -p -i -e 's@^filename@name@g' {outdir}/{prefix}/summaries/temp_assembly_stats.txt")
+    #Removes duplicate headers (in this case lines starting with filename)
+    shell("awk 'FNR==1 {{ header = $0; print }} $0 != header' {outdir}/{prefix}/summaries/temp_assembly_stats.txt > {outdir}/{prefix}/summaries/assembly_stats.txt")
+    #Delete temp file
+    shell("rm {outdir}/{prefix}/summaries/temp_assembly_stats.txt")
+    shell("echo Assembly stats summary written to \\'{outdir}/{prefix}/summaries/assembly_stats.txt\\'")
+    shell("echo ")
+
+#Combine abricate data
+    shell("cat {outdir}/{prefix}/abricate/*/*.tab > {outdir}/{prefix}/summaries/genotype_temp1.txt")
+    #trim '.fasta' off the ends of assembly names
+    shell("perl -p -i -e 's@\.fasta@@g' {outdir}/{prefix}/summaries/genotype_temp1.txt")
+    #Rename first column name
+    shell("sed -E '1s/#FILE/name/g' {outdir}/{prefix}/summaries/genotype_temp1.txt > {outdir}/{prefix}/summaries/genotype_temp2.txt")
+    #Remove duplicate headers by negate grep
+    shell("grep -v '#FILE' {outdir}/{prefix}/summaries/genotype_temp2.txt > {outdir}/{prefix}/summaries/genotype.txt")
+    #Remove temp files
+    shell("rm {outdir}/{prefix}/summaries/genotype_temp*")
+    shell("echo Genotypic data written to \\'{outdir}/{prefix}/summaries/genotype.txt\\'")
+    shell("echo ")
+
+#Combine pMLST data
+    shell("cat {outdir}/{prefix}/pMLST/*/*/results_named.txt > {outdir}/{prefix}/summaries/pMLST_temp.txt")
+    shell("grep -E 'pMLST profile|Sequence Type' {outdir}/{prefix}/summaries/pMLST_temp.txt > {outdir}/{prefix}/summaries/pMLST_temp2.txt")
+    shell("perl -p -i -e 's@pMLST profile: @@g' {outdir}/{prefix}/summaries/pMLST_temp2.txt")
+    shell("awk '{{printf \"%s%s\",$0,NR%2?\"\t\":RS}}' {outdir}/{prefix}/summaries/pMLST_temp2.txt > {outdir}/{prefix}/summaries/pMLST_temp3.txt")
+    ##Trim the first column to generate a column with pMLST scheme")
+    shell("perl -p -i -e 's@^.*Inc@@g' {outdir}/{prefix}/summaries/pMLST_temp3.txt")
+    ##Trim the first column to generate a column with pMLST scheme")
+    shell("perl -p -i -e 's@^.*pBSSB1@pBSSB1@g' {outdir}/{prefix}/summaries/pMLST_temp3.txt")
+    ##Trim column two to generate a column with sample names")
+    shell("perl -p -i -e 's@\t.*(inc[^/]+|pbssb1[^/]+)/@\t@g' {outdir}/{prefix}/summaries/pMLST_temp3.txt")
+    ## Trim column with sample names to clean them")
+    shell("perl -p -i -e 's@.out/results.txt@@g' {outdir}/{prefix}/summaries/pMLST_temp3.txt")
+    ##Trim pMLST column to get rid of junk text")
+    shell("perl -p -i -e 's@Sequence Type: @@g' {outdir}/{prefix}/summaries/pMLST_temp3.txt")
+    ##Clean square brackets from pMLST names")
+    shell("perl -p -i -e 's@(\]|\[)@@g' {outdir}/{prefix}/summaries/pMLST_temp3.txt")
+    ##Fix scheme column names")
+    shell("perl -p -i -e 's@^@Inc@g' {outdir}/{prefix}/summaries/pMLST_temp3.txt")
+    shell("perl -p -i -e 's@Inc @Inc@g' {outdir}/{prefix}/summaries/pMLST_temp3.txt")
+    shell("perl -p -i -e 's@^.*family@pbssb1-family@g'  {outdir}/{prefix}/summaries/pMLST_temp3.txt")
+    ##Change order of columns")
+    shell("awk -F'\t' -v OFS=\"\t\" '{{ print $2, $1, $3}}' {outdir}/{prefix}/summaries/pMLST_temp3.txt > {outdir}/{prefix}/summaries/pMLST_temp4.txt")
+    ##Insert a header")
+    shell("echo -e \"name\tpMLST_scheme\tpMLST\" | cat - {outdir}/{prefix}/summaries/pMLST_temp4.txt > {outdir}/{prefix}/summaries/pMLST_temp5.txt")
+    ##Remove MLST scheme/sample combinations with no hits")
+    shell("grep -v 'Unknown' {outdir}/{prefix}/summaries/pMLST_temp5.txt > {outdir}/{prefix}/summaries/pMLST.txt")
+    #Remove temp files
+    shell("rm {outdir}/{prefix}/summaries/*_temp*")
+    #Announce genotype summary location
+    shell("echo pMLST data written to \\'{outdir}/{prefix}/summaries/pMLST.txt\\'")
+    shell("echo ")
+
+#Combine pointfinder data
+    shell("cat {outdir}/{prefix}/pointfinder/*/*_blastn_results_named.tsv > {outdir}/{prefix}/summaries/Pointfinder_temp.txt")
+    shell("awk 'FNR==1 {{ header = $0; print }} $0 != header' {outdir}/{prefix}/summaries/Pointfinder_temp.txt > {outdir}/{prefix}/summaries/pointfinder.txt")
+    shell("perl -p -i -e 's@.*/@@g' {outdir}/{prefix}/summaries/pointfinder.txt")
+    shell("perl -p -i -e 's@_blastn_results.tsv@@g' {outdir}/{prefix}/summaries/pointfinder.txt")
+    #Remove temp files
+    shell("rm {outdir}/{prefix}/summaries/*_temp*")
+    #Announce genotype summary location
+    shell("echo Pointfinder data written to \\'{outdir}/{prefix}/summaries/pointfinder.txt\\'")
+    shell("echo ")
+
+
+#Combine Kraken data
+    shell("cat {outdir}/{prefix}/kraken2/*_clean.report > {outdir}/{prefix}/summaries/kraken2_summary_temp.txt")
+    # Clean sample names
+    shell("perl -p -i -e s'@.*kraken2/@@g' {outdir}/{prefix}/summaries/kraken2_summary_temp.txt")
+    # Removes duplicate headers (in this case lines starting with filename)
+    shell("awk 'FNR==1 {{ header = $0; print }} $0 != header' {outdir}/{prefix}/summaries/kraken2_summary_temp.txt > {outdir}/{prefix}/summaries/kraken2_summary_temp2.txt")
+    # Create simple summary - 1. find cols with species designations (== S) 2. Sort by highest match in column 2. 3. Select the row with the first instance of each sample (i.e. highest species match)
+    shell("grep -P \"\tS\t\" {outdir}/{prefix}/summaries/kraken2_summary_temp2.txt | sort -nk2 -r | awk '{{ if (a[$1]++ == 0) print $0; }}' $@ > {outdir}/{prefix}/summaries/kraken2_simple_summary_temp.txt")
+    #awk '{{if ($5 == "S") print $0;}}' {output.combined_output_cleaned} | sort -nk2 -r | awk '{{ if (a[$1]++ == 0) print $0; }}' $@ > {output.simplified_combined}
+    # Insert a header
+    shell("echo -e \"name\tperc_frags\tnum_frags\tnum_frags_direct\trank\tncbi_taxon_id\tscientific_name\" | cat - {outdir}/{prefix}/summaries/kraken2_simple_summary_temp.txt > {outdir}/{prefix}/summaries/kraken2_simple_summary.txt")
+    # Insert a header
+    shell("echo -e \"name\tperc_frags\tnum_frags\tnum_frags_direct\trank\tncbi_taxon_id\tscientific_name\" | cat - {outdir}/{prefix}/summaries/kraken2_summary_temp2.txt > {outdir}/{prefix}/summaries/kraken2_full_summary.txt")
+    #Remove temp files
+    shell("rm {outdir}/{prefix}/summaries/*_temp*")
+    #Announce genotype summary location
+    shell("echo Kraken data written to \\'{outdir}/{prefix}/summaries/kraken2_simple_summary.txt\\' and \\'{outdir}/{prefix}/summaries/kraken2_full_summary.txt\\'")
+    shell("echo ")
+
+#Combine  fastp data
+    if config['input_type'] == 'raw_reads':
+        shell("cat {outdir}/{prefix}/fastp/*.fastp.json > {outdir}/{prefix}/summaries/fastp_summary.json")
+        #Announce genotype summary location
+        shell("echo Fastp data written to \\'{outdir}/{prefix}/summaries/fastp_summary.json")
+        shell("echo ")
+
+#Combine MLST data
+    shell("cat {outdir}/{prefix}/mlst/*_mlst.txt > {outdir}/{prefix}/summaries/mlst_temp.txt")
+    shell("perl -p -i -e 's@.*assemblies/@@g' {outdir}/{prefix}/summaries/mlst_temp.txt")
+    shell("perl -p -i -e 's@.fasta@@g' {outdir}/{prefix}/summaries/mlst_temp.txt")
+    # Insert a header
+    shell("echo -e \"name\tscheme\tST\" | cat - {outdir}/{prefix}/summaries/mlst_temp.txt > {outdir}/{prefix}/summaries/mlst.txt")
+    #Remove temp files
+    shell("rm {outdir}/{prefix}/summaries/*_temp*")
+    #Announce genotype summary location
+    shell("echo MLST data written to \\'{outdir}/{prefix}/summaries/mlst.txt\\'")
+    shell("echo ")
+
+    #Announce job finish
+    print("Job finished")
+    #Email user
+    shell("echo Your Snakemake job with prefix \\'{prefix}\\' has finished. It has been written to \\'{outdir}/{prefix}/summaries/\\' | mail -s 'Snakemake job has finished' {email}")
+
+
 
 include: "smks/genome_assembly.smk"
 include: "smks/summarise.smk"

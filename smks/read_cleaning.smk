@@ -41,12 +41,19 @@ rule run_fastp:
         fastp -i {input.r1} -I {input.r2} -o {output.r1_filt} -O {output.r2_filt} -j {output.json} -h {output.html} 2>&1 {log}
         """
 
-rule run_fastp_summary:
-    input:
-        expand(config['outdir']+"/{prefix}/fastp/{sample}.fastp.json", sample=sample_ids, prefix=prefix)
-    output:
-        config['outdir']+"/{prefix}/summaries/fastp_summary.json"
-    shell:
-        """
-        cat {input} > {output}
-        """
+#rule run_fastp_summary:
+#    input:
+#        expand(config['outdir']+"/{prefix}/fastp/{sample}.fastp.json", sample=sample_ids, prefix=prefix)
+#    output:
+#        config['outdir']+"/{prefix}/summaries/fastp_summary.json"
+#    params:
+#        summaries_dir = config['outdir']+"/{prefix}/summaries"
+#    shell:
+#        """
+#        if [[ ! -e {params.summaries_dir} ]]; then
+#            mkdir -p {params.summaries_dir}
+#        touch {output}
+#        xargs cat > {output} <<'EOF'\n
+#        {input}\n
+#        EOF\n
+#        """

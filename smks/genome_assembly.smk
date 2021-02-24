@@ -33,37 +33,37 @@ if config['input_type'] == 'assemblies':
         input:
             config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
         output:
-            temp(config['outdir']+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt")
+            config['outdir']+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt"
         conda:
             "config/assembly_stats.yaml"
         shell:
             "assembly-stats -t {input} > {output}"
 
-    rule combine_assembly_stats_:
-        input:
-            expand(config['outdir']+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt", sample=sample_ids, prefix=prefix)
-        output:
-            stats_temp = temp(config['outdir']+"/{prefix}/summaries/temp_assembly_stats.txt")
-        shell:
-            """
-            cat {input} > {output}
-            """
-
-    rule clean_assembly_stats_:
-        input:
-            stats_temp = config['outdir']+"/{prefix}/summaries/temp_assembly_stats.txt",
-        output:
-            stats = config['outdir']+"/{prefix}/summaries/assembly_stats.txt"
-        shell:
-            """
-            # Cleans file names
-            perl -p -i -e 's@.*assemblies/@@g' {input}
-            perl -p -i -e 's@.fasta@@g' {input}
-            # Changes column name to name rather than filename
-            perl -p -i -e 's@^filename@name@g' {input}
-            #Removes duplicate headers (in this case lines starting with filename)
-            awk 'FNR==1 {{ header = $0; print }} $0 != header' {input} > {output}
-            """
+#    rule combine_assembly_stats_:
+#        input:
+#            expand(config['outdir']+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt", sample=sample_ids, prefix=prefix)
+#        output:
+#            stats_temp = temp(config['outdir']+"/{prefix}/summaries/temp_assembly_stats.txt")
+#        shell:
+#            """
+#            cat {input} > {output}
+#            """
+#
+#    rule clean_assembly_stats_:
+#        input:
+#            stats_temp = config['outdir']+"/{prefix}/summaries/temp_assembly_stats.txt",
+#        output:
+#            stats = config['outdir']+"/{prefix}/summaries/assembly_stats.txt"
+#        shell:
+#            """
+#            # Cleans file names
+#            perl -p -i -e 's@.*assemblies/@@g' {input}
+#            perl -p -i -e 's@.fasta@@g' {input}
+#            # Changes column name to name rather than filename
+#            perl -p -i -e 's@^filename@name@g' {input}
+#            #Removes duplicate headers (in this case lines starting with filename)
+#            awk 'FNR==1 {{ header = $0; print }} $0 != header' {input} > {output}
+#            """
 
 elif config['input_type'] == 'raw_reads':
     rule run_shovill:
@@ -71,7 +71,7 @@ elif config['input_type'] == 'raw_reads':
             r1_filt = config['outdir']+"/{prefix}/fastp/{sample}.R1.fastq.gz",
             r2_filt = config['outdir']+"/{prefix}/fastp/{sample}.R2.fastq.gz"
         output:
-            shov_out = temp(directory(config['outdir']+"/{prefix}/shovill/shovill_out/{sample}.out")),
+            shov_out = directory(config['outdir']+"/{prefix}/shovill/shovill_out/{sample}.out"),
             assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
         log:
             out = config['base_log_outdir']+"/{prefix}/shovill/run/{sample}_out.log",
@@ -87,38 +87,38 @@ elif config['input_type'] == 'raw_reads':
             """
     rule run_assembly_stats:
         input:
-            config['outdir']+"/{prefix}/shovill/shovill_out/{sample}.out"
+            config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
         output:
-            temp(config['outdir']+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt")
+            config['outdir']+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt"
         conda:
             "config/assembly_stats.yaml"
         shell:
-            "assembly-stats -t {input}/contigs.fa > {output}"
+            "assembly-stats -t {input} > {output}"
 
-    rule combine_assembly_stats:
-        input:
-            expand(config['outdir']+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt", sample=sample_ids, prefix=prefix)
-        output:
-            stats_temp = temp(config['outdir']+"/{prefix}/summaries/temp_assembly_stats.txt")
-        shell:
-            """
-            cat {input} > {output}
-            """
-
-    rule clean_assembly_stats:
-        input:
-            stats_temp = config['outdir']+"/{prefix}/summaries/temp_assembly_stats.txt",
-        output:
-            stats = config['outdir']+"/{prefix}/summaries/assembly_stats.txt"
-        shell:
-            """
-            # Cleans file names
-            perl -p -i -e 's@.*shovill_out/@@g' {input}
-            perl -p -i -e 's@.out/contigs.fa@@g' {input}
-            # Changes column name to name rather than filename
-            perl -p -i -e 's@^filename@name@g' {input}
-            #Removes duplicate headers (in this case lines starting with filename)
-            awk 'FNR==1 {{ header = $0; print }} $0 != header' {input} > {output}
-            """
-
+#    rule combine_assembly_stats:
+#        input:
+#            expand(config['outdir']+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt", sample=sample_ids, prefix=prefix)
+#        output:
+#            stats_temp = temp(config['outdir']+"/{prefix}/summaries/temp_assembly_stats.txt")
+#        shell:
+#            """
+#            cat {input} > {output}
+#            """
+#
+#    rule clean_assembly_stats:
+#        input:
+#            stats_temp = config['outdir']+"/{prefix}/summaries/temp_assembly_stats.txt",
+#        output:
+#            stats = config['outdir']+"/{prefix}/summaries/assembly_stats.txt"
+#        shell:
+#            """
+#            # Cleans file names
+#            perl -p -i -e 's@.*shovill_out/@@g' {input}
+#            perl -p -i -e 's@.out/contigs.fa@@g' {input}
+#            # Changes column name to name rather than filename
+#            perl -p -i -e 's@^filename@name@g' {input}
+#            #Removes duplicate headers (in this case lines starting with filename)
+#            awk 'FNR==1 {{ header = $0; print }} $0 != header' {input} > {output}
+#            """
+#
 #include: "read_cleaning.smk"

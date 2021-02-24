@@ -30,7 +30,7 @@ rule abricate_run:
     input:
         assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
     output:
-        tab = temp(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab"),
+        tab = config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab",
     log:
         config['base_log_outdir']+"/{prefix}/abricate/run/{gene_db}/{sample}.log"
     conda:
@@ -44,23 +44,29 @@ rule abricate_run:
     shell:
         "abricate --nopath --datadir {params.datadir} --db {params.db} {input.assembly} > {output} 2> {log}"
 
-# in beta
-rule concatenate_abricate_hits:
-    input:
-        expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab", sample=sample_ids, gene_db=gene_dbs, prefix=prefix)
-    output:
-        config['outdir']+"/{prefix}/summaries/abricate_hits.txt"
-    log:
-        config['base_log_outdir']+"/{prefix}/abricate/concatenate.log"
-    conda:
-        "config/abricate.yaml"
-    threads:
-        maxthreads
-    shell:
-        """
-        cat {input} | awk 'BEGIN{{FS=OFS=";"}} {{gsub(/\.fasta/, "", $1)}} 1' | sed -E '1s/#FILE/name/g' | grep -v "#FILE" > {output}
-        """
-
+## in beta
+#rule concatenate_abricate_hits:
+#    input:
+#        expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab", sample=sample_ids, gene_db=gene_dbs, prefix=prefix)
+#    output:
+#        config['outdir']+"/{prefix}/summaries/abricate_hits.txt"
+#    log:
+#        config['base_log_outdir']+"/{prefix}/abricate/concatenate.log"
+#    conda:
+#        "config/abricate.yaml"
+#    params:
+#        summaries_dir = config['outdir']+"/{prefix}/summaries"
+#    shell:
+#        """
+#        if [[ ! -e {params.summaries_dir} ]]; then
+#            mkdir -p {params.summaries_dir}
+#        touch {output}
+#        xargs cat > {output} <<'EOF'\n
+#        {input}\n
+#        EOF\n
+#        awk 'BEGIN{{FS=OFS=";"}} {{gsub(/\.fasta/, "", $1)}} 1' {output} | sed -E '1s/#FILE/name/g' | grep -v "#FILE" > {output}
+#        """
+#
 #rule abricate_summary:
 #    input:
 #        expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab", sample=sample_ids, gene_db=gene_dbs, prefix=prefix)

@@ -45,33 +45,42 @@ rule name_append:
     input:
         config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results.tsv"
     output:
-        temp(config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results_named.tsv")
+        config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results_named.tsv"
     shell:
         """awk 'NR == 1 {{print "name\t" $0; next;}}{{print FILENAME "\t" $0;}}' {input} > {output}"""
 
 
-rule combine:
-    input:
-        expand(config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results_named.tsv", sample=sample_ids, prefix=prefix)
-    output:
-        temp(config['outdir']+"/{prefix}/pointfinder/Pointfinder_temp.txt")
-    shell:
-        """cat {input} > {output}"""
-
-rule clean:
-    input:
-        config['outdir']+"/{prefix}/pointfinder/Pointfinder_temp.txt"
-    output:
-        config['outdir']+"/{prefix}/summaries/Pointfinder.txt"
-    shell:
-        """
-        awk 'FNR==1 {{ header = $0; print }} $0 != header' {input} > {output}
-        perl -p -i -e 's@.*/@@g' {output}
-        perl -p -i -e 's@_blastn_results.tsv@@g' {output}
-
-        """
-
-
+#rule combine:
+#    input:
+#        expand(config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results_named.tsv", sample=sample_ids, prefix=prefix)
+#    output:
+#        config['outdir']+"/{prefix}/pointfinder/Pointfinder_temp.txt"
+#    params:
+#        summaries_dir = config['outdir']+"/{prefix}/summaries"
+#    shell:
+#        """
+#        if [[ ! -e {params.summaries_dir} ]]; then
+#            mkdir -p {params.summaries_dir}
+#        touch {output}
+#        xargs cat > {output} <<'EOF'\n
+#        {input}\n
+#        EOF\n
+#        """
+#
+#rule clean:
+#    input:
+#        config['outdir']+"/{prefix}/pointfinder/Pointfinder_temp.txt"
+#    output:
+#        config['outdir']+"/{prefix}/summaries/Pointfinder.txt"
+#    shell:
+#        """
+#        awk 'FNR==1 {{ header = $0; print }} $0 != header' {input} > {output}
+#        perl -p -i -e 's@.*/@@g' {output}
+#        perl -p -i -e 's@_blastn_results.tsv@@g' {output}
+#
+#        """
+#
+#
 # rule data_combine:
 #	input:
 #		config['outdir']+"{sample}/{sample}_blastn_results_named.tsv"
