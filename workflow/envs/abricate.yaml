@@ -1,18 +1,19 @@
-name: null
+name: /data/malcummi/pipelord2_0/.snakemake/conda/410618b6
 channels:
   - bioconda
-  - conda-forge
+  - r
   - defaults
+  - conda-forge
 dependencies:
   - _libgcc_mutex=0.1=conda_forge
   - _openmp_mutex=4.5=0_gnu
-  - abricate=0.9.8=h1341992_0
+  - abricate=1.0.1=h1341992_0
   - any2fasta=0.4.2=2
   - blast=2.9.0=pl526h3066fca_4
   - bzip2=1.0.8=h516909a_2
-  - ca-certificates=2019.11.28=hecc5488_0
+  - ca-certificates=2020.12.5=ha878542_0
   - cairo=1.16.0=hcf35c78_1003
-  - certifi=2019.11.28=py37hc8dfbb8_1
+  - certifi=2020.12.5=py37h89c1867_1
   - clustalw=2.1=hc9558a2_5
   - curl=7.65.3=hf8cf82a_0
   - entrez-direct=11.0=pl526h375a9b1_2
@@ -293,5 +294,4 @@ dependencies:
   - xz=5.2.4=h516909a_1002
   - zlib=1.2.11=h516909a_1006
   - zstd=1.4.4=h3b9ef0a_2
-prefix: /data/malcummi/pipelord/abricatelord/.snakemake/conda/80d9c67c
-
+prefix: /data/malcummi/pipelord2_0/.snakemake/conda/410618b6
