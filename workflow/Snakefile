@@ -4,7 +4,7 @@ import os
 from os import path
 import git
 
-configfile: "config/masterconfig.yaml"
+configfile: "config/masterconfig_test.yaml"
 
 outdir = config['outdir']
 prefix = config['prefix']

@@ -2,7 +2,7 @@ import re
 import subprocess
 import os
 
-if path.exists("resources/tools/pointfinder") == False:
+if path.exists("resources/tools/pmlst") == False:
     print('pmlst directory not located, downloading pmlst...')
     os.system("git clone https://git@bitbucket.org/genomicepidemiology/pmlst.git resources/tools/pmlst")
     os.system("git clone https://git@bitbucket.org/genomicepidemiology/pmlst_db.git resources/tools/pmlst/pmlst_db")
