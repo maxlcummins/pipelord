@@ -1,5 +1,5 @@
 ### User info
-email: max.cummins@uts.edu.au
+email: 
 
 ### General configuration variables
 # Primary input type
@@ -7,13 +7,13 @@ email: max.cummins@uts.edu.au
 input_type: assemblies
 #input_type: raw_reads
 # Prefix for output files - here the collection name or an abbreviation for the relevant manuscript might be a good choice
-prefix: ST95_all
+prefix: test
 # Path to project directory where you want your output to go
 # Path to short-reads. Here it is assumed that your reads are set up as read pairs - analysis is unlikely to work if this isnt the case.
 #raw_reads: /projects/AusGEM/i3_genomes/AVC_MLC
 raw_reads_path:
 # Path to assemblies. These may be your initial input as sometimes it can be hard to source read for large collections
-assembly_path: /projects/AusGEM/Users/Max/Manuscripts/ST95/data/assemblies/ST95_all
+assembly_path: resources/test_data/assemblies
 # Path to blast executable
 blast_bin: /usr/local/ncbi-blast-2.8.1+/bin
 # Path to master output directory
