@@ -4,13 +4,21 @@ import os
 from os import path
 import git
 
-configfile: "config/masterconfig_test.yaml"
+configfile: "config/Salmonella_UoW_config.yaml"
 
 outdir = config['outdir']
 prefix = config['prefix']
 gene_dbs = expand(config['gene_dbs'])
+plasmid_screen_db = expand(config['plasmid_screen_db'])
+
 scheme = config['pmlst_scheme']
 email = config['email']
+
+
+subset_fofn = config['subset_fofn']
+subset_name = config['subset_name']
+with open(subset_fofn) as f:
+        subset = [line.strip("\n") for line in f]
 
 if path.exists("resources/tools") == False:
     print('tools directory not located, creating tools directory...')
@@ -53,6 +61,13 @@ rule all:
         expand(config['outdir']+"/{prefix}/kraken2/{sample}_clean.report", sample=sample_ids, prefix=prefix),
         expand(config['outdir']+"/{prefix}/fastp/{sample}.R1.fastq.gz", sample=sample_ids, prefix=prefix) if config['input_type'] == 'raw_reads' else [],
         expand(config['outdir']+"/{prefix}/mlst/{sample}_mlst.txt",sample=sample_ids, prefix=prefix),
+        expand(config['outdir']+"/{prefix}/dfast/gffs/{sample}.gff",sample=sample_ids, prefix=prefix),
+        "resources/dbs/dfast" if path.exists("resources/dbs/dfast") == False else [],
+        #expand(config['outdir']+"/{prefix}/abricate/plasmid_screen.txt", prefix=prefix),
+        expand(config['outdir']+"/{prefix}/abricate/plasmids/{plasmid_screen_db}/{sample}.tab", sample=sample_ids, plasmid_screen_db=plasmid_screen_db, prefix=prefix),
+        #expand(config['outdir']+"/{prefix}/roary/{subset_name}", prefix=prefix, subset_name=subset_name),
+        #expand(config['outdir']+"/{prefix}/dfast/{subset_name}/{subset}.gff", prefix=prefix, subset_name=subset_name, subset=subset),
+
 
         # Summaries
         #expand(config['outdir']+"/{prefix}/summaries/fastp_summary.json", prefix=config['prefix']) if config['input_type'] == 'raw_reads' else [],
@@ -69,7 +84,9 @@ rule all:
 
 onerror:
     print("An error occurred")
-    shell("echo Your Snakemake job with prefix \'{prefix}\' has failed. | mail -s 'Snakemake job has failed' {email}")
+    #Email user
+    if config['email'] != '':
+        shell("echo Your Snakemake job with prefix \'{prefix}\' has failed. | mail -s 'Snakemake job has failed' {email}")
 
 
 # Please code deities forgive my frankenstein onsuccess script. I will repackage it in a future distribution into a script... for now I just need it to run!
@@ -198,10 +215,12 @@ onsuccess:
     #Announce job finish
     print("Job finished")
     #Email user
-    shell("echo Your Snakemake job with prefix \'{prefix}\' has finished. It has been written to \'{outdir}/{prefix}/summaries/\' | mail -s 'Snakemake job has finished' {email}")
+    if config['email'] != '':
+        shell("echo Your Snakemake job with prefix \'{prefix}\' has finished. It has been written to \'{outdir}/{prefix}/summaries/\' | mail -s 'Snakemake job has finished' {email}")
 
 
-
+#include: "rules/roary_pangenome.smk"
+include: "rules/genome_annotation.smk"
 include: "rules/genome_assembly.smk"
 include: "rules/summarise.smk"
 include: "rules/species_id.smk"
@@ -211,4 +230,4 @@ include: "rules/strain_mlst.smk"
 include: "rules/plasmid_mlst.smk"
 
 
-#ruleorder: concatenate_abricate_hits > abricate_summary
+ruleorder: abricate_plasmid_run > abricate_run
