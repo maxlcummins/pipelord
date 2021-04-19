@@ -1,0 +1,13 @@
+name: iqtree
+channels:
+  - bioconda
+  - r
+  - defaults
+  - conda-forge
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - iqtree=2.0.3=h176a8bc_0
+  - libgcc-ng=9.1.0=hdf63c60_0
+  - libstdcxx-ng=9.1.0=hdf63c60_0
+  - zlib=1.2.11=h7b6447c_3
+prefix: /home/malcummi/Data/miniconda3/envs/iqtree

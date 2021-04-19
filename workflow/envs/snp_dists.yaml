@@ -1,0 +1,11 @@
+name: snp_dists_snake
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - libgcc-ng=7.3.0=hdf63c60_0
+  - snp-dists=0.6.3=ha92aebf_0
+  - zlib=1.2.11=h14c3975_1004
+prefix: /home/cjreid/miniconda3/envs/snp_dists_snake
+
