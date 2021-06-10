@@ -25,9 +25,10 @@ rule pointfinder_run:
     params:
         output_dir = config['outdir']+"/{prefix}/pointfinder/{sample}",
         species = config['pointfinder_species'],
+        blastn_path = config['blast_bin']
     shell:
         """
-        resources/tools/pointfinder/PointFinder.py -i {input} -o {params.output_dir} -p resources/tools/pointfinder/pointfinder_db {params.species} -m blastn -m_p /usr/local/ncbi-blast-ihpc-2.8.1+/bin/blastn 2> {log}
+        resources/tools/pointfinder/PointFinder.py -i {input} -o {params.output_dir} -p resources/tools/pointfinder/pointfinder_db {params.species} -m blastn -m_p {params.blastn_path}/blastn 2> {log}
         """
 
 rule name_append:

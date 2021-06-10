@@ -30,10 +30,11 @@ rule pMLST_run:
         pmlst_db_path = config['pMLST_db_path'],
         db = "{scheme}",
         scheme = scheme,
+        blastn_path = config['blast_bin']
 
     shell:
         """
-        python3 {params.pmlst_script_path} -i {input} -o {params.output_dir} -p {params.pmlst_db_path} {params.pmlst_tool} -s {params.db} -x -t {params.tmp}
+        python3 {params.pmlst_script_path} -i {input} -o {params.output_dir} -p {params.pmlst_db_path} {params.pmlst_tool} {params.blastn_path}/blastn -s {params.db} -x -t {params.tmp}
         rm -rf {params.tmp}
         """
 

@@ -13,9 +13,11 @@ if config['input_type'] == 'assemblies':
         input:
             assembly = config['assembly_path']+"/{sample}.fasta"
         output:
-            assembly = temp(config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta")
+            assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
         shell:
-            "cp {input} {output}"
+            """
+            cp -n {input} {output}
+            """
 
     rule run_assembly_stats_:
         input:
