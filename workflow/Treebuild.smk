@@ -145,4 +145,4 @@ onsuccess:
         shell("echo Your Snakemake job with prefix \'{prefix}\' has finished. It has been written to \'{outdir}/{prefix}/summaries/\' | mail -s 'Snakemake job has finished' {email}")
 
 
-ruleorder: roary > snp_sites > iqtree > iqtree_snp_sites > snp_dists_snp_sit
+ruleorder: roary > snp_sites > iqtree > iqtree_snp_sites > snp_dists_snp_sites > snp_dists_full
