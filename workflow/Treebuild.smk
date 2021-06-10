@@ -4,8 +4,9 @@ import os
 from os import path
 import git
 
-configfile: "config/Salmonella_UoW_config.yaml"
+configfile: "config/citrobacter_all.yaml"
 
+#Number of threads
 maxthreads = snakemake.utils.available_cpu_count()
 
 outdir = config['outdir']
@@ -21,6 +22,7 @@ subset_fofn = config['subset_fofn']
 subset_names = config['subset_name']
 with open(subset_fofn) as f:
         subset = [line.strip("\n") for line in f]
+
 
 rule all:
     input:
@@ -143,4 +145,4 @@ onsuccess:
         shell("echo Your Snakemake job with prefix \'{prefix}\' has finished. It has been written to \'{outdir}/{prefix}/summaries/\' | mail -s 'Snakemake job has finished' {email}")
 
 
-ruleorder: roary > snp_sites > iqtree > iqtree_snp_sites > snp_dists_snp_sites > snp_dists_full
+ruleorder: roary > snp_sites > iqtree > iqtree_snp_sites > snp_dists_snp_sit
