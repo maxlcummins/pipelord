@@ -33,10 +33,10 @@ if config["input_type"] == "raw_reads":
     include: "rules/read_cleaning.smk"
 
 
-if config["input_type"] == "reads":
+elif config["input_type"] == "reads":
     (ssample_ids,) = glob_wildcards(config["reads_path"] + "/{sample}.R1.fastq.gz")
 
-if config["input_type"] == "assemblies":
+elif config["input_type"] == "assemblies":
     (sample_ids,) = glob_wildcards(config["assembly_path"] + "/{sample}.fasta")
 
 else:
