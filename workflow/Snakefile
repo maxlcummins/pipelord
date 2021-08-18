@@ -329,13 +329,13 @@ onsuccess:
     shell("echo MLST data written to '{outdir}/{prefix}/summaries/mlst.txt'")
     shell("echo ")
 
-# Announce job finish
-print("Job finished")
+    # Announce job finish
+    print("Job finished")
 # Email user
-if config["email"] != "":
-    shell(
-        "echo Your Snakemake job with prefix '{prefix}' has finished. It has been written to '{outdir}/{prefix}/summaries/' | mail -s 'Snakemake job has finished' {email}"
-    )
+    if config["email"] != "":
+        shell(
+            "echo Your Snakemake job with prefix '{prefix}' has finished. It has been written to '{outdir}/{prefix}/summaries/' | mail -s 'Snakemake job has finished' {email}"
+            )
 
 
 # include: "rules/roary_pangenome.smk"
