@@ -1,5 +1,5 @@
 ### User info
-email: 
+email: max.cummins@uts.edu.au
 
 ### General configuration variables
 # Primary input type
@@ -13,7 +13,8 @@ raw_reads_path: resources/test_data/reads
 # Path to assemblies. These may be your initial input as sometimes it can be hard to source read for large collections
 #assembly_path: resources/test_data/assemblies
 # Path to blast executable
-blast_bin: /usr/local/ncbi-blast-2.10.1+/bin
+blast_bin: /Users/131785/ncbi-blast-2.12.0+/bin
+#blast_bin: /usr/local/ncbi-blast-2.10.1+/bin
 # Path to master output directory
 outdir: results
 # Filtered reads (via fastp)
@@ -29,7 +30,7 @@ pointfinder_species: "-s escherichia_coli"
 
 
 ### Kraken2lord
-krakendb: /projects/AusGEM/databases/kraken2/minikraken2
+krakendb: /Users/131785/playground/pipelord2_0/resources/dbs/minikraken2
 
 
 ### Abricatelord

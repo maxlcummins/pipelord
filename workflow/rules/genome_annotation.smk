@@ -27,7 +27,8 @@ rule dfast_db_download:
 
 rule dfast_run:
     input:
-        assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
+        assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta",
+        database = "resources/dbs/dfast"
     output:
         directory(config['outdir']+"/{prefix}/dfast/{sample}.out")
     conda:
@@ -36,7 +37,7 @@ rule dfast_run:
         dfast_out = config['outdir']+"/{prefix}/dfast/{sample}.out",
     shell:
         """
-        dfast -g {input} --dbroot ~/Data/pipelord2_0/resources/dbs/dfast -o {output} --use_locustag_as_gene_id
+        dfast -g {input.assembly} --dbroot {input.database} -o {output} --use_locustag_as_gene_id
         """
 
 rule gff_rename:
