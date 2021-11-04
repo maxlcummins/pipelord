@@ -1,5 +1,8 @@
 # pipelord2.0
 
+## Disclaimer
+While I have made every effort to ensure these scripts produce reliable and accurate output, it is important that you spot check your outputs to ensure they are correct.
+
 ## Installation and setup
 
 ```
