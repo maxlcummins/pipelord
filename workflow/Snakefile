@@ -98,11 +98,7 @@ rule all:
             sample=sample_ids,
             prefix=prefix,
         ),
-        expand(
-            config["outdir"] + "/{prefix}/kraken2/{sample}_clean.report",
-            sample=sample_ids,
-            prefix=prefix,
-        ),
+        expand(config['outdir']+"/{prefix}/summaries/bracken_report.txt", prefix=prefix),
         expand(
             config["outdir"] + "/{prefix}/fastp/{sample}.R1.fastq.gz",
             sample=sample_ids,
@@ -238,7 +234,6 @@ onsuccess:
         "awk -F'\t' -v OFS=\"\t\" '{{ print $2, $1, $3}}' {outdir}/{prefix}/summaries/pMLST_temp3.txt > {outdir}/{prefix}/summaries/pMLST_temp4.txt"
     )
     # Insert a header")
-<<<<<<< HEAD
     shell(
         'echo -e "name\tpMLST_scheme\tpMLST" | cat - {outdir}/{prefix}/summaries/pMLST_temp4.txt > {outdir}/{prefix}/summaries/pMLST_temp5.txt'
     )
@@ -246,15 +241,6 @@ onsuccess:
     shell(
         "grep -v 'Unknown' {outdir}/{prefix}/summaries/pMLST_temp5.txt > {outdir}/{prefix}/summaries/pMLST.txt"
     )
-=======
-    shell(
-        'echo -e "name\tpMLST_scheme\tpMLST" | cat - {outdir}/{prefix}/summaries/pMLST_temp4.txt > {outdir}/{prefix}/summaries/pMLST_temp5.txt'
-    )
-    # Remove MLST scheme/sample combinations with no hits")
-    shell(
-        "grep -v 'Unknown' {outdir}/{prefix}/summaries/pMLST_temp5.txt > {outdir}/{prefix}/summaries/pMLST.txt"
-    )
->>>>>>> e4942ff1983ec17f9f5cbf980c9811d97e3a98a3
     # Remove temp files
     shell("rm {outdir}/{prefix}/summaries/*_temp*")
     # Announce genotype summary location
@@ -279,50 +265,6 @@ onsuccess:
         "echo Pointfinder data written to \\'{outdir}/{prefix}/summaries/pointfinder.txt\\'"
     )
     shell("echo ")
-
-
-    # Combine Kraken data
-    shell(
-        "cat {outdir}/{prefix}/kraken2/*_clean.report > {outdir}/{prefix}/summaries/kraken2_summary_temp.txt"
-    )
-    # Clean sample names
-    shell(
-        "perl -p -i -e s'@.*kraken2/@@g' {outdir}/{prefix}/summaries/kraken2_summary_temp.txt"
-    )
-    # Removes duplicate headers (in this case lines starting with filename)
-    shell(
-        "awk 'FNR==1 {{ header = $0; print }} $0 != header' {outdir}/{prefix}/summaries/kraken2_summary_temp.txt > {outdir}/{prefix}/summaries/kraken2_summary_temp2.txt"
-    )
-    # Create simple summary - 1. find cols with species designations (== S) 2. Sort by highest match in column 2. 3. Select the row with the first instance of each sample (i.e. highest species match)
-    shell(
-        "grep -P \"\tS\t\" {outdir}/{prefix}/summaries/kraken2_summary_temp2.txt | sort -nk2 -r | awk '{{ if (a[$1]++ == 0) print $0; }}' $@ > {outdir}/{prefix}/summaries/kraken2_simple_summary_temp.txt"
-    )
-    # awk '{{if ($5 == "S") print $0;}}' {output.combined_output_cleaned} | sort -nk2 -r | awk '{{ if (a[$1]++ == 0) print $0; }}' $@ > {output.simplified_combined}
-    # Insert a header
-    shell(
-        'echo -e "name\tperc_frags\tnum_frags\tnum_frags_direct\trank\tncbi_taxon_id\tscientific_name" | cat - {outdir}/{prefix}/summaries/kraken2_simple_summary_temp.txt > {outdir}/{prefix}/summaries/kraken2_simple_summary.txt'
-    )
-    # Insert a header
-    shell(
-        'echo -e "name\tperc_frags\tnum_frags\tnum_frags_direct\trank\tncbi_taxon_id\tscientific_name" | cat - {outdir}/{prefix}/summaries/kraken2_summary_temp2.txt > {outdir}/{prefix}/summaries/kraken2_full_summary.txt'
-    )
-    # Remove temp files
-    shell("rm {outdir}/{prefix}/summaries/*_temp*")
-    # Announce genotype summary location
-    shell(
-        "echo Kraken data written to \\'{outdir}/{prefix}/summaries/kraken2_simple_summary.txt\\' and \\'{outdir}/{prefix}/summaries/kraken2_full_summary.txt\\'"
-    )
-    shell("echo ")
-
-    # Combine  fastp data
-    if config["input_type"] == "raw_reads":
-        shell(
-            "cat {outdir}/{prefix}/fastp/*.fastp.json > {outdir}/{prefix}/summaries/fastp_summary.json"
-        )
-        # Announce genotype summary location
-        shell("echo Fastp data written to '{outdir}/{prefix}/summaries/fastp_summary.json'")
-        shell("echo ")
-
     # Combine MLST data
     shell(
         "cat {outdir}/{prefix}/mlst/*_mlst.txt > {outdir}/{prefix}/summaries/mlst_temp.txt"
@@ -338,64 +280,6 @@ onsuccess:
     # Announce genotype summary location
     shell("echo MLST data written to '{outdir}/{prefix}/summaries/mlst.txt'")
     shell("echo ")
-
-    # Announce job finish
-    print("Job finished")
-# Email user
-<<<<<<< HEAD
-    if config["email"] != "":
-        shell(
-            "echo Your Snakemake job with prefix '{prefix}' has finished. It has been written to '{outdir}/{prefix}/summaries/' | mail -s 'Snakemake job has finished' {email}"
-            )
-=======
-if config["email"] != "":
-    shell(
-        "echo Pointfinder data written to \\'{outdir}/{prefix}/summaries/pointfinder.txt\\'"
-    )
-    shell("echo ")
-
-
-    # # Combine Kraken data
-    # shell(
-    #     "cat {outdir}/{prefix}/kraken2/*_clean.report > {outdir}/{prefix}/summaries/kraken2_summary_temp.txt"
-    # )
-    # # Clean sample names
-    # shell(
-    #     "perl -p -i -e s'@.*kraken2/@@g' {outdir}/{prefix}/summaries/kraken2_summary_temp.txt"
-    # )
-    # # Removes duplicate headers (in this case lines starting with filename)
-    # shell(
-    #     "awk 'FNR==1 {{ header = $0; print }} $0 != header' {outdir}/{prefix}/summaries/kraken2_summary_temp.txt > {outdir}/{prefix}/summaries/kraken2_summary_temp2.txt"
-    # )
-    # # Create simple summary - 1. find cols with species designations (== S) 2. Sort by highest match in column 2. 3. Select the row with the first instance of each sample (i.e. highest species match)
-    # shell(
-    #     "grep -P \"\tS\t\" {outdir}/{prefix}/summaries/kraken2_summary_temp2.txt | sort -nk2 -r | awk '{{ if (a[$1]++ == 0) print $0; }}' $@ > {outdir}/{prefix}/summaries/kraken2_simple_summary_temp.txt"
-    # )
-    # # awk '{{if ($5 == "S") print $0;}}' {output.combined_output_cleaned} | sort -nk2 -r | awk '{{ if (a[$1]++ == 0) print $0; }}' $@ > {output.simplified_combined}
-    # # Insert a header
-    # shell(
-    #     'echo -e "name\tperc_frags\tnum_frags\tnum_frags_direct\trank\tncbi_taxon_id\tscientific_name" | cat - {outdir}/{prefix}/summaries/kraken2_simple_summary_temp.txt > {outdir}/{prefix}/summaries/kraken2_simple_summary.txt'
-    # )
-    # # Insert a header
-    # shell(
-    #     'echo -e "name\tperc_frags\tnum_frags\tnum_frags_direct\trank\tncbi_taxon_id\tscientific_name" | cat - {outdir}/{prefix}/summaries/kraken2_summary_temp2.txt > {outdir}/{prefix}/summaries/kraken2_full_summary.txt'
-    # )
-    # # Remove temp files
-    # shell("rm {outdir}/{prefix}/summaries/*_temp*")
-    # # Announce genotype summary location
-    # shell(
-    #     "echo Kraken data written to \\'{outdir}/{prefix}/summaries/kraken2_simple_summary.txt\\' and \\'{outdir}/{prefix}/summaries/kraken2_full_summary.txt\\'"
-    # )
-    # shell("echo ")
-
-    # Combine  fastp data
-    if config["input_type"] == "raw_reads":
-        shell(
-            "cat {outdir}/{prefix}/fastp/*.fastp.json > {outdir}/{prefix}/summaries/fastp_summary.json"
-        )
-        # Announce genotype summary location
-        shell("echo Fastp data written to '{outdir}/{prefix}/summaries/fastp_summary.json'")
-        shell("echo ")
 
     # Combine MLST data
     shell(
@@ -420,7 +304,6 @@ if config["email"] != "":
         shell(
             "echo Your Snakemake job with prefix '{prefix}' has finished. It has been written to '{outdir}/{prefix}/summaries/' | mail -s 'Snakemake job has finished' {email}"
         )
->>>>>>> dce7b69ceab01bc89535b7e58885bd5009664fa1
 
 
 # include: "rules/roary_pangenome.smk"
