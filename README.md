@@ -26,3 +26,11 @@ nohup snakemake --resources mem_mb=450000 -j 20 -p --use-conda --configfile conf
 PROCESS_ID=$!
 echo "JOB_ID =" "$PROCESS_ID" > mostrecentjobid.txt
 ```
+
+## Database update
+
+To update your databases you can use a command like the following - make sure the db dir path is correct and change the database appropriately
+
+```
+abricate-get_db --dbdir resources/dbs/abricate --db vfdb --force
+```
