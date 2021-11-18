@@ -16,12 +16,14 @@ snakemake -j --use-conda
 
 ## Configuration
 
-Configuration of the snakemake workflow can be done via the configuration file in `misc`
+Configuration of the snakemake workflow can be done via the configuration file in `config`
 
 ## Usage
 
+Change your config file accordingly if you create a new one
+
 ```
-nohup snakemake --resources mem_mb=450000 -j 20 -p --use-conda --configfile config/config_template.yaml --use-conda 1> snakemake_out.log 2> snakemake_err.log &
+nohup snakemake --resources mem_mb=300000 -j 20 -p --use-conda --configfile config/config_template.yaml --use-conda 1> snakemake_out.log 2> snakemake_err.log &
 
 PROCESS_ID=$!
 echo "JOB_ID =" "$PROCESS_ID" > mostrecentjobid.txt
