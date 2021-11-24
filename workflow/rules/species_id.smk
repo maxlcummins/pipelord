@@ -61,7 +61,7 @@ rule bracken:
     conda:
         "../envs/kraken2.yaml"
     shell:
-        "resources/Bracken/bracken -d {params.krakendb} -i {input} -o {output.bracken} -w {output.species} -r 100 -l S -t {threads} 2>&1 {log}"
+        "resources/tools/Bracken/bracken -d {params.krakendb} -i {input} -o {output.bracken} -w {output.species} -r 100 -l S -t {threads} 2>&1 {log}"
     #wrapper:
         #"0.2.0/bio/assembly-stats"
     #    "https://raw.githubusercontent.com/maxlcummins/snakemake-wrappers/assembly-stats/bio/assembly-stats/wrapper.py"
