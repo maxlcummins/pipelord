@@ -14,7 +14,7 @@ raw_reads_path: resources/test_data/reads
 #assembly_path: resources/test_data/assemblies
 # Path to blast executable
 #blast_bin: /Users/131785/ncbi-blast-2.12.0+/bin
-blast_bin: resources/local/ncbi-blast-2.12.0+/bin
+blast_bin: resources/tools/ncbi-blast-2.12.0+/bin
 # Path to master output directory
 outdir: results
 # Filtered reads (via fastp)
