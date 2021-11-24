@@ -4,6 +4,11 @@ import os
 
 prefix = config['prefix']
 maxthreads = snakemake.utils.available_cpu_count()
+
+if path.exists("resources/tools/Bracken/bracken") == False:
+    print('Pointfinder directory not located, downloading pointfinder...')
+    os.system("git clone https://github.com/jenniferlu717/Bracken.git resources/tools/Bracken")
+
 if config['input_type'] == 'assemblies':
     rule run_kraken2:
         input:
@@ -56,7 +61,7 @@ rule bracken:
     conda:
         "../envs/kraken2.yaml"
     shell:
-        "~/Data/playground/Bracken/bracken -d {params.krakendb} -i {input} -o {output.bracken} -w {output.species} -r 100 -l S -t {threads} 2>&1 {log}"
+        "resources/Bracken/bracken -d {params.krakendb} -i {input} -o {output.bracken} -w {output.species} -r 100 -l S -t {threads} 2>&1 {log}"
     #wrapper:
         #"0.2.0/bio/assembly-stats"
     #    "https://raw.githubusercontent.com/maxlcummins/snakemake-wrappers/assembly-stats/bio/assembly-stats/wrapper.py"
