@@ -9,7 +9,7 @@ configfile: "config/config_template.yaml"
 
 if path.exists("resources/tools/ncbi-blast-2.12.0+") == False:
     print('blast directory not located, downloading blast...')
-    os.system("wget -O resources/tools/ncbi-blast-2.12.0+ https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.12.0/ncbi-blast-2.12.0+-x64-linux.tar.gz")
+    os.system("wget -O resources/tools/ncbi-blast-2.12.0+-x64-linux.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.12.0/ncbi-blast-2.12.0+-x64-linux.tar.gz")
     print('Unzipping...')
     os.system("tar -xvf resources/tools/ncbi-blast-2.12.0+-x64-linux.tar.gz")
 
