@@ -79,6 +79,11 @@ rule all:
             prefix=prefix,
         ),
         expand(
+            config['outdir']+"/{prefix}/cgmlstfinder/cgmlst_summaries/{sample}.txt",
+            sample=sample_ids,
+            prefix=prefix,
+        ),
+        expand(
             config["outdir"]
             + "/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt",
             sample=sample_ids,
@@ -320,6 +325,7 @@ include: "rules/genotype_abricate.smk"
 include: "rules/point_mutations.smk"
 include: "rules/strain_mlst.smk"
 include: "rules/plasmid_mlst.smk"
+include: "rules/cgmlstfinder.smk"
 
 
 ruleorder: abricate_plasmid_run > abricate_run
