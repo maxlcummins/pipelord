@@ -13,6 +13,12 @@ if path.exists("resources/tools/ncbi-blast-2.12.0+") == False:
     print('Unzipping...')
     os.system("tar -xvf resources/tools/ncbi-blast-2.12.0+-x64-linux.tar.gz -C resources/tools/")
 
+if path.exists("resources/tools/kma") == False:
+    print('kma directory not located, downloading kma...')
+    os.system("git clone https://bitbucket.org/genomicepidemiology/kma.git resources/tools/kma")
+    os.system("cd resources/tools/kma && make")
+    os.system("cd ../../..")
+
 outdir = config["outdir"]
 prefix = config["prefix"]
 gene_dbs = expand(config["gene_dbs"])
@@ -83,6 +89,16 @@ rule all:
             sample=sample_ids,
             prefix=prefix,
         ),
+        expand(
+                config['outdir']+"/{prefix}/spifinder/spifinder_out/{sample}.out",
+                sample=sample_ids,
+                prefix=prefix,
+            ),
+        expand(
+                config['outdir']+"/{prefix}/summaries/spi_report.txt",
+                sample=sample_ids,
+                prefix=prefix,
+            )
         expand(
             config["outdir"]
             + "/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt",
@@ -326,6 +342,7 @@ include: "rules/point_mutations.smk"
 include: "rules/strain_mlst.smk"
 include: "rules/plasmid_mlst.smk"
 include: "rules/cgmlstfinder.smk"
+include: "rules/spifinder.smk"
 
 
 ruleorder: abricate_plasmid
