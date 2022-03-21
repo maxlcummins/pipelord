@@ -27,12 +27,6 @@ plasmid_screen_db = expand(config["plasmid_screen_db"])
 scheme = config["pmlst_scheme"]
 email = config["email"]
 
-
-subset_fofn = config["subset_fofn"]
-subset_name = config["subset_name"]
-with open(subset_fofn) as f:
-    subset = [line.strip("\n") for line in f]
-
 if path.exists("resources/tools") == False:
     print("tools directory not located, creating tools directory...")
     os.system("mkdir -p resources/tools")
