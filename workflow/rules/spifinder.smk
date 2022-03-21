@@ -1,4 +1,4 @@
-iimport re
+import re
 import subprocess
 import os
 from os import path
@@ -18,7 +18,6 @@ if path.exists("/projects/AusGEM/databases/spifinder_db") == False:
         os.system("cd resources/tools/spifinder_db")
         os.system("python3 INSTALL.py kma_index")
         os.system("cd ../../..")
-        
 
 
 prefix = config['prefix']
