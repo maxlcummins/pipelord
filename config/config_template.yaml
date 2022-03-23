@@ -13,9 +13,15 @@ prefix: test
 genome_path: resources/test_data/reads
 
 # Path to blast executable
+<<<<<<< HEAD
 blast_bin: resources/tools/ncbi-blast-2.13.0+/bin
 
 # Path to project directory where you want your output to go
+=======
+#blast_bin: /Users/131785/ncbi-blast-2.12.0+/bin
+blast_bin: resources/tools/ncbi-blast-2.12.0+/bin
+# Path to master output directory
+>>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
 outdir: results
 
 # Base output directory for logs
@@ -56,7 +62,11 @@ pointfinder_species: "-s escherichia_coli"
 #pointfinder_species: "-s salmonella"
 
 ### Kraken2lord
+<<<<<<< HEAD
 krakendb: resources/dbs/kraken2/minikraken2
+=======
+krakendb: /projects/AusGEM/databases/kraken2/minikraken2
+>>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
 
 ### Abricatelord
 # Path to gene db location
@@ -64,6 +74,7 @@ gene_db_location: resources/dbs/abricate
 
 # Name of gene databases you want to screen for
 gene_dbs:
+<<<<<<< HEAD
   - ISfinder_Feb_2020
   - EC_custom
   - card
@@ -87,6 +98,33 @@ plasmid_screen_db:
   - pACN001_B
 
 
+=======
+  [
+    "ISfinder_Feb_2020",
+    "EC_custom",
+    "card",
+    "plasmidfinder",
+    "ecoh",
+    "vfdb",
+    "colV_zoetis",
+    "dfrA5_848",
+  ]
+plasmid_screen_db:
+  [
+    "pCERC4",
+    "pAPEC_O1_ColBM",
+    "pAPEC_O2_ColV",
+    "pUTI89",
+    "pBCE049_1",
+    "pSF_088_nores",
+    "pU1_F51_B10",
+    "pEC244_2",
+    "pAPEC_O78_ColV",
+    "pAMSC2",
+    "pACN001_B",
+  ]
+#gene_dbs: ['EC_custom']
+>>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
 # Minimum nucleotide ID (default for abricate is 75)
 abricate_minimum_id: 75
 # Minimum coverage (default for abricate is 0)
@@ -102,6 +140,7 @@ BLAST_dbs: /home/malcummi/Data/BlastDBs
 ## ##Configuration file for pMLSTlord
 # pMLST scheme
 pmlst_scheme:
+<<<<<<< HEAD
   - incac
   - incf
   - inchi1
@@ -110,6 +149,9 @@ pmlst_scheme:
   - incn
   - pbssb1-family
 
+=======
+  ["incac", "incf", "inchi1", "inchi2", "inci1", "incn", "pbssb1-family"]
+>>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
 # #Below is for fastas. If you want to use reads, replace the blast path with the path to kma
 pmlst_tool: "-mp"
 # Path to your pMLST database
@@ -124,6 +166,10 @@ subset_fofn:
  - resources/test_data/test_subset.txt
  - resources/test_data/test_subset2.txt
 #Subset name
+<<<<<<< HEAD
 subset_name:
  - test1
  - test2
+=======
+subset_name: test
+>>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1

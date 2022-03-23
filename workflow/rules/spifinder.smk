@@ -12,6 +12,7 @@ if path.exists("resources/tools/spifinder") == False:
     os.system("git clone https://bitbucket.org/genomicepidemiology/spifinder.git resources/tools/spifinder")
 
 if path.exists("/projects/AusGEM/databases/spifinder_db") == False:
+<<<<<<< HEAD
     if path.exists("resources/tools/spifinder_db/SPI.length.b") == False:
         print('spifinder_db directory not located, downloading database...')
         os.system("git clone https://git@bitbucket.org/genomicepidemiology/spifinder_db.git resources/tools/spifinder_db")
@@ -22,11 +23,25 @@ if path.exists("/projects/AusGEM/databases/spifinder_db") == False:
 
 
 
+=======
+    if path.exists("resources/tools/spifinder_db") == False:
+        print('spifinder_db directory not located, downloading database...')
+        os.system("git clone https://git@bitbucket.org/genomicepidemiology/spifinder_db.git resources/tools/spifinder_db")
+        os.system("cd resources/tools/spifinder_db")
+        os.system("python3 INSTALL.py kma_index")
+        os.system("cd ../../..")
+
+
+>>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
 prefix = config['prefix']
 
 logs = config['base_log_outdir']
 
+<<<<<<< HEAD
 if config["genotype_modules"]["run_genome_assembly"]:
+=======
+if config['input_type'] == 'raw_reads':
+>>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
     rule run_spifinder:
         input:
             r1_filt = config['outdir']+"/{prefix}/fastp/{sample}.R1.fastq.gz",
@@ -63,7 +78,11 @@ if config["genotype_modules"]["run_genome_assembly"]:
             "../../scripts/combine_spifinder.py"
 
 
+<<<<<<< HEAD
 if config["genotype_modules"]["run_genome_assembly"] == False:
+=======
+if config['input_type'] == 'assemblies':
+>>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
     rule run_spifinder:
         input:
             config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"

@@ -7,6 +7,7 @@ import git
 prefix = config['prefix']
 maxthreads = snakemake.utils.available_cpu_count()
 
+<<<<<<< HEAD
 if config["cgmlst_schemes"] != "":
     if path.exists("resources/tools/cgmlstfinder") == False:
         print('cgmlstfinder directory not located, downloading cgmlstfinder...')
@@ -18,6 +19,16 @@ if config["cgmlst_schemes"] != "":
             print('cgmlstfinder_db directory not located, downloading database... This will take a long time but will only need to be done once')
             os.system("git clone https://git@bitbucket.org/genomicepidemiology/cgmlstfinder_db.git resources/dbs/cgmlstfinder_db")
             os.system("python resources/dbs/cgmlstfinder_db/INSTALL.py -s ecoli")
+=======
+if path.exists("resources/tools/cgmlstfinder") == False:
+    print('cgmlstfinder directory not located, downloading cgmlstfinder...')
+    os.system("git clone https://git@bitbucket.org/genomicepidemiology/cgmlstfinder.git resources/tools/cgmlstfinder")
+
+if path.exists("/projects/AusGEM/databases/cgmlstfinder_db") == False:
+    if path.exists("resources/tools/cgmlst_db") == False:
+        print('cgmlstfinder_db directory not located, downloading database... This will take a long time but will only need to be done once')
+        os.system("git clone https://git@bitbucket.org/genomicepidemiology/cgmlstfinder_db.git resources/tools/cgmlstfinder_db")
+>>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
 
 prefix = config['prefix']
 
