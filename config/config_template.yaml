@@ -1,63 +1,115 @@
 ### User info
-email: max.cummins@uts.edu.au
+email:
 
 ### General configuration variables
-# Primary input type
-# Options: 'raw_reads', 'reads', 'assemblies'
-input_type: raw_reads
+input_type:
+  - "reads"
+#  - "assemblies"
+
 # Prefix for output files - here the collection name or an abbreviation for the relevant manuscript might be a good choice
 prefix: test
-# Path to project directory where you want your output to go
-# Path to short-reads. Here it is assumed that your reads are set up as read pairs - analysis is unlikely to work if this isnt the case.
-raw_reads_path: resources/test_data/reads
-# Path to assemblies. These may be your initial input as sometimes it can be hard to source read for large collections
-#assembly_path: resources/test_data/assemblies
+
+# Path to your genomic data
+genome_path: resources/test_data/reads
+
 # Path to blast executable
-blast_bin: /Users/131785/ncbi-blast-2.12.0+/bin
-#blast_bin: /usr/local/ncbi-blast-2.10.1+/bin
-# Path to master output directory
+blast_bin: resources/tools/ncbi-blast-2.13.0+/bin
+
+# Path to project directory where you want your output to go
 outdir: results
-# Filtered reads (via fastp)
-#reads_path: test_data/output/test/fastp
 
 # Base output directory for logs
 base_log_outdir: logs
+
+#cgMLST schemes - this takes a long time to download and prepare.
+cgmlst_schemes: "" #['ecoli','salmonella']
+
+#Module selection - QC pipeline
+
+#Module selection - default genotyping pipeline
+genotype_modules:
+  run_dfast_genome_annotation: Yes
+  run_plasmid_mlst: Yes
+  run_genome_assembly: Yes
+  run_assembly_stats: Yes
+  run_abricate: Yes
+  run_abricate_plasmid: Yes
+  run_pointfinder: Yes
+  run_kraken2_and_bracken: Yes
+  run_fastp: Yes
+  run_mlst: Yes
+  run_spifinder: No
+  run_cgmlstfinder: No
+  run_summarise: No # in development
+
+#Module selection - treebuilding pipeline
+treebuild_modules:
+  run_roary: Yes
+  run_core_genome_treebuild_snp_sites: Yes
+  run_core_genome_treebuild_full: Yes
+
+
 
 ### Pointfinder config
 # #E. coli
 pointfinder_species: "-s escherichia_coli"
 #pointfinder_species: "-s salmonella"
 
-
 ### Kraken2lord
-krakendb: /Users/131785/playground/pipelord2_0/resources/dbs/minikraken2
-
+krakendb: resources/dbs/kraken2/minikraken2
 
 ### Abricatelord
 # Path to gene db location
 gene_db_location: resources/dbs/abricate
+
 # Name of gene databases you want to screen for
-gene_dbs: ['ISfinder_Feb_2020','EC_custom', 'card', 'plasmidfinder', 'ecoh', 'vfdb', 'colV_zoetis','dfrA5_848']
-plasmid_screen_db: ['pCERC4', 'pAPEC_O1_ColBM', 'pAPEC_O2_ColV', 'pUTI89','pBCE049_1','pSF_088_nores','pU1_F51_B10','pEC244_2', 'pAPEC_O78_ColV', 'pAMSC2', 'pACN001_B']
-#gene_dbs: ['EC_custom']
+gene_dbs:
+  - ISfinder_Feb_2020
+  - EC_custom
+  - card
+  - plasmidfinder
+  - ecoh
+  - vfdb
+  - colV_zoetis
+  - dfrA5_848
+
+plasmid_screen_db:
+  - pCERC4
+  - pAPEC_O1_ColBM
+  - pAPEC_O2_ColV
+  - pUTI89
+  - pBCE049_1
+  - pSF_088_nores
+  - pU1_F51_B10
+  - pEC244_2
+  - pAPEC_O78_ColV
+  - pAMSC2
+  - pACN001_B
+
+
 # Minimum nucleotide ID (default for abricate is 75)
 abricate_minimum_id: 75
 # Minimum coverage (default for abricate is 0)
-abricate_minimum_id: 0
+#abricate_minimum_id: 0
 
 ###Configuration for BLASTlord
 # Path to blast databases:
 BLAST_dbs: /home/malcummi/Data/BlastDBs
-# Path to blast directory:
-#outdir: /projects/AusGEM/Users/Max/Manuscripts/AVC171/AVC171/analysis/enterobase_poultry/pUTI89
 
 #Configuration for BIGSI
 #bigsi_refseq: /projects/AusGEM/Users/Max/Manuscripts/ST95/data/bigsi
 
-
 ## ##Configuration file for pMLSTlord
 # pMLST scheme
-pmlst_scheme: ['incac','incf','inchi1','inchi2','inci1','incn','pbssb1-family']
+pmlst_scheme:
+  - incac
+  - incf
+  - inchi1
+  - inchi2
+  - inci1
+  - incn
+  - pbssb1-family
+
 # #Below is for fastas. If you want to use reads, replace the blast path with the path to kma
 pmlst_tool: "-mp"
 # Path to your pMLST database
@@ -65,12 +117,13 @@ pMLST_db_path: resources/tools/pmlst/pmlst_db
 # Path to pMLST tool
 pMLST_script_path: resources/tools/pmlst/pmlst.py
 
-
-
 ## ## Configuration for roary
 roary_core_req: 99
 #Subset file of file names
-subset_fofn: resources/test_data/test_subset.txt
+subset_fofn:
+ - resources/test_data/test_subset.txt
+ - resources/test_data/test_subset2.txt
 #Subset name
-subset_name: test
-
+subset_name:
+ - test1
+ - test2
