@@ -21,3 +21,16 @@ rule mlst_run:
         1
     shell:
         "mlst {input} > {output}"
+
+rule run_mlst_summarise:
+    input:
+        mlst_summary=expand(config['outdir']+"/{prefix}/mlst/{sample}_mlst.txt", prefix=prefix, sample=sample_ids)
+    output:
+        combine_mlst=config['outdir']+"/{prefix}/summaries/mlst.txt"
+    params:
+        extra="",
+    log:
+        "logs/{prefix}/summaries/combine_mlst.log",
+    threads: 1
+    script:
+        "../../scripts/combine_mlst.py"

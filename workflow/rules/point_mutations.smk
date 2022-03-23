@@ -28,7 +28,7 @@ rule pointfinder_run:
         blastn_path = config['blast_bin']
     shell:
         """
-        resources/tools/pointfinder/PointFinder.py -i {input} -o {params.output_dir} -p resources/tools/pointfinder/pointfinder_db {params.species} -m blastn -m_p {params.blastn_path}/blastn 2> {log}
+        resources/tools/pointfinder/PointFinder.py -i {input} -o {params.output_dir} -p resources/tools/pointfinder/pointfinder_db {params.species} -m blastn -m_p $CONDA_PREFIX/bin/blastn 2> {log}
         """
 
 rule name_append:
@@ -39,3 +39,15 @@ rule name_append:
     shell:
         """awk 'NR == 1 {{print "name\t" $0; next;}}{{print FILENAME "\t" $0;}}' {input} > {output}"""
 
+rule run_pointfinder_summarise:
+    input:
+        pointfinder_summary=expand(config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results_named.tsv", prefix=prefix, sample=sample_ids)
+    output:
+        combine_pointfinder=config["outdir"]+"/{prefix}/summaries/pointfinder.txt"
+    params:
+        extra="",
+    log:
+        "logs/{prefix}/summaries/combine_pointfinder.log",
+    threads: 1
+    script:
+        "../../scripts/combine_pointfinder.py"

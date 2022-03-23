@@ -34,7 +34,7 @@ rule abricate_plasmid_run:
     input:
         assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
     output:
-        config['outdir']+"/{prefix}/abricate/plasmids/{plasmid_screen_db}/{sample}.tab",
+        config['outdir']+"/{prefix}/abricate_plasmids/{plasmid_screen_db}/{sample}.tab",
     log:
         config['base_log_outdir']+"/{prefix}/abricate/run/{plasmid_screen_db}/{sample}.log"
     conda:
@@ -70,3 +70,16 @@ rule abricate_plasmid_combine:
         #Remove duplicate headers by negative grep
         grep -v '#FILE' {output.out2} > {output.out}
         """
+
+rule run_abricate_summarise:
+    input:
+        abricate_summary=expand(config['outdir']+"/{prefix}/abricate/{gene_db}/{sample}.tab", prefix=prefix, gene_db=gene_dbs, sample=sample_ids)
+    output:
+        combine_abricate=config["outdir"]+"/{prefix}/summaries/genotype.txt"
+    params:
+        extra="",
+    log:
+        "logs/{prefix}/summaries/combine_abricate.log",
+    threads: 1
+    script:
+        "../../scripts/combine_abricate.py"

@@ -11,8 +11,8 @@ logs = config['base_log_outdir']
 
 rule run_fastp:
     input:
-        r1 = config['raw_reads_path']+"/{sample}.R1.fastq.gz",
-        r2 = config['raw_reads_path']+"/{sample}.R2.fastq.gz"
+        r1 = config['genome_path']+"/{sample}.R1.fastq.gz",
+        r2 = config['genome_path']+"/{sample}.R2.fastq.gz"
     output:
         r1_filt = config['outdir']+"/{prefix}/fastp/{sample}.R1.fastq.gz",
         r2_filt = config['outdir']+"/{prefix}/fastp/{sample}.R2.fastq.gz",

@@ -1,4 +1,4 @@
-name: pMLST
+name: cgmlst
 channels:
   - conda-forge
   - bioconda
@@ -9,3 +9,6 @@ dependencies:
   - python=3.7.10
   - blast=2.12.0
   - kma=1.3.3
+  - pip:
+      - ete3
+      - six

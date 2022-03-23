@@ -19,7 +19,8 @@ rule pMLST_run:
     input:
         assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
     output:
-        config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results.txt"
+        results = config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results.txt",
+        results_simple = config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results_simple.txt"
     conda:
         "../envs/pMLST.yaml"
     params:
@@ -30,20 +31,22 @@ rule pMLST_run:
         pmlst_db_path = config['pMLST_db_path'],
         db = "{scheme}",
         scheme = scheme,
-        blastn_path = config['blast_bin']
-
     shell:
         """
-        python3 {params.pmlst_script_path} -i {input} -o {params.output_dir} -p {params.pmlst_db_path} {params.pmlst_tool} {params.blastn_path}/blastn -s {params.db} -x -t {params.tmp}
+        python3 {params.pmlst_script_path} -i {input} -o {params.output_dir} -p {params.pmlst_db_path} {params.pmlst_tool} $CONDA_PREFIX/bin/blastn -s {params.db} -x -t {params.tmp}
         rm -rf {params.tmp}
+        grep "Sequence Type" {output.results} | perl -p -e 's/(\[|\])//g' | perl -p -e 's/Sequence Type://g' > {output.results_simple}
         """
 
-rule name_files_pMLST:
+rule run_pmlst_summarise:
     input:
-        config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results.txt"
+        pMLST_summary=expand(config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results_simple.txt", prefix=prefix, scheme=scheme, sample=sample_ids)
     output:
-        config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results_named.txt"
-    shell:
-        """
-        awk 'NR == 1 {{print "name\t" $0; next;}}{{print FILENAME "\t" $0;}}' {input} > {output}
-        """
+        combine_pMLST=config["outdir"]+"/{prefix}/summaries/pMLST.txt"
+    params:
+        extra="",
+    log:
+        "logs/{prefix}/summaries/combine_pMLST.log",
+    threads: 1
+    script:
+        "../../scripts/combine_pMLST.py"
