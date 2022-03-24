@@ -23,7 +23,7 @@ else: gunc_db_path = config["gunc_db_path"]
 
 rule gunc_run:
 	input:
-		gunc_db = "resources/dbs/gunc_db" if path.exists(config["gunc_db_path"] == False) else config["gunc_db_path"],
+		gunc_db = gunc_db_path,
 		assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
 	output:
 		guncoutdir = directory(config["outdir"]+"/{prefix}/QC_workflow/gunc/{sample}.out"),
