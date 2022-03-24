@@ -5,7 +5,6 @@ import os
 prefix = config['prefix']
 maxthreads = snakemake.utils.available_cpu_count()
 
-<<<<<<< HEAD
 if path.exists(config['krakendb']) == False:
     if path.exists("resources/dbs/kraken2/minikraken2") == False:
         print('Kraken database not located, downloading minikracken2 DB ...')
@@ -18,12 +17,6 @@ if path.exists("resources/tools/Bracken/bracken") == False:
     print('bracken directory not located, downloading bracken...')
     os.system("git clone https://github.com/jenniferlu717/Bracken.git resources/tools/Bracken")
 
-=======
-if path.exists("resources/tools/Bracken/bracken") == False:
-    print('Pointfinder directory not located, downloading pointfinder...')
-    os.system("git clone https://github.com/jenniferlu717/Bracken.git resources/tools/Bracken")
-
->>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
 if config['input_type'] == 'assemblies':
     rule run_kraken2:
         input:
@@ -40,7 +33,6 @@ if config['input_type'] == 'assemblies':
             """
             kraken2 --db {input.db} --use-names --report {output.report} --output {output.out} {input.assembly}  2> {log}
             """
-<<<<<<< HEAD
 elif config["genotype_modules"]["run_fastp"] == False:
     rule run_kraken2:
         input:
@@ -59,10 +51,6 @@ elif config["genotype_modules"]["run_fastp"] == False:
             kraken2 --db {input.db} --use-names --report {output.report} --output {output.out} {input.r1} {input.r2}  2> {log}
             """
 elif config["genotype_modules"]["run_fastp"]:
-=======
-
-elif config['input_type'] == 'raw_reads':
->>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
     rule run_kraken2:
         input:
             db = config['krakendb'],
@@ -79,11 +67,7 @@ elif config['input_type'] == 'raw_reads':
             """
             kraken2 --db {input.db} --use-names --report {output.report} --output {output.out} {input.r1_filt} {input.r2_filt}  2> {log}
             """
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
 rule bracken:
     input:
         config['outdir']+"/{prefix}/kraken2/{sample}.report"

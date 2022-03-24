@@ -4,7 +4,6 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-<<<<<<< HEAD
   - aragorn=1.2.38=ha5712d3_5
   - barrnap=0.9=hdfd78af_4
   - bedtools=2.30.0=h0e31d98_3
@@ -45,7 +44,4 @@ dependencies:
     - numpy==1.22.3
     - setuptools==60.10.0
 prefix: /Users/131785/miniconda/envs/dfast
-=======
-  - dfast=1.2.13
-  - blast=2.12.0
->>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
+
