@@ -39,8 +39,8 @@ elif config["input_type"] == "reads":
     rule run_kraken2:
         input:
             db = config['krakendb'],
-            r1_filt = config['outdir']+"/{prefix}/QC_workflow/fastp/{sample}.R1.fastq.gz",
-            r2_filt = config['outdir']+"/{prefix}/QC_workflow/fastp/{sample}.R2.fastq.gz"
+            r1_filt = config['outdir']+"/{prefix}/fastp/{sample}.R1.fastq.gz",
+            r2_filt = config['outdir']+"/{prefix}/fastp/{sample}.R2.fastq.gz"
         output:
             out = config['outdir']+"/{prefix}/QC_workflow/kraken2/{sample}.out",
             report = config['outdir']+"/{prefix}/QC_workflow/kraken2/{sample}.report"
