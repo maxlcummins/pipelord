@@ -63,7 +63,7 @@ pointfinder_species: "-s escherichia_coli"
 #pointfinder_species: "-s salmonella"
 
 ### Kraken2lord
-krakendb: resources/dbs/kraken2/minikraken2
+krakendb: /projects/AusGEM/databases/kraken2/bacteria
 
 ### Abricatelord
 # Path to gene db location
@@ -92,7 +92,6 @@ plasmid_screen_db:
   - pAPEC_O78_ColV
   - pAMSC2
   - pACN001_B
-
 
 # Minimum nucleotide ID (default for abricate is 75)
 abricate_minimum_id: 75
@@ -128,11 +127,11 @@ pMLST_script_path: resources/tools/pmlst/pmlst.py
 roary_core_req: 99
 #Subset file of file names
 subset_fofn:
- - resources/test_data/test_subset.txt
- - resources/test_data/test_subset2.txt
+  - resources/test_data/test_subset.txt
+  - resources/test_data/test_subset2.txt
 #Subset name
 subset_name:
- - test1
- - test2
+  - test1
+  - test2
 
-gunc_db_path: /projects/AusGEM/databases/gunc
+gunc_db_path: /projects/AusGEM/databases/gunc_db
