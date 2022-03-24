@@ -40,8 +40,8 @@ if platform.system() == "Darwin":
 
 rule checkm_tree_and_tree_qa:
     input:
-        dummy_out = "downloaded_pplacer",
-        assemblies = config['outdir']+"/{prefix}/shovill/assemblies",
+        #dummy_out = "downloaded_pplacer",
+        assemblies = config['outdir']+"/{prefix}/shovill/assemblies_temp",
     output:
         directory(config['outdir']+"/{prefix}/QC_workflow/checkm")
     conda:
@@ -72,7 +72,7 @@ rule checkm_lineage_set:
 
 rule checkm_analyze:
     input:
-        assemblies = config['outdir']+"/{prefix}/shovill/assemblies",
+        assemblies = config['outdir']+"/{prefix}/shovill/assemblies_temp",
         markers = config['outdir']+"/{prefix}/QC_workflow/checkm_markers/markers"
     output:
         temporary(config['outdir']+"/{prefix}/QC_workflow/checkm_dummy/alignment_info.tsv")
@@ -99,7 +99,4 @@ rule checkm_qa:
     log:
         config['base_log_outdir']+"/{prefix}/checkm/checkm_qa.log"
     shell:
-        "checkm qa {input.checkmdir} {output} -f {output} -o 2 --tab_table"
-
-
-ruleorder: install_pplacer > checkm_tree_and_tree_qa > checkm_lineage_set > checkm_analyze > checkm_qa
+        "checkm qa {input.markers} {output} -f {output} -o 2 --tab_table"
