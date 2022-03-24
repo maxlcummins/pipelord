@@ -38,12 +38,38 @@ if platform.system() == "Darwin":
             touch {output}
             """
 
+if path.exists('resources/dbs/checkm') == False:
+    rule install_checkmdb:
+        output:
+            checkm_db = "resources/dbs/checkm/hmms/phylo.hmm"
+        conda:
+            checkm_env
+        threads:
+            maxthreads
+        shell:
+            """
+            FILE=resources/dbs/checkm/hmms/phylo.hmm
+            if test -f "$FILE"; then
+                echo "$FILE exists. CheckM database will not be downloaded"
+            else
+                echo "Downloading CheckM database..."
+                wget -q https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
+                echo "Moving CheckM database to 'resources/dbs/checkm'"
+                mkdir -p resources/dbs/checkm
+                echo "Decompressing checkmdb..."
+                tar -xvf checkm_data_2015_01_16.tar.gz --directory resources/dbs/checkm && rm checkm_data_2015_01_16.tar.gz
+            fi
+            touch {output}
+            checkm data setRoot resources/dbs/checkm
+            """
+
+
 rule checkm_tree_and_tree_qa:
     input:
-        #dummy_out = "downloaded_pplacer",
+        checkm_db = "resources/dbs/checkm/hmms/phylo.hmm",
         assemblies = config['outdir']+"/{prefix}/shovill/assemblies_temp",
     output:
-        directory(config['outdir']+"/{prefix}/QC_workflow/checkm")
+        directory(config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_out")
     conda:
         checkm_env
     log:
@@ -58,9 +84,9 @@ rule checkm_tree_and_tree_qa:
 
 rule checkm_lineage_set:
     input:
-        config['outdir']+"/{prefix}/QC_workflow/checkm"
+        config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_out"
     output:
-        markers = config['outdir']+"/{prefix}/QC_workflow/checkm_markers/markers"
+        markers = config['outdir']+"/{prefix}/QC_workflow/checkm/markers"
     conda:
         checkm_env
     log:
@@ -68,14 +94,16 @@ rule checkm_lineage_set:
     threads:
         maxthreads
     shell:
-        "checkm lineage_set {input} {output}"
+        """
+        checkm lineage_set {input} {output}
+        """
 
 rule checkm_analyze:
     input:
         assemblies = config['outdir']+"/{prefix}/shovill/assemblies_temp",
-        markers = config['outdir']+"/{prefix}/QC_workflow/checkm_markers/markers"
+        markers = config['outdir']+"/{prefix}/QC_workflow/checkm/markers"
     output:
-        temporary(config['outdir']+"/{prefix}/QC_workflow/checkm_dummy/alignment_info.tsv")
+        config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_dummy"
     conda:
         checkm_env
     log:
@@ -90,10 +118,10 @@ rule checkm_analyze:
 
 rule checkm_qa:
     input:
-        markers = config['outdir']+"/{prefix}/QC_workflow/checkm_markers/markers",
-        pseudoinput = config['outdir']+"/{prefix}/QC_workflow/checkm_dummy/alignment_info.tsv"
+        markers = config['outdir']+"/{prefix}/QC_workflow/checkm/markers",
+        pseudoinput = config['outdir']+"/{prefix}/QC_workflow/checkm_dummy"
     output:
-        config['outdir']+"/{prefix}/QC_workflow/checkm_qa/qa.tsv"
+        config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_qa/qa.tsv"
     conda:
         checkm_env
     log:
