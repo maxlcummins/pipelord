@@ -64,6 +64,17 @@ rule run_assembly_stats:
     shell:
         "assembly-stats -t {input} > {output}"
 
+rule touch_assemblies: #required for rules where we need a directory of fastas as an input
+    input:
+        expand(config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta", prefix=prefix, sample=sample_ids)
+    output:
+        assemblydir = temp(directory(config['outdir']+"/{prefix}/shovill/assemblies_temp"))
+    shell:
+        """
+        mkdir {output}
+        cp {input} {output}
+        """
+
 rule run_assembly_summarise:
     input:
         assembly_stats_summary=expand(config['outdir']+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt", prefix=prefix, sample=sample_ids)
