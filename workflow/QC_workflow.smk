@@ -29,17 +29,19 @@ if path.exists("resources/tools") == False:
     print("tools directory not located, creating tools directory...")
     os.system("mkdir -p resources/tools")
 
-if config["qc_modules"]["run_genome_assembly"] == False:
+if config["input_type"] == "assemblies":
     (sample_ids,) = glob_wildcards(config["genome_path"]+"/{sample}.fasta")
-else:
+elif config["input_type"] == "reads":
     (sample_ids,) = glob_wildcards(config["genome_path"]+"/{sample}.R1.fastq.gz")
+else: "Config variable 'input_type' must be either 'assemblies' or 'reads'. Please check the config file"
 
 print(sample_ids,)
 
 rule all:
     input:
         expand(config['outdir']+"/{prefix}/QC_workflow/summaries/bracken_report.txt", prefix=prefix) if config["qc_modules"]["run_kraken2_and_bracken"] else [],
-        expand(config['outdir']+"/{prefix}/QC_workflow/checkm_qa/qa.tsv", prefix=prefix) if config ["qc_modules"]["run_checkm"] and platform.system() == "Linux" else [],
+        expand(config['outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.txt", sample=sample_ids, prefix=prefix) if config["qc_modules"]["run_kraken2_and_bracken"] else [],
+        expand(config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_qa/qa.tsv", prefix=prefix) if config ["qc_modules"]["run_checkm"] and platform.system() == "Linux" else [],
         expand(config["outdir"]+"/{prefix}/QC_workflow/summaries/gunc_report.txt", prefix=prefix) if config ["qc_modules"]["run_gunc"] else[],
         expand(config["outdir"]+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt", sample=sample_ids, prefix=prefix) if config["qc_modules"]["run_assembly_stats"] else [],
         expand( config["outdir"]+"/{prefix}/shovill/assemblies/{sample}.fasta", sample=sample_ids, prefix=prefix) if config["qc_modules"]["run_genome_assembly"] else [],
@@ -51,8 +53,6 @@ onsuccess:
     #Email user
     if config['email'] != '':
         shell("echo Your Snakemake job with prefix \'{prefix}\' has finished. It has been written to \'{outdir}/{prefix}/summaries/\' | mail -s 'Snakemake job has finished' {email}")
-
-include: "rules/read_cleaning.smk"
 
 if config["qc_modules"]["run_checkm"]:
     include: "rules/checkm.smk"

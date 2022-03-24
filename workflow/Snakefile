@@ -38,10 +38,11 @@ if path.exists("resources/tools") == False:
     print("tools directory not located, creating tools directory...")
     os.system("mkdir -p resources/tools")
 
-if config["genotype_modules"]["run_genome_assembly"] == False:
+if config["input_type"] == "assemblies":
     (sample_ids,) = glob_wildcards(config["genome_path"]+"/{sample}.fasta")
-else:
+elif config["input_type"] == "reads":
     (sample_ids,) = glob_wildcards(config["genome_path"]+"/{sample}.R1.fastq.gz")
+else: "Config variable 'input_type' must be either 'assemblies' or 'reads'. Please check the config file"
 
 print(sample_ids,)
 
@@ -72,6 +73,7 @@ rule all:
         expand(config["outdir"]+"/{prefix}/summaries/genotype.txt", prefix=prefix) if config["genotype_modules"]["run_abricate"] else [],
         expand(config["outdir"]+"/{prefix}/summaries/pMLST.txt", scheme=scheme, sample=sample_ids, prefix=prefix) if config["genotype_modules"]["run_plasmid_mlst"] else [],
         expand(config["outdir"]+"/{prefix}/summaries/pointfinder.txt", prefix=prefix) if config["genotype_modules"]["run_pointfinder"] else [],
+        expand(config['outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.txt", sample=sample_ids, prefix=prefix) if config["genotype_modules"]["run_kraken2_and_bracken"] else [],
         expand(config['outdir']+"/{prefix}/QC_workflow/summaries/bracken_report.txt", prefix=prefix) if config["genotype_modules"]["run_kraken2_and_bracken"] else [],
         expand(config["outdir"]+"/{prefix}/fastp/{sample}.R1.fastq.gz",sample=sample_ids,prefix=prefix),
         expand(config["outdir"]+"/{prefix}/mlst/{sample}_mlst.txt",sample=sample_ids,prefix=prefix) if config["genotype_modules"]["run_mlst"] else [],
