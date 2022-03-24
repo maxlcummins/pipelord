@@ -103,7 +103,8 @@ rule checkm_analyze:
         assemblies = config['outdir']+"/{prefix}/shovill/assemblies_temp",
         markers = config['outdir']+"/{prefix}/QC_workflow/checkm/markers"
     output:
-        config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_dummy"
+        pseudo_output = config['outdir']+"/{prefix}/QC_workflow/checkm/dummy_file.txt",
+        outdir = directory(config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_out")
     conda:
         checkm_env
     log:
@@ -112,14 +113,15 @@ rule checkm_analyze:
         maxthreads
     shell:
         """
-        checkm analyze {input.markers} {input.assemblies} {output} -t {threads} -x fasta
-        touch {output}
+        checkm analyze {input.markers} {input.assemblies} {output.outdir} -t {threads} -x fasta
+        touch {output.pseudo_output}
         """
 
 rule checkm_qa:
     input:
+        checkm_out = config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_out",
         markers = config['outdir']+"/{prefix}/QC_workflow/checkm/markers",
-        pseudoinput = config['outdir']+"/{prefix}/QC_workflow/checkm_dummy"
+        pseudo_input = config['outdir']+"/{prefix}/QC_workflow/checkm/dummy_file.txt"
     output:
         config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_qa/qa.tsv"
     conda:
@@ -127,4 +129,8 @@ rule checkm_qa:
     log:
         config['base_log_outdir']+"/{prefix}/checkm/checkm_qa.log"
     shell:
-        "checkm qa {input.markers} {output} -f {output} -o 2 --tab_table"
+        """
+        checkm qa {input.markers} {input.checkm_out} -f {output} -o 2 --tab_table
+        """
+
+ruleorder: checkm_tree_and_tree_qa > checkm_lineage_set > checkm_analyze > checkm_qa
