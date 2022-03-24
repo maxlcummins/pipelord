@@ -12,18 +12,6 @@ if platform.system() == "Darwin" and config ["qc_modules"]["run_checkm"]:
     print("CheckM enabled but operating system detected as Darwin (MacOSX). CheckM is not supported on Mac, therefore it will not be run")
     print("If you want to run CheckM you must run this pipeline on a Linux system. A future release will support a containerised, Linux-based CheckM enironment.")
 
-#Download the appropriate blast tool depending on the OS
-if path.exists("resources/tools/ncbi-blast-2.13.0+") == False:
-    print('blast directory not located, downloading blast...')
-    if platform.system() == "Linux":
-        os.system("wget -O resources/tools/ncbi-blast-2.13.0+.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.12.0/ncbi-blast-2.12.0+-x64-linux.tar.gz")
-    elif platform.system() == "Windows":
-        os.system("wget -O resources/tools/ncbi-blast-2.13.0+.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.13.0+-x64-win64.tar.gz")
-    elif platform.system() == "Darwin":
-        os.system("wget -O resources/tools/ncbi-blast-2.13.0+.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.13.0+-x64-macosx.tar.gz")
-    print('Unzipping...')
-    os.system("tar -xvf resources/tools/ncbi-blast-2.13.0+.tar.gz -C resources/tools/")
-
 if path.exists("resources/tools/kma") == False:
     print('kma directory not located, downloading kma...')
     os.system("git clone https://bitbucket.org/genomicepidemiology/kma.git resources/tools/kma")
@@ -68,7 +56,7 @@ onsuccess:
 if config["qc_modules"]["run_checkm"]:
     include: "rules/checkm.smk"
 if config["qc_modules"]["run_kraken2_and_bracken"]:
-    include: "rules/species_Id.smk"
+    include: "rules/species_id.smk"
 if config["qc_modules"]["run_gunc"]:
     include: "rules/gunc.smk"
 if config["qc_modules"]["run_fastp"]:
