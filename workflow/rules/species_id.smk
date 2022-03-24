@@ -33,6 +33,7 @@ if config['input_type'] == 'assemblies':
             """
             kraken2 --db {input.db} --use-names --report {output.report} --output {output.out} {input.assembly}  2> {log}
             """
+
 elif config["genotype_modules"]["run_fastp"] == False:
     rule run_kraken2:
         input:
