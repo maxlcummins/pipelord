@@ -11,6 +11,8 @@ if path.exists(config['krakendb']) == False:
         os.system("wget https://genome-idx.s3.amazonaws.com/kraken/minikraken2_v2_8GB_201904.tgz -O minikraken2.tgz")
         os.system("mkdir resources/dbs/kraken2")
         os.system("tar -xvf minikraken2.tgz --directory resources/dbs/kraken2/minikraken2")
+    krakendb = "resources/dbs/kraken2/minikraken2"
+else: krakendb = config['krakendb']
 
 
 if path.exists("resources/tools/Bracken/bracken") == False:
@@ -20,48 +22,30 @@ if path.exists("resources/tools/Bracken/bracken") == False:
 if config['input_type'] == 'assemblies':
     rule run_kraken2:
         input:
-            db = config['krakendb'],
+            db = krakendb,
             assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
         output:
-            out = config['outdir']+"/{prefix}/kraken2/{sample}.out",
-            report = config['outdir']+"/{prefix}/kraken2/{sample}.report"
+            out = config['outdir']+"/{prefix}/QC_workflow/kraken2/{sample}.out",
+            report = config['outdir']+"/{prefix}/QC_workflow/kraken2/{sample}.report"
         log:
-            config['base_log_outdir']+"/{prefix}/kraken2/run/{sample}_err.log"
+            config['base_log_outdir']+"/{prefix}/QC_workflow/kraken2/run/{sample}_err.log"
         conda:
             "../envs/kraken2.yaml"
         shell:
             """
             kraken2 --db {input.db} --use-names --report {output.report} --output {output.out} {input.assembly}  2> {log}
             """
-
-elif config["genotype_modules"]["run_fastp"] == False:
+elif config["input_type"] == "reads":
     rule run_kraken2:
         input:
             db = config['krakendb'],
-            r1 = config['genome_path']+"/{sample}.R1.fastq.gz",
-            r2 = config['genome_path']+"/{sample}.R2.fastq.gz"
+            r1_filt = config['outdir']+"/{prefix}/QC_workflow/fastp/{sample}.R1.fastq.gz",
+            r2_filt = config['outdir']+"/{prefix}/QC_workflow/fastp/{sample}.R2.fastq.gz"
         output:
-            out = config['outdir']+"/{prefix}/kraken2/{sample}.out",
-            report = config['outdir']+"/{prefix}/kraken2/{sample}.report"
+            out = config['outdir']+"/{prefix}/QC_workflow/kraken2/{sample}.out",
+            report = config['outdir']+"/{prefix}/QC_workflow/kraken2/{sample}.report"
         log:
-            config['base_log_outdir']+"/{prefix}/kraken2/run/{sample}_err.log"
-        conda:
-            "../envs/kraken2.yaml"
-        shell:
-            """
-            kraken2 --db {input.db} --use-names --report {output.report} --output {output.out} {input.r1} {input.r2}  2> {log}
-            """
-elif config["genotype_modules"]["run_fastp"]:
-    rule run_kraken2:
-        input:
-            db = config['krakendb'],
-            r1_filt = config['outdir']+"/{prefix}/fastp/{sample}.R1.fastq.gz",
-            r2_filt = config['outdir']+"/{prefix}/fastp/{sample}.R2.fastq.gz"
-        output:
-            out = config['outdir']+"/{prefix}/kraken2/{sample}.out",
-            report = config['outdir']+"/{prefix}/kraken2/{sample}.report"
-        log:
-            config['base_log_outdir']+"/{prefix}/kraken2/run/{sample}_err.log"
+            config['base_log_outdir']+"/{prefix}/QC_workflow/kraken2/run/{sample}_err.log"
         conda:
             "../envs/kraken2.yaml"
         shell:
@@ -71,17 +55,17 @@ elif config["genotype_modules"]["run_fastp"]:
 
 rule bracken:
     input:
-        config['outdir']+"/{prefix}/kraken2/{sample}.report"
+        config['outdir']+"/{prefix}/QC_workflow/kraken2/{sample}.report"
     output:
         #Assembly statistics
         #assembly_stats=config['output_dir']+"/assembly-stats/{assembler}/{sample}.txt"
-        bracken=config['outdir']+"/{prefix}/bracken/{sample}.bracken.txt",
-        species=config['outdir']+"/{prefix}/bracken/{sample}_bracken_species_report.txt"
+        bracken=config['outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.txt",
+        species=config['outdir']+"/{prefix}/QC_workflow/bracken/{sample}_bracken_species_report.txt"
     params:
-        krakendb=config['krakendb']
+        krakendb=krakendb
         #extra="-t",
     log:
-        config['base_log_outdir']+"/{prefix}/bracken/{sample}.bracken.log",
+        config['base_log_outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.log",
     threads: 4
     conda:
         "../envs/kraken2.yaml"
@@ -94,14 +78,14 @@ rule bracken:
 rule run_bracken_summarise:
     input:
         #assembly-stats text files
-        bracken_reports=expand(config['outdir']+"/{prefix}/bracken/{sample}.bracken.txt", prefix=prefix, sample=sample_ids)
+        bracken_reports=expand(config['outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.txt", prefix=prefix, sample=sample_ids)
     output:
         #combined, tab-delimited assembly statistics
-        combined_bracken=config['outdir']+"/{prefix}/summaries/bracken_report.txt"
+        combined_bracken=config['outdir']+"/{prefix}/QC_workflow/summaries/bracken_report.txt"
     params:
         extra="",
     log:
-        "logs/{prefix}/summaries/combine_bracken.log",
+        "logs/{prefix}/QC_workflow/summaries/combine_bracken.log",
     threads: 1
     script:
         "../../scripts/combine_bracken.py"

@@ -2,15 +2,14 @@
 email:
 
 ### General configuration variables
-input_type:
-  - "reads"
-#  - "assemblies"
+#Input type - assemblies or reads
+input_type: assemblies
 
 # Prefix for output files - here the collection name or an abbreviation for the relevant manuscript might be a good choice
 prefix: test
 
 # Path to your genomic data
-genome_path: resources/test_data/reads
+genome_path: resources/test_data/assemblies
 
 # Path to blast executable
 blast_bin: resources/tools/ncbi-blast-2.13.0+/bin
@@ -36,7 +35,6 @@ genotype_modules:
   run_abricate_plasmid: Yes
   run_pointfinder: Yes
   run_kraken2_and_bracken: Yes
-  run_fastp: Yes
   run_mlst: Yes
   run_spifinder: No
   run_cgmlstfinder: No
@@ -50,11 +48,10 @@ treebuild_modules:
 
 #Module selection - treebuilding pipeline
 qc_modules:
-  run_fastp: Yes
   run_kraken2_and_bracken: Yes
   run_gunc: Yes
   run_checkm: Yes
-  run_genome_assembly: Yes
+  run_genome_assembly: No
   run_assembly_stats: Yes
 
 ### Pointfinder config

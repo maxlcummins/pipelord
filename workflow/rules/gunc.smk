@@ -6,19 +6,20 @@ prefix = config["prefix"]
 outdir = config["outdir"]
 maxthreads = snakemake.utils.available_cpu_count()
 
-if path.exists(config["gunc_db_path"]) == False and path.exists('resources/dbs/gunc_db') == False:
-	print("Gunc DB not detected. It will be downloaded (to 'resources/dbs/gunc_db'), which will take some time as it is (~13GB)")
+if path.exists(config["gunc_db_path"]) == False:
+	if path.exists('resources/dbs/gunc_db') == False:
+		print("Gunc DB not detected. It will be downloaded (to 'resources/dbs/gunc_db'), which will take some time as it is (~13GB)")
+		rule gunc_db_dl:
+			output:
+				gunc_db = directory("resources/dbs/gunc_db"),
+			conda:
+				"../envs/gunc.yaml"
+			shell:
+				"""
+				mkdir -p resources/dbs/gunc_db
+				gunc download_db {output}
+				"""
 	gunc_db_path = 'resources/dbs/gunc_db'
-	rule gunc_db_dl:
-		output:
-			gunc_db = directory("resources/dbs/gunc_db"),
-		conda:
-			"../envs/gunc.yaml"
-		shell:
-			"""
-			mkdir -p resources/dbs/gunc_db
-			gunc download_db {output}
-			"""
 else: gunc_db_path = config["gunc_db_path"]
 
 rule gunc_run:
