@@ -3,13 +3,13 @@ email:
 
 ### General configuration variables
 #Input type - assemblies or reads
-input_type: assemblies
+input_type: reads
 
 # Prefix for output files - here the collection name or an abbreviation for the relevant manuscript might be a good choice
 prefix: test
 
 # Path to your genomic data
-genome_path: resources/test_data/assemblies
+genome_path: resources/test_data/reads
 
 # Path to blast executable
 blast_bin: resources/tools/ncbi-blast-2.13.0+/bin
