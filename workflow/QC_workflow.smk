@@ -35,14 +35,15 @@ elif config["input_type"] == "reads":
     (sample_ids,) = glob_wildcards(config["genome_path"]+"/{sample}.R1.fastq.gz")
 else: "Config variable 'input_type' must be either 'assemblies' or 'reads'. Please check the config file"
 
-print("\nFrom config file, input type selected as '"+config["input_type"]+"'\n")
-print("Genomes detected:")
-print(sample_ids,)
-print("\n")
+#print("\nFrom config file, input type selected as '"+config["input_type"]+"'\n")
+#print("Genomes detected:")
+#print(sample_ids,)
+#print("\n")
 
 rule all:
     input:
         expand(config["outdir"]+"/{prefix}/fastp/{sample}.R1.fastq.gz",sample=sample_ids,prefix=prefix) if config["input_type"] == "reads" else [],
+        expand(config["outdir"]+"/{prefix}/QC_workflow/summaries/gunc_checkm_report.txt", prefix=prefix) if config["qc_modules"]["run_checkm"] and config["qc_modules"]["run_gunc"] else [],
         expand(config['outdir']+"/{prefix}/QC_workflow/summaries/bracken_report.txt", prefix=prefix) if config["qc_modules"]["run_kraken2_and_bracken"] else [],
         expand(config['outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.txt", sample=sample_ids, prefix=prefix) if config["qc_modules"]["run_kraken2_and_bracken"] else [],
         expand(config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_qa/qa.tsv", prefix=prefix) if config ["qc_modules"]["run_checkm"] and platform.system() == "Linux" else [],

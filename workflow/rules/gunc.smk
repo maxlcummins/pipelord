@@ -28,7 +28,7 @@ rule gunc_run:
 		assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
 	output:
 		guncoutdir = directory(config["outdir"]+"/{prefix}/QC_workflow/gunc/{sample}.out"),
-		tempdir = directory(temp(config["outdir"]+"/{prefix}/QC_workflow/gunc/{sample}.temp"))
+		tempdir = directory(config["outdir"]+"/{prefix}/QC_workflow/gunc/{sample}.temp")
 	conda:
 		"../envs/gunc.yaml"
 	log:
@@ -39,7 +39,6 @@ rule gunc_run:
 		mkdir -p {output.tempdir}
 		gunc run -i {input.assembly} --file_suffix .fasta --use_species_level --temp_dir {output.tempdir} --detailed_output --out_dir {output.guncoutdir} -r {input.gunc_db}/gunc_db_progenomes2.1.dmnd
 		"""
-
 
 rule run_gunc_summarise:
 	input:

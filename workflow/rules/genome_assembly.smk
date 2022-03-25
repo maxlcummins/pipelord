@@ -50,7 +50,7 @@ rule touch_assemblies: #required for rules where we need a directory of fastas a
     input:
         expand(config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta", prefix=prefix, sample=sample_ids)
     output:
-        assemblydir = temp(directory(config['outdir']+"/{prefix}/shovill/assemblies_temp"))
+        assemblydir = directory(config['outdir']+"/{prefix}/shovill/assemblies_temp")
     shell:
         """
         mkdir {output}

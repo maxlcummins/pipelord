@@ -69,7 +69,8 @@ rule checkm_tree_and_tree_qa:
         checkm_db = "resources/dbs/checkm/hmms/phylo.hmm",
         assemblies = config['outdir']+"/{prefix}/shovill/assemblies_temp",
     output:
-        directory(config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_out")
+        checkm_out = directory(config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_out"),
+        pseudo_output = config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_tree_and_tree_qa_pseudoout.txt"
     conda:
         checkm_env
     log:
@@ -79,12 +80,12 @@ rule checkm_tree_and_tree_qa:
     shell:
         """
         checkm tree {input.assemblies} -x fasta {output} -t {threads}
-        checkm tree_qa {output}
+        checkm tree_qa {output.checkm_out}
         """
 
 rule checkm_lineage_set:
     input:
-        config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_out"
+        pseudo_input = config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_tree_and_tree_qa_pseudoout.txt"
     output:
         markers = config['outdir']+"/{prefix}/QC_workflow/checkm/markers"
     conda:
@@ -93,9 +94,11 @@ rule checkm_lineage_set:
         config['base_log_outdir']+"/{prefix}/QC_workflow/checkm/checkm_lineage_set.log"
     threads:
         maxthreads
+    params:
+        actual_input = config['outdir']+"/"+config['outdir']+"/QC_workflow/checkm/checkm_out"
     shell:
         """
-        checkm lineage_set {input} {output}
+        checkm lineage_set {params.actual_input} {output}
         """
 
 rule checkm_analyze:
@@ -119,7 +122,6 @@ rule checkm_analyze:
 
 rule checkm_qa:
     input:
-        checkm_out = config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_out",
         markers = config['outdir']+"/{prefix}/QC_workflow/checkm/markers",
         pseudo_input = config['outdir']+"/{prefix}/QC_workflow/checkm/dummy_file.txt"
     output:
@@ -128,9 +130,11 @@ rule checkm_qa:
         checkm_env
     log:
         config['base_log_outdir']+"/{prefix}/checkm/checkm_qa.log"
+    params:
+        checkm_out = config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_out",
     shell:
         """
-        checkm qa {input.markers} {input.checkm_out} -f {output} -o 2 --tab_table
+        checkm qa {input.markers} {params.checkm_out} -f {output} -o 2 --tab_table
         """
 
 ruleorder: checkm_tree_and_tree_qa > checkm_lineage_set > checkm_analyze > checkm_qa
