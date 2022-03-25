@@ -125,7 +125,7 @@ rule checkm_qa:
         markers = config['outdir']+"/{prefix}/QC_workflow/checkm/markers",
         pseudo_input = config['outdir']+"/{prefix}/QC_workflow/checkm/dummy_file.txt"
     output:
-        config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_qa/qa.tsv"
+        config['outdir']+"/{prefix}/QC_workflow/summaries/checkm_qa.tsv"
     conda:
         checkm_env
     log:
@@ -134,7 +134,8 @@ rule checkm_qa:
         checkm_out = config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_out",
     shell:
         """
-        checkm qa {input.markers} {params.checkm_out} -f {output} -o 2 --tab_table
+        #checkm qa {input.markers} {params.checkm_out} -f {output} -o 2 --tab_table
+        checkm qa {input.markers} {params.checkm_out} -f {output} --tab_table
         """
 
 ruleorder: checkm_tree_and_tree_qa > checkm_lineage_set > checkm_analyze > checkm_qa
