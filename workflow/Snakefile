@@ -104,7 +104,7 @@ onsuccess:
 
 
 # include: "rules/roary_pangenome.smk"
-if config["genotype_modules"]["run_fastp"]:
+if config["input_type"] == "reads":
     include: "rules/read_cleaning.smk"
 if config["genotype_modules"]["run_dfast_genome_annotation"]:
     include: "rules/genome_annotation.smk"
