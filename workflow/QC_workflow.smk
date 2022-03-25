@@ -45,9 +45,9 @@ rule all:
         expand(config["outdir"]+"/{prefix}/fastp/{sample}.R1.fastq.gz",sample=sample_ids,prefix=prefix) if config["input_type"] == "reads" else [],
         expand(config['outdir']+"/{prefix}/QC_workflow/summaries/bracken_report.txt", prefix=prefix) if config["qc_modules"]["run_kraken2_and_bracken"] else [],
         expand(config['outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.txt", sample=sample_ids, prefix=prefix) if config["qc_modules"]["run_kraken2_and_bracken"] else [],
-        expand(config['outdir']+"/{prefix}/QC_workflow/summaries/checkm_qa.tsv", prefix=prefix) if config ["qc_modules"]["run_checkm"] and platform.system() == "Linux" else [],
+        expand(config['outdir']+"/{prefix}/QC_workflow/summaries/checkm_qa.txt", prefix=prefix) if config ["qc_modules"]["run_checkm"] and platform.system() == "Linux" else [],
         expand(config["outdir"]+"/{prefix}/QC_workflow/summaries/gunc_report.txt", prefix=prefix) if config ["qc_modules"]["run_gunc"] else[],
-        expand(config["outdir"]+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt", sample=sample_ids, prefix=prefix) if config["qc_modules"]["run_assembly_stats"] else [],
+        expand(config["outdir"]+"/{prefix}/QC_workflow/summaries/assembly_stats.txt",prefix=prefix) if config["qc_modules"]["run_assembly_stats"] else [],
         expand( config["outdir"]+"/{prefix}/shovill/assemblies/{sample}.fasta", sample=sample_ids, prefix=prefix) if config["qc_modules"]["run_genome_assembly"] else [],
 
 
