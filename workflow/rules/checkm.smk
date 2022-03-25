@@ -79,8 +79,9 @@ rule checkm_tree_and_tree_qa:
         maxthreads
     shell:
         """
-        checkm tree {input.assemblies} -x fasta {output} -t {threads}
+        checkm tree {input.assemblies} -x fasta {output.checkm_out} -t {threads}
         checkm tree_qa {output.checkm_out}
+        touch {output.pseudo_output}
         """
 
 rule checkm_lineage_set:
