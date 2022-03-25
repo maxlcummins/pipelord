@@ -125,7 +125,7 @@ rule checkm_qa:
         markers = config['outdir']+"/{prefix}/QC_workflow/checkm/markers",
         pseudo_input = config['outdir']+"/{prefix}/QC_workflow/checkm/dummy_file.txt"
     output:
-        config['outdir']+"/{prefix}/QC_workflow/summaries/checkm_qa.tsv"
+        config['outdir']+"/{prefix}/QC_workflow/summaries/checkm_qa.txt"
     conda:
         checkm_env
     log:
