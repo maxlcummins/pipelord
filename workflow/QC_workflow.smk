@@ -42,6 +42,7 @@ else: "Config variable 'input_type' must be either 'assemblies' or 'reads'. Plea
 
 rule all:
     input:
+        expand(config['outdir']+"/{prefix}/QC_workflow/summaries/QC_report.txt",prefix=prefix) if config["qc_modules"]["run_qc_summary"] else [],
         expand(config["outdir"]+"/{prefix}/fastp/{sample}.R1.fastq.gz",sample=sample_ids,prefix=prefix) if config["input_type"] == "reads" else [],
         expand(config['outdir']+"/{prefix}/QC_workflow/summaries/bracken_report.txt", prefix=prefix) if config["qc_modules"]["run_kraken2_and_bracken"] else [],
         expand(config['outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.txt", sample=sample_ids, prefix=prefix) if config["qc_modules"]["run_kraken2_and_bracken"] else [],
@@ -68,3 +69,5 @@ if config["qc_modules"]["run_gunc"]:
     include: "rules/gunc.smk"
 if config["qc_modules"]["run_assembly_stats"] or config["qc_modules"]["run_genome_assembly"]:
     include: "rules/genome_assembly.smk"
+if config["qc_modules"]["run_qc_summary"]:
+    include: "rules/QC_summary.smk"
