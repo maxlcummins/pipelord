@@ -19,4 +19,4 @@ rule QC_summarise:
     params:
         names = sample_ids,
     script:
-        "scripts/summarise_qc.py"
+        "../../scripts/QC_summary.py"
