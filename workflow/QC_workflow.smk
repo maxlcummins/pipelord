@@ -71,5 +71,3 @@ if config["qc_modules"]["run_assembly_stats"] or config["qc_modules"]["run_genom
     include: "rules/genome_assembly.smk"
 if config["qc_modules"]["run_qc_summary"]:
     include: "rules/QC_summary.smk"
-if config["qc_modules"]["run_multiqc_fastp"]:
-    include: "rules/multiqc_fastp.smk"
