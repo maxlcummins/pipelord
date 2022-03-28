@@ -51,7 +51,7 @@ qc_modules:
   run_kraken2_and_bracken: Yes
   run_gunc: Yes
   run_checkm: Yes
-  run_genome_assembly: No
+  run_genome_assembly: Yes
   run_assembly_stats: Yes
   run_qc_summary: Yes
   run_multiqc_fastp: Yes
