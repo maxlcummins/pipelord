@@ -96,7 +96,7 @@ rule checkm_lineage_set:
     threads:
         maxthreads
     params:
-        actual_input = config['outdir']+"/"+config['outdir']+"/QC_workflow/checkm/checkm_out"
+        actual_input = config['outdir']+"/"+config['prefix']+"/QC_workflow/checkm/checkm_out"
     shell:
         """
         checkm lineage_set {params.actual_input} {output}
