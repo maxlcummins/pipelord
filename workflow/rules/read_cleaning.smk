@@ -21,10 +21,10 @@ if config['input_type'] == 'reads':
         log:
             config['base_log_outdir']+"/{prefix}/fastp/run/{sample}.log"
         threads:
-            2
+            3
         conda:
             "../envs/fastp.yaml"
         shell:
             """
-            fastp -i {input.r1} -I {input.r2} -o {output.r1_filt} -O {output.r2_filt} -j {output.json} -h {output.html} 2>&1 {log}
+            fastp -i {input.r1} -I {input.r2} -o {output.r1_filt} -O {output.r2_filt} --thread {threads} -j {output.json} -h {output.html} 2>&1 {log}
             """

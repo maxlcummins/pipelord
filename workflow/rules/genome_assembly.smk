@@ -8,6 +8,8 @@ if config['input_type'] == "assemblies":
             assembly = config['genome_path']+"/{sample}.fasta"
         output:
             assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
+        threads:
+            1
         shell:
             """
             cp -n {input} {output}
@@ -30,7 +32,7 @@ elif config['input_type'] == "reads":
             "../envs/shovill.yaml"
         shell:
             """
-            shovill --minlen 200 --outdir {output.shov_out} --R1 {input.r1_filt} --R2 {input.r2_filt} 1> {log.out} 2> {log.err}
+            shovill --minlen 200 --cpus {threads} --outdir {output.shov_out} --R1 {input.r1_filt} --R2 {input.r2_filt} 1> {log.out} 2> {log.err}
             cp {output.shov_out}/contigs.fa {output.assembly}
             """
 else:
@@ -43,6 +45,8 @@ rule run_assembly_stats:
         config['outdir']+"/{prefix}/shovill/assembly_stats/{sample}_assembly_stats.txt"
     conda:
         "../envs/assembly_stats.yaml"
+    threads:
+        2
     shell:
         "assembly-stats -t {input} > {output}"
 
@@ -51,6 +55,7 @@ rule touch_assemblies: #required for rules where we need a directory of fastas a
         expand(config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta", prefix=prefix, sample=sample_ids)
     output:
         assemblydir = directory(config['outdir']+"/{prefix}/shovill/assemblies_temp")
+    threads: 1
     shell:
         """
         mkdir {output}

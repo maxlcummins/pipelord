@@ -20,7 +20,7 @@ if platform.system() == "Darwin":
         conda:
             checkm_env
         threads:
-            maxthreads
+            1
         shell:
             """
             FILE=$CONDA_PREFIX/bin/pplacer
@@ -45,7 +45,7 @@ if path.exists('resources/dbs/checkm') == False:
         conda:
             checkm_env
         threads:
-            maxthreads
+            1
         shell:
             """
             FILE=resources/dbs/checkm/hmms/phylo.hmm
@@ -76,7 +76,7 @@ rule checkm_tree_and_tree_qa:
     log:
         tree = config['base_log_outdir']+"/{prefix}/QC_workflow/checkm/checkm_tree_and_tree_qa.log"
     threads:
-        maxthreads
+        12
     shell:
         """
         checkm tree {input.assemblies} -x fasta {output.checkm_out} -t {threads}
@@ -94,7 +94,7 @@ rule checkm_lineage_set:
     log:
         config['base_log_outdir']+"/{prefix}/QC_workflow/checkm/checkm_lineage_set.log"
     threads:
-        maxthreads
+        12
     params:
         actual_input = config['outdir']+"/"+config['prefix']+"/QC_workflow/checkm/checkm_out"
     shell:
@@ -114,7 +114,7 @@ rule checkm_analyze:
     log:
         config['base_log_outdir']+"/{prefix}/QC_workflow/checkm/checkm_analyze.log"
     threads:
-        maxthreads
+        12
     shell:
         """
         checkm analyze {input.markers} {input.assemblies} {output.outdir} -t {threads} -x fasta
@@ -133,6 +133,8 @@ rule checkm_qa:
         config['base_log_outdir']+"/{prefix}/checkm/checkm_qa.log"
     params:
         checkm_out = config['outdir']+"/{prefix}/QC_workflow/checkm/checkm_out",
+    threads:
+        12
     shell:
         """
         #checkm qa {input.markers} {params.checkm_out} -f {output} -o 2 --tab_table

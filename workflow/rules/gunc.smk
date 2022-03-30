@@ -14,6 +14,8 @@ if path.exists(config["gunc_db_path"]) == False:
 				gunc_db = directory("resources/dbs/gunc_db"),
 			conda:
 				"../envs/gunc.yaml"
+			threads:
+				1
 			shell:
 				"""
 				mkdir -p resources/dbs/gunc_db
@@ -31,13 +33,14 @@ rule gunc_run:
 		tempdir = directory(config["outdir"]+"/{prefix}/QC_workflow/gunc/{sample}.temp")
 	conda:
 		"../envs/gunc.yaml"
+	threads: 6
 	log:
 		config["base_log_outdir"]+"/{prefix}/QC_workflow/gunc/logs/{sample}/gunc.log"
 	shell:
 		"""
 		mkdir -p {output.guncoutdir}
 		mkdir -p {output.tempdir}
-		gunc run -i {input.assembly} --file_suffix .fasta --use_species_level --temp_dir {output.tempdir} --detailed_output --out_dir {output.guncoutdir} -r {input.gunc_db}/gunc_db_progenomes2.1.dmnd
+		gunc run -i {input.assembly} --threads {threads} --file_suffix .fasta --use_species_level --temp_dir {output.tempdir} --detailed_output --out_dir {output.guncoutdir} -r {input.gunc_db}/gunc_db_progenomes2.1.dmnd
 		"""
 
 rule run_gunc_summarise:
