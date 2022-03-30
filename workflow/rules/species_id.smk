@@ -8,10 +8,11 @@ maxthreads = snakemake.utils.available_cpu_count()
 if path.exists(config['krakendb']) == False:
     if path.exists("resources/dbs/kraken2/minikraken2") == False:
         print('Kraken database not located, downloading minikracken2 DB ...')
-        os.system("wget https://genome-idx.s3.amazonaws.com/kraken/minikraken2_v2_8GB_201904.tgz -O minikraken2.tgz")
-        os.system("mkdir resources/dbs/kraken2")
-        os.system("tar -xvf minikraken2.tgz --directory resources/dbs/kraken2/minikraken2")
-    krakendb = "resources/dbs/kraken2/minikraken2"
+        if path.exists("minikraken2.tgz") == False:
+            os.system("wget https://genome-idx.s3.amazonaws.com/kraken/minikraken2_v2_8GB_201904.tgz -O minikraken2.tgz")
+        os.system("mkdir -p resources/dbs/kraken2")
+        os.system("tar -xvf minikraken2.tgz --directory resources/dbs/kraken2 && rm minikraken2.tgz")
+    krakendb = "resources/dbs/kraken2/minikraken2_v2_8GB_201904"
 else: krakendb = config['krakendb']
 
 

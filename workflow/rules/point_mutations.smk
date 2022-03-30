@@ -22,6 +22,7 @@ rule pointfinder_run:
         "../envs/pointfinder.yaml"
     log:
         config['base_log_outdir']+"/{prefix}/pointfinder/pointfinder_run/{sample}.log"
+    threads: 4
     params:
         output_dir = config['outdir']+"/{prefix}/pointfinder/{sample}",
         species = config['pointfinder_species'],
@@ -36,6 +37,7 @@ rule name_append:
         config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results.tsv"
     output:
         config['outdir']+"/{prefix}/pointfinder/{sample}/{sample}_blastn_results_named.tsv"
+    threads: 1
     shell:
         """awk 'NR == 1 {{print "name\t" $0; next;}}{{print FILENAME "\t" $0;}}' {input} > {output}"""
 

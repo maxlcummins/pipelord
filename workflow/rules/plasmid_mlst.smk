@@ -23,6 +23,7 @@ rule pMLST_run:
         results_simple = config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results_simple.txt"
     conda:
         "../envs/pMLST.yaml"
+    threads: 4
     params:
         output_dir = config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out",
         tmp = config['outdir']+"/{prefix}/pMLST/{scheme}/temp_{sample}",
