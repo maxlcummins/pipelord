@@ -5,7 +5,6 @@ from os import path
 import git
 import platform
 
-
 configfile: "config/config_template.yaml"
 
 if platform.system() == "Darwin" and config ["qc_modules"]["run_checkm"]:

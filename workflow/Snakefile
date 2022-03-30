@@ -8,17 +8,17 @@ import platform
 
 configfile: "config/config_template.yaml"
 
-#Download the appropriate blast tool depending on the OS
-if path.exists("resources/tools/ncbi-blast-2.13.0+") == False:
-    print('blast directory not located, downloading blast...')
-    if platform.system() == "Linux":
-        os.system("wget -O resources/tools/ncbi-blast-2.13.0+.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.13.0+-x64-linux.tar.gz")
-    elif platform.system() == "Windows":
-        os.system("wget -O resources/tools/ncbi-blast-2.13.0+.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.13.0+-x64-win64.tar.gz")
-    elif platform.system() == "Darwin":
-        os.system("wget -O resources/tools/ncbi-blast-2.13.0+.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.13.0+-x64-macosx.tar.gz")
-    print('Unzipping...')
-    os.system("tar -xvf resources/tools/ncbi-blast-2.13.0+.tar.gz -C resources/tools/")
+# #Download the appropriate blast tool depending on the OS
+# if path.exists("resources/tools/ncbi-blast-2.13.0+") == False:
+#     print('blast directory not located, downloading blast...')
+#     if platform.system() == "Linux":
+#         os.system("wget -O resources/tools/ncbi-blast-2.13.0+.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.13.0+-x64-linux.tar.gz")
+#     elif platform.system() == "Windows":
+#         os.system("wget -O resources/tools/ncbi-blast-2.13.0+.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.13.0+-x64-win64.tar.gz")
+#     elif platform.system() == "Darwin":
+#         os.system("wget -O resources/tools/ncbi-blast-2.13.0+.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.13.0+-x64-macosx.tar.gz")
+#     print('Unzipping...')
+#     os.system("tar -xvf resources/tools/ncbi-blast-2.13.0+.tar.gz -C resources/tools/")
 
 if path.exists("resources/tools/kma") == False:
     print('kma directory not located, downloading kma...')
