@@ -31,9 +31,13 @@ if config['input_type'] == 'assemblies':
             config['base_log_outdir']+"/{prefix}/QC_workflow/kraken2/run/{sample}_err.log"
         conda:
             "../envs/kraken2.yaml"
+        threads:
+            3
+        #resources:
+            #mem_mb=16000
         shell:
             """
-            kraken2 --db {input.db} --use-names --report {output.report} --output {output.out} {input.assembly}  2> {log}
+            kraken2 --db {input.db} --use-names --memory-mapping --threads {threads} --report {output.report} --output {output.out} {input.assembly}  2> {log}
             """
 elif config["input_type"] == "reads":
     rule run_kraken2:
@@ -48,9 +52,13 @@ elif config["input_type"] == "reads":
             config['base_log_outdir']+"/{prefix}/QC_workflow/kraken2/run/{sample}_err.log"
         conda:
             "../envs/kraken2.yaml"
+        threads:
+            6
+        #resources:
+            #mem_mb=16000
         shell:
             """
-            kraken2 --db {input.db} --use-names --report {output.report} --output {output.out} {input.r1_filt} {input.r2_filt}  2> {log}
+            kraken2 --db {input.db} --use-names --memory-mapping --threads {threads} --report {output.report} --output {output.out} {input.r1_filt} {input.r2_filt}  2> {log}
             """
 
 rule bracken:
@@ -66,7 +74,10 @@ rule bracken:
         #extra="-t",
     log:
         config['base_log_outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.log",
-    threads: 4
+    threads:
+        4
+    #resources:
+        #mem_mb=16000
     conda:
         "../envs/kraken2.yaml"
     shell:
@@ -86,6 +97,9 @@ rule run_bracken_summarise:
         extra="",
     log:
         "logs/{prefix}/QC_workflow/summaries/combine_bracken.log",
-    threads: 1
+    threads:
+        1
+    #resources:
+        #mem_mb=3000
     script:
         "../../scripts/combine_bracken.py"
