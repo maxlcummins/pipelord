@@ -29,16 +29,29 @@ if path.exists("resources/tools") == False:
     print("tools directory not located, creating tools directory...")
     os.system("mkdir -p resources/tools")
 
+
+
 if config["input_type"] == "assemblies":
     (sample_ids,) = glob_wildcards(config["genome_path"]+"/{sample}.fasta")
+    print(len(sample_ids)+" genomes detected...")
+    for i in sample_ids:
+        if os.path.getsize(config["genome_path"]+"/"+i+".fasta") < 1000000:
+            sample_ids.remove(i)
+            print(i+" fasta too small, excluded from analysis")
+    print(str(len(sample_ids))+" genomes of an appropriate size for inclusion... (assembly over 1MB)")
 elif config["input_type"] == "reads":
     (sample_ids,) = glob_wildcards(config["genome_path"]+"/{sample}.R1.fastq.gz")
+    print(len(sample_ids))
+    for i in sample_ids:
+        if os.path.getsize(config["genome_path"]+"/"+i+".R1.fastq.gz") < 20000000:
+            print(i+" R1 too small, excluded from analysis")
+            sample_ids.remove(i)
+        elif os.path.getsize(config["genome_path"]+"/"+i+".R2.fastq.gz") < 20000000:
+            print(i+" R2 too small, excluded from analysis")
+            sample_ids.remove(i)
+    print(str(len(sample_ids))+" genomes of an appropriate size for inclusion... (R1 and R2 over 20MB each)")
 else: "Config variable 'input_type' must be either 'assemblies' or 'reads'. Please check the config file"
 
-#print("\nFrom config file, input type selected as '"+config["input_type"]+"'\n")
-#print("Genomes detected:")
-#print(sample_ids,)
-#print("\n")
 
 rule all:
     input:
