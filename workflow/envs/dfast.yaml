@@ -6,8 +6,8 @@ channels:
 dependencies:
   - dfast
   - pip
-  - pip:21
-    - biopython
-    - numpy
-    - setuptools
+  - pip:
+      - biopython
+      - numpy
+      - setuptools
 prefix: /Users/131785/miniconda/envs/dfast
