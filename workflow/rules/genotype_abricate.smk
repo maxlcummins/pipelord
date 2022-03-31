@@ -28,7 +28,7 @@ rule abricate_run:
         gene_db = gene_dbs,
         datadir = config['gene_db_location']
     shell:
-        "abricate --nopath --datadir {params.datadir} --threads --db {params.db} {input.assembly} > {output} 2> {log}"
+        "abricate --nopath --datadir {params.datadir} --threads {threads} --db {params.db} {input.assembly} > {output} 2> {log}"
 
 rule abricate_plasmid_run:
     input:
@@ -46,7 +46,7 @@ rule abricate_plasmid_run:
         plasmid_screen_db = plasmid_screen_db,
         datadir = config['gene_db_location']
     shell:
-        "abricate --nopath --datadir {params.datadir} --db {params.db} {input.assembly} > {output} 2> {log}"
+        "abricate --nopath --datadir {params.datadir} --threads {threads} --db {params.db} {input.assembly} > {output} 2> {log}"
 
 rule abricate_plasmid_combine:
     input:
