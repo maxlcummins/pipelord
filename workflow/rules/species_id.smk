@@ -3,7 +3,6 @@ import subprocess
 import os
 
 prefix = config['prefix']
-maxthreads = snakemake.utils.available_cpu_count()
 
 if path.exists(config['krakendb']) == False:
     if path.exists("resources/dbs/kraken2/minikraken2") == False:
