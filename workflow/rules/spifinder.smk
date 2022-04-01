@@ -5,7 +5,6 @@ from os import path
 import git
 
 prefix = config['prefix']
-maxthreads = snakemake.utils.available_cpu_count()
 
 if path.exists("resources/tools/spifinder") == False:
     print('spifinder directory not located, downloading spifinder...')
@@ -61,11 +60,7 @@ if config['input_type'] == 'raw_reads':
             "../../scripts/combine_spifinder.py"
 
 
-<<<<<<< HEAD
-if config["genotype_modules"]["run_genome_assembly"] == False:
-=======
 if config['input_type'] == 'assemblies':
->>>>>>> cdc33cae0ec3288b9d1a38c32905d923b2b706f1
     rule run_spifinder:
         input:
             config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
@@ -76,7 +71,7 @@ if config['input_type'] == 'assemblies':
             out = config['base_log_outdir']+"/{prefix}/spifinder/run/{sample}_out.log",
             err = config['base_log_outdir']+"/{prefix}/spifinder/run/{sample}_err.log"
         threads:
-            8
+            5
         conda:
             "../envs/spifinder.yaml"
         shell:

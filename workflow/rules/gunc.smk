@@ -4,7 +4,6 @@ import os
 
 prefix = config["prefix"]
 outdir = config["outdir"]
-maxthreads = snakemake.utils.available_cpu_count()
 
 if path.exists(config["gunc_db_path"]) == False:
 	if path.exists('resources/dbs/gunc_db') == False:

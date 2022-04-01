@@ -5,7 +5,6 @@ from os import path
 import git
 
 prefix = config['prefix']
-maxthreads = snakemake.utils.available_cpu_count()
 
 if config["cgmlst_schemes"] != "":
     if path.exists("resources/tools/cgmlstfinder") == False:

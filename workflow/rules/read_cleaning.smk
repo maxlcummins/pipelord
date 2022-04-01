@@ -3,7 +3,6 @@ import subprocess
 import os
 
 prefix = config['prefix']
-maxthreads = snakemake.utils.available_cpu_count()
 
 logs = config['base_log_outdir']
 

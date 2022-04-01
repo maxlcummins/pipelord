@@ -5,7 +5,6 @@ from os import path
 import git
 
 prefix = config['prefix']
-maxthreads = snakemake.utils.available_cpu_count()
 
 if path.exists("resources/tools/pointfinder") == False:
     print('Pointfinder directory not located, downloading pointfinder...')

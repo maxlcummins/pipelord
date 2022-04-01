@@ -4,7 +4,6 @@ import os
 
 prefix = config["prefix"]
 outdir = config["outdir"]
-maxthreads = snakemake.utils.available_cpu_count()
 
 logs = config["base_log_outdir"]
 
