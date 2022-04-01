@@ -6,9 +6,6 @@ import git
 
 configfile: "config/config_template.yaml"
 
-#Number of threads
-maxthreads = snakemake.utils.available_cpu_count()
-
 #Define some parameters from our config file
 outdir = config['outdir']
 prefix = config['prefix']
@@ -71,7 +68,7 @@ rule roary:
     log:
         config['base_log_outdir']+"/{prefix}/roary/{subset_prefix}.log"
     threads:
-        maxthreads
+        12
     params:
         out = config['outdir']+"/{prefix}/roary/{subset_prefix}",
         core_req = config['roary_core_req'],

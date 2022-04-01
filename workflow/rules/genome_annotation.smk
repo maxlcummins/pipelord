@@ -3,7 +3,6 @@ import subprocess
 import os
 
 prefix = config['prefix']
-maxthreads = snakemake.utils.available_cpu_count()
 scheme = config['pmlst_scheme']
 
 
