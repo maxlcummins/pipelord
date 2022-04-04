@@ -5,7 +5,7 @@ import os
 prefix = config['prefix']
 
 if path.exists(config['krakendb']) == False:
-    if path.exists("resources/dbs/kraken2/minikraken2") == False:
+    if path.exists("resources/dbs/kraken2/minikraken2_v2_8GB_201904_UPDATE") == False:
         print('Kraken database not located, downloading minikracken2 DB ...')
         if path.exists("minikraken2.tgz") == False:
             os.system("wget https://genome-idx.s3.amazonaws.com/kraken/minikraken2_v2_8GB_201904.tgz -O minikraken2.tgz")
