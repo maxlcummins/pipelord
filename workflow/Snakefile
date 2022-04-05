@@ -113,6 +113,7 @@ if config["genotype_modules"]["run_kraken2_and_bracken"]:
     include: "rules/species_id.smk"
 if config["genotype_modules"]["run_abricate"] or config["genotype_modules"]["run_abricate_plasmid"]:
     include: "rules/genotype_abricate.smk"
+    ruleorder: abricate_plasmid_run > abricate_run
 if config["genotype_modules"]["run_pointfinder"]:
     include: "rules/point_mutations.smk"
 if config["genotype_modules"]["run_mlst"]:
@@ -126,4 +127,3 @@ if config["genotype_modules"]["run_spifinder"]:
 if config["genotype_modules"]["run_summarise"]:
     include: "rules/summarise.smk"
 
-ruleorder: abricate_plasmid_run > abricate_run
