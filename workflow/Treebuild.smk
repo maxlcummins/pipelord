@@ -3,6 +3,7 @@ import subprocess
 import os
 from os import path
 import git
+import re
 
 configfile: "config/config_template.yaml"
 
@@ -33,13 +34,20 @@ for subset_prefix in subset_prefixes:
         subset_filenames = ([line.strip("\n") for line in f if line.strip() != ''])
         #Print the list of genomes in the subset (from the file of file names)
         print(subset_filenames)
+        #Path to gffs
+        gff_path = [config['outdir']+"/"+config['prefix']+"/dfast/gffs/"+name+".gff" for name in subset_filenames]
         #Generate a list of files for our subsets which will be used by roary
-        subsets_filenames.append(expand(config['outdir']+"/{prefix}/subsets/{subset_prefix}/gffs/{subset}.gff", prefix=prefix, subset_prefix=subset_prefix, subset=subset_filenames))
+        subsets_filenames.append(gff_path)
     #Increment our counter to help us dynamically access our files of file names
     i += 1
 
+print(subsets_filenames)
+
+print(subset_prefixes)
+
 rule all:
     input:
+        expand(config['outdir']+"/{prefix}/subsets/{subset_prefix}_gff_locations.txt", prefix=prefix, subset_prefix=subset_prefixes),
         expand(config['outdir']+"/{prefix}/roary/{subset_prefix}", prefix=prefix, subset_prefix=subset_prefixes),
         expand(config['outdir']+"/{prefix}/snp_sites/{subset_prefix}/core_gene_alignment_snp_sites.aln", prefix=prefix, subset_prefix=subset_prefixes),
         expand(config['outdir']+"/{prefix}/trees/{subset_prefix}/CGA_snp_sites.treefile", prefix=prefix, subset_prefix=subset_prefixes) if config["treebuild_modules"]["run_core_genome_treebuild_snp_sites"] else [],
@@ -47,20 +55,25 @@ rule all:
         expand(config['outdir']+"/{prefix}/snp_dists/{subset_prefix}/CGA_snp_sites_pairwise_snps_counts.csv", prefix=prefix, subset_prefix=subset_prefixes) if config["treebuild_modules"]["run_roary"] else [],
         expand(config['outdir']+"/{prefix}/snp_dists/{subset_prefix}/CGA_full_pairwise_snps_counts.csv", prefix=prefix, subset_prefix=subset_prefixes) if config["treebuild_modules"]["run_roary"] else [],
 
+rule make_fofns:
+    input: config['subset_fofn'],
+    output: expand(config['outdir']+"/{prefix}/subsets/{subset_prefix}_gff_locations.txt", prefix=prefix, subset_prefix=subset_prefixes)
+    run:
+        for f, o in zip(input,output):
+            with open(f, 'r') as f_in:
+                with open(o, 'w') as f_out:
+                    for line in f_in:
+                        line_fix = re.sub('^', config['outdir']+"/"+config['prefix']+"/dfast/gffs/", line)
+                        line_fix = re.sub('\n', '', line_fix)
+                        line_fix = re.sub('$', ".gff\n", line_fix)
+                        line_fix = re.sub(config['outdir']+"/"+config['prefix']+"/dfast/gffs/"+'.gff\n', "", line_fix)
+                        print(line_fix)
+                        f_out.write(line.replace(line, line_fix))
 
-rule roary_subset:
-    input:
-        config['outdir']+"/{prefix}/dfast/gffs/{subset}.gff"
-    output:
-        config['outdir']+"/{prefix}/subsets/{subset_prefix}/gffs/{subset}.gff"
-    shell:
-        """
-        cp -n {input} {output}
-        """
 
 rule roary:
     input:
-        expand(config['outdir']+"/{prefix}/subsets/{subset_prefix}/gffs/{subset}.gff", prefix=prefix, subset_prefix=subset_prefix, subset=subset_filenames)
+        config['outdir']+"/{prefix}/subsets/{subset_prefix}_gff_locations.txt"
     output:
         directory(config['outdir']+"/{prefix}/roary/{subset_prefix}")
     conda:
@@ -74,7 +87,7 @@ rule roary:
         core_req = config['roary_core_req'],
         kraken_db = config['krakendb']
     shell:
-        "roary -e -v -n -r -cd {params.core_req} -qc -k {params.kraken_db} -f {params.out} {input}  2> {log}"
+        "cat {input} | xargs roary -p {threads} -e -v -n -r -cd {params.core_req} -qc -k {params.kraken_db} -f {params.out} 2> {log}"
 
 rule snp_sites:
     input:
@@ -99,9 +112,10 @@ rule iqtree:
         config['base_log_outdir']+"/{prefix}/roary/logs/{subset_prefix}/iqtree.log"
     params:
         out = config['outdir']+"/{prefix}/trees/{subset_prefix}/CGA_full"
+    threads: 12
     shell:
         """
-        iqtree -s {input}/core_gene_alignment.aln -pre {params.out} -m GTR+F -bb 1000
+        iqtree -s {input}/core_gene_alignment.aln -pre {params.out} -m GTR+F -ntmax {threads} -bb 1000
         """
 
 rule iqtree_snp_sites:
@@ -115,9 +129,10 @@ rule iqtree_snp_sites:
         config['base_log_outdir']+"/{prefix}/roary/logs/{subset_prefix}/iqtree_snp_sites.log"
     params:
         out = config['outdir']+"/{prefix}/trees/{subset_prefix}/CGA_snp_sites"
+    threads: 12
     shell:
         """
-        iqtree -s {input} -pre {params.out} -m GTR+ASC -bb 1000
+        iqtree -s {input} -pre {params.out} -m GTR+ASC -ntmax {threads} -bb 1000
         """
 
 rule snp_dists_snp_sites:
