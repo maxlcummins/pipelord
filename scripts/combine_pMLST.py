@@ -25,10 +25,13 @@ combined = pd.concat(dataframes)
 #Change the filename column to be pMLST
 combined.rename(columns={0:'pMLST'}, inplace=True)
 
+#Change the filename column to be pMLST
+combined.rename(columns={'scheme':'pMLST_scheme'}, inplace=True)
+
 #Change column order
 combined = combined[[
     'name',
-    'scheme',
+    'pMLST_scheme',
     'pMLST'
     ]
 ]
