@@ -51,7 +51,7 @@ rule iqtree:
     log:
         config['base_log_outdir']+"/{prefix}/roary/logs/{subset_name}/iqtree.log"
     shell:
-        "iqtree -s {input} -m MFP -ntmax -bb 1000"
+        "iqtree -s {input} -m MFP -ntmax {threads} -bb 1000"
 
 
 rule iqtree_snp_sites:
@@ -66,7 +66,7 @@ rule iqtree_snp_sites:
     log:
         config['base_log_outdir']+"/{prefix}/roary/logs/{subset_name}/iqtree_snp_sites.log"
     shell:
-        "iqtree -s {input} -m MFP -ntmax -bb 1000"
+        "iqtree -s {input} -m MFP -ntmax {threads} -bb 1000"
 
 #snp-dists -c full_aln/core_gene_alignment.aln > full_aln/core_gene_alignment.csv
 #snp-dists -c snp_sites/core_gene_alignment_snp_sites.aln > snp_sites/core_gene_alignment_snp_sites.csv
