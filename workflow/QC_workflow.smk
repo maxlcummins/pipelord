@@ -32,7 +32,7 @@ if path.exists("resources/tools") == False:
 
 if config["input_type"] == "assemblies":
     (sample_ids,) = glob_wildcards(config["genome_path"]+"/{sample}.fasta")
-    print("Detected "str(len(sample_ids))+" genomes")
+    print("Detected "+str(len(sample_ids))+" genomes")
     for i in sample_ids:
         if os.path.getsize(config["genome_path"]+"/"+i+".fasta") < 1000000:
             sample_ids.remove(i)
@@ -40,7 +40,7 @@ if config["input_type"] == "assemblies":
     print(str(len(sample_ids))+" genomes of an appropriate size for inclusion... (assembly over 1MB)")
 elif config["input_type"] == "reads":
     (sample_ids,) = glob_wildcards(config["genome_path"]+"/{sample}.R1.fastq.gz")
-    print(str(len(sample_ids))+" genomes detected...")
+    print("Detected "+str(len(sample_ids))+" genomes")
     for i in sample_ids:
         if os.path.getsize(config["genome_path"]+"/"+i+".R1.fastq.gz") < 20000000:
             print(i+" R1 too small, excluded from analysis")
