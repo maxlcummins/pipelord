@@ -49,7 +49,7 @@ elif config["input_type"] == "reads":
             print(i+" R2 too small, excluded from analysis")
             sample_ids.remove(i)
     print(str(len(sample_ids))+" genomes of an appropriate size for inclusion... (R1 and R2 over 20MB each)")
-else: "Config variable 'input_type' must be either 'assemblies' or 'reads'. Please check the config file"
+else: print("Config variable 'input_type' must be either 'assemblies' or 'reads'. Please check the config file")
 
 
 rule all:
