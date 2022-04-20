@@ -77,9 +77,10 @@ rule all:
         expand(config["outdir"]+"/{prefix}/fastp/{sample}.R1.fastq.gz",sample=sample_ids,prefix=prefix),
         expand(config["outdir"]+"/{prefix}/mlst/{sample}_mlst.txt",sample=sample_ids,prefix=prefix) if config["genotype_modules"]["run_mlst"] else [],
         expand(config["outdir"]+"/{prefix}/summaries/mlst.txt", prefix=prefix) if config["genotype_modules"]["run_mlst"] else [],
-        expand(config["outdir"]+"/{prefix}/dfast/gffs/{sample}.gff",sample=sample_ids,prefix=prefix) if config["genotype_modules"]["run_dfast_genome_annotation"] else [],
+        expand(config["outdir"]+"/{prefix}/dfast/gffs/{sample}.gff",sample=sample_ids,prefix=prefix) if config["genotype_modules"]['genome_annotater'] == "dfast" else [],
+        expand(config["outdir"]+"/{prefix}/prokka/gffs/{sample}.gff",sample=sample_ids,prefix=prefix) if config["genotype_modules"]['genome_annotater'] == "prokka" else [],
         expand(config["outdir"]+"/{prefix}/abricate_plasmids/{plasmid_screen_db}/{sample}.tab",sample=sample_ids, plasmid_screen_db=plasmid_screen_db,prefix=prefix) if config["genotype_modules"]["run_abricate_plasmid"] else [],
-        "resources/dbs/dfast" if config["genotype_modules"]["run_dfast_genome_annotation"] and path.exists("resources/dbs/dfast") == False else [],
+        "resources/dbs/dfast" if config["genotype_modules"]['genome_annotater'] == "dfast" and path.exists("resources/dbs/dfast") == False else [],
 
 
 onerror:
@@ -105,7 +106,7 @@ onsuccess:
 # include: "rules/roary_pangenome.smk"
 if config["input_type"] == "reads":
     include: "rules/read_cleaning.smk"
-if config["genotype_modules"]["run_dfast_genome_annotation"]:
+if config["genotype_modules"]["run_genome_annotation"]:
     include: "rules/genome_annotation.smk"
 if config["genotype_modules"]["run_genome_assembly"]:
     include: "rules/genome_assembly.smk"

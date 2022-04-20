@@ -25,21 +25,38 @@ subsets_filenames = []
 #Set an incrementer for our for loops
 i = 0
 
-#For each of the subsets of samples we want to run
-for subset_prefix in subset_prefixes:
-    #Report on the prefix name
-    print("Subset with prefix \'"+subset_prefix+"\' contains the following genomes:")
-    #Open the associated file of file names
-    with open(subset_fofn[i]) as f:
-        subset_filenames = ([line.strip("\n") for line in f if line.strip() != ''])
-        #Print the list of genomes in the subset (from the file of file names)
-        print(subset_filenames)
-        #Path to gffs
-        gff_path = [config['outdir']+"/"+config['prefix']+"/dfast/gffs/"+name+".gff" for name in subset_filenames]
-        #Generate a list of files for our subsets which will be used by roary
-        subsets_filenames.append(gff_path)
-    #Increment our counter to help us dynamically access our files of file names
-    i += 1
+if config["genotype_modules"]['genome_annotater'] == "dfast":
+    #For each of the subsets of samples we want to run
+    for subset_prefix in subset_prefixes:
+        #Report on the prefix name
+        print("Subset with prefix \'"+subset_prefix+"\' contains the following genomes:")
+        #Open the associated file of file names
+        with open(subset_fofn[i]) as f:
+            subset_filenames = ([line.strip("\n") for line in f if line.strip() != ''])
+            #Print the list of genomes in the subset (from the file of file names)
+            print(subset_filenames)
+            #Path to gffs
+            gff_path = [config['outdir']+"/"+config['prefix']+"/dfast/gffs/"+name+".gff" for name in subset_filenames]
+            #Generate a list of files for our subsets which will be used by roary
+            subsets_filenames.append(gff_path)
+        #Increment our counter to help us dynamically access our files of file names
+        i += 1
+elif config["genotype_modules"]['genome_annotater'] == "prokka":
+        #For each of the subsets of samples we want to run
+    for subset_prefix in subset_prefixes:
+        #Report on the prefix name
+        print("Subset with prefix \'"+subset_prefix+"\' contains the following genomes:")
+        #Open the associated file of file names
+        with open(subset_fofn[i]) as f:
+            subset_filenames = ([line.strip("\n") for line in f if line.strip() != ''])
+            #Print the list of genomes in the subset (from the file of file names)
+            print(subset_filenames)
+            #Path to gffs
+            gff_path = [config['outdir']+"/"+config['prefix']+"/prokka/gffs/"+name+".gff" for name in subset_filenames]
+            #Generate a list of files for our subsets which will be used by roary
+            subsets_filenames.append(gff_path)
+        #Increment our counter to help us dynamically access our files of file names
+        i += 1
 
 print(subsets_filenames)
 
@@ -55,20 +72,37 @@ rule all:
         expand(config['outdir']+"/{prefix}/snp_dists/{subset_prefix}/CGA_snp_sites_pairwise_snps_counts.csv", prefix=prefix, subset_prefix=subset_prefixes) if config["treebuild_modules"]["run_roary"] else [],
         expand(config['outdir']+"/{prefix}/snp_dists/{subset_prefix}/CGA_full_pairwise_snps_counts.csv", prefix=prefix, subset_prefix=subset_prefixes) if config["treebuild_modules"]["run_roary"] else [],
 
-rule make_fofns:
-    input: config['subset_fofn'],
-    output: expand(config['outdir']+"/{prefix}/subsets/{subset_prefix}_gff_locations.txt", prefix=prefix, subset_prefix=subset_prefixes)
-    run:
-        for f, o in zip(input,output):
-            with open(f, 'r') as f_in:
-                with open(o, 'w') as f_out:
-                    for line in f_in:
-                        line_fix = re.sub('^', config['outdir']+"/"+config['prefix']+"/dfast/gffs/", line)
-                        line_fix = re.sub('\n', '', line_fix)
-                        line_fix = re.sub('$', ".gff\n", line_fix)
-                        line_fix = re.sub(config['outdir']+"/"+config['prefix']+"/dfast/gffs/"+'.gff\n', "", line_fix)
-                        print(line_fix)
-                        f_out.write(line.replace(line, line_fix))
+if config["genotype_modules"]['genome_annotater'] == "dfast":
+    rule make_fofns:
+        input: config['subset_fofn'],
+        output: expand(config['outdir']+"/{prefix}/subsets/{subset_prefix}_gff_locations.txt", prefix=prefix, subset_prefix=subset_prefixes)
+        run:
+            for f, o in zip(input,output):
+                with open(f, 'r') as f_in:
+                    with open(o, 'w') as f_out:
+                        for line in f_in:
+                            line_fix = re.sub('^', config['outdir']+"/"+config['prefix']+"/dfast/gffs/", line)
+                            line_fix = re.sub('\n', '', line_fix)
+                            line_fix = re.sub('$', ".gff\n", line_fix)
+                            line_fix = re.sub(config['outdir']+"/"+config['prefix']+"/dfast/gffs/"+'.gff\n', "", line_fix)
+                            print(line_fix)
+                            f_out.write(line.replace(line, line_fix))
+elif config["genotype_modules"]['genome_annotater'] == "prokka":
+    rule make_fofns:
+        input: config['subset_fofn'],
+        output: expand(config['outdir']+"/{prefix}/subsets/{subset_prefix}_gff_locations.txt", prefix=prefix, subset_prefix=subset_prefixes)
+        run:
+            for f, o in zip(input,output):
+                with open(f, 'r') as f_in:
+                    with open(o, 'w') as f_out:
+                        for line in f_in:
+                            line_fix = re.sub('^', config['outdir']+"/"+config['prefix']+"/prokka/gffs/", line)
+                            line_fix = re.sub('\n', '', line_fix)
+                            line_fix = re.sub('$', ".gff\n", line_fix)
+                            line_fix = re.sub(config['outdir']+"/"+config['prefix']+"/prokka/gffs/"+'.gff\n', "", line_fix)
+                            print(line_fix)
+                            f_out.write(line.replace(line, line_fix))
+else: print("Please set the genome annotater in the config file to either 'dfast' or 'prokka'")
 
 
 rule roary:
