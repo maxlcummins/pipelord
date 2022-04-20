@@ -27,7 +27,8 @@ cgmlst_schemes: "" #['ecoli','salmonella']
 
 #Module selection - default genotyping pipeline
 genotype_modules:
-  run_dfast_genome_annotation: Yes
+  run_genome_annotation: Yes
+  genome_annotater: "prokka"
   run_plasmid_mlst: Yes
   run_genome_assembly: Yes
   run_assembly_stats: Yes
