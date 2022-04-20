@@ -74,7 +74,7 @@ rule all:
         expand(config["outdir"]+"/{prefix}/summaries/pointfinder.txt", prefix=prefix) if config["genotype_modules"]["run_pointfinder"] else [],
         expand(config['outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.txt", sample=sample_ids, prefix=prefix) if config["genotype_modules"]["run_kraken2_and_bracken"] else [],
         expand(config['outdir']+"/{prefix}/QC_workflow/summaries/bracken_report.txt", prefix=prefix) if config["genotype_modules"]["run_kraken2_and_bracken"] else [],
-        expand(config["outdir"]+"/{prefix}/fastp/{sample}.R1.fastq.gz",sample=sample_ids,prefix=prefix),
+        expand(config["outdir"]+"/{prefix}/fastp/{sample}.R1.fastq.gz",sample=sample_ids,prefix=prefix) if config["input_type"] == "reads" else [],
         expand(config["outdir"]+"/{prefix}/mlst/{sample}_mlst.txt",sample=sample_ids,prefix=prefix) if config["genotype_modules"]["run_mlst"] else [],
         expand(config["outdir"]+"/{prefix}/summaries/mlst.txt", prefix=prefix) if config["genotype_modules"]["run_mlst"] else [],
         expand(config["outdir"]+"/{prefix}/dfast/gffs/{sample}.gff",sample=sample_ids,prefix=prefix) if config["genotype_modules"]['genome_annotater'] == "dfast" else [],
