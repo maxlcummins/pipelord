@@ -1,0 +1,205 @@
+Read1 before filtering:
+total reads: 669536
+total bases: 83692000
+Q20 bases: 78560203(93.8682%)
+Q30 bases: 73790454(88.1691%)
+
+Read2 before filtering:
+total reads: 669536
+total bases: 83692000
+Q20 bases: 73976172(88.391%)
+Q30 bases: 68300233(81.609%)
+
+Read1 after filtering:
+total reads: 613997
+total bases: 74717148
+Q20 bases: 71619495(95.8542%)
+Q30 bases: 67991774(90.9989%)
+
+Read2 aftering filtering:
+total reads: 613997
+total bases: 74717148
+Q20 bases: 69771624(93.381%)
+Q30 bases: 65059900(87.0749%)
+
+Filtering result:
+reads passed filter: 1227994
+reads failed due to low quality: 111032
+reads failed due to too many N: 46
+reads failed due to too short: 0
+reads with adapter trimmed: 95116
+bases trimmed due to adapters: 4103220
+
+Duplication rate: 0.676396%
+
+Insert size peak (evaluated by paired-end reads): 215
+
+JSON report: results/test_gtdb/fastp/AVC2.fastp.json
+HTML report: results/test_gtdb/fastp/AVC2.fastp.html
+
+fastp -i resources/test_data/reads/AVC2.R1.fastq.gz -I resources/test_data/reads/AVC2.R2.fastq.gz -o results/test_gtdb/fastp/AVC2.R1.fastq.gz -O results/test_gtdb/fastp/AVC2.R2.fastq.gz --thread 3 -j results/test_gtdb/fastp/AVC2.fastp.json -h results/test_gtdb/fastp/AVC2.fastp.html logs/test_gtdb/fastp/run/AVC2.log 
+fastp v0.20.1, time used: 7 seconds
+Read1 before filtering:
+total reads: 851813
+total bases: 106476625
+Q20 bases: 99507028(93.4543%)
+Q30 bases: 93148193(87.4823%)
+
+Read2 before filtering:
+total reads: 851813
+total bases: 106476625
+Q20 bases: 94036939(88.317%)
+Q30 bases: 86769090(81.4912%)
+
+Read1 after filtering:
+total reads: 779708
+total bases: 94508395
+Q20 bases: 90247345(95.4914%)
+Q30 bases: 85375377(90.3363%)
+
+Read2 aftering filtering:
+total reads: 779708
+total bases: 94508395
+Q20 bases: 88142623(93.2643%)
+Q30 bases: 82138865(86.9117%)
+
+Filtering result:
+reads passed filter: 1559416
+reads failed due to low quality: 144154
+reads failed due to too many N: 56
+reads failed due to too short: 0
+reads with adapter trimmed: 140918
+bases trimmed due to adapters: 5962458
+
+Duplication rate: 0.71823%
+
+Insert size peak (evaluated by paired-end reads): 218
+
+JSON report: results/test_gtdb/fastp/AVC209.fastp.json
+HTML report: results/test_gtdb/fastp/AVC209.fastp.html
+
+fastp -i resources/test_data/reads/AVC209.R1.fastq.gz -I resources/test_data/reads/AVC209.R2.fastq.gz -o results/test_gtdb/fastp/AVC209.R1.fastq.gz -O results/test_gtdb/fastp/AVC209.R2.fastq.gz --thread 3 -j results/test_gtdb/fastp/AVC209.fastp.json -h results/test_gtdb/fastp/AVC209.fastp.html logs/test_gtdb/fastp/run/AVC209.log 
+fastp v0.20.1, time used: 9 seconds
+Read1 before filtering:
+total reads: 647410
+total bases: 80926250
+Q20 bases: 77669241(95.9753%)
+Q30 bases: 74167463(91.6482%)
+
+Read2 before filtering:
+total reads: 647410
+total bases: 80926250
+Q20 bases: 74972774(92.6433%)
+Q30 bases: 71316833(88.1257%)
+
+Read1 after filtering:
+total reads: 632693
+total bases: 62543697
+Q20 bases: 60796583(97.2066%)
+Q30 bases: 58424414(93.4138%)
+
+Read2 aftering filtering:
+total reads: 632693
+total bases: 62543697
+Q20 bases: 60505927(96.7418%)
+Q30 bases: 58110139(92.9113%)
+
+Filtering result:
+reads passed filter: 1265386
+reads failed due to low quality: 29388
+reads failed due to too many N: 46
+reads failed due to too short: 0
+reads with adapter trimmed: 849250
+bases trimmed due to adapters: 33407316
+
+Duplication rate: 3.28786%
+
+Insert size peak (evaluated by paired-end reads): 89
+
+JSON report: results/test_gtdb/fastp/AVC199.fastp.json
+HTML report: results/test_gtdb/fastp/AVC199.fastp.html
+
+fastp -i resources/test_data/reads/AVC199.R1.fastq.gz -I resources/test_data/reads/AVC199.R2.fastq.gz -o results/test_gtdb/fastp/AVC199.R1.fastq.gz -O results/test_gtdb/fastp/AVC199.R2.fastq.gz --thread 3 -j results/test_gtdb/fastp/AVC199.fastp.json -h results/test_gtdb/fastp/AVC199.fastp.html logs/test_gtdb/fastp/run/AVC199.log 
+fastp v0.20.1, time used: 10 seconds
+Read1 before filtering:
+total reads: 936975
+total bases: 117121875
+Q20 bases: 109967019(93.8911%)
+Q30 bases: 103354098(88.2449%)
+
+Read2 before filtering:
+total reads: 936975
+total bases: 117121875
+Q20 bases: 104470805(89.1984%)
+Q30 bases: 96887299(82.7235%)
+
+Read1 after filtering:
+total reads: 864669
+total bases: 105809124
+Q20 bases: 101329244(95.7661%)
+Q30 bases: 96167166(90.8874%)
+
+Read2 aftering filtering:
+total reads: 864669
+total bases: 105809124
+Q20 bases: 99151260(93.7077%)
+Q30 bases: 92791845(87.6974%)
+
+Filtering result:
+reads passed filter: 1729338
+reads failed due to low quality: 144542
+reads failed due to too many N: 70
+reads failed due to too short: 0
+reads with adapter trimmed: 109308
+bases trimmed due to adapters: 4590548
+
+Duplication rate: 0.772409%
+
+Insert size peak (evaluated by paired-end reads): 215
+
+JSON report: results/test_gtdb/fastp/AVC111.fastp.json
+HTML report: results/test_gtdb/fastp/AVC111.fastp.html
+
+fastp -i resources/test_data/reads/AVC111.R1.fastq.gz -I resources/test_data/reads/AVC111.R2.fastq.gz -o results/test_gtdb/fastp/AVC111.R1.fastq.gz -O results/test_gtdb/fastp/AVC111.R2.fastq.gz --thread 3 -j results/test_gtdb/fastp/AVC111.fastp.json -h results/test_gtdb/fastp/AVC111.fastp.html logs/test_gtdb/fastp/run/AVC111.log 
+fastp v0.20.1, time used: 11 seconds
+Read1 before filtering:
+total reads: 1177405
+total bases: 147175625
+Q20 bases: 138732860(94.2635%)
+Q30 bases: 130579963(88.7239%)
+
+Read2 before filtering:
+total reads: 1177405
+total bases: 147175625
+Q20 bases: 130825886(88.891%)
+Q30 bases: 120902797(82.1487%)
+
+Read1 after filtering:
+total reads: 1089962
+total bases: 130899153
+Q20 bases: 125727482(96.0491%)
+Q30 bases: 119542265(91.3239%)
+
+Read2 aftering filtering:
+total reads: 1089962
+total bases: 130899153
+Q20 bases: 122435532(93.5342%)
+Q30 bases: 114230833(87.2663%)
+
+Filtering result:
+reads passed filter: 2179924
+reads failed due to low quality: 174776
+reads failed due to too many N: 110
+reads failed due to too short: 0
+reads with adapter trimmed: 265114
+bases trimmed due to adapters: 10819186
+
+Duplication rate: 1.12326%
+
+Insert size peak (evaluated by paired-end reads): 219
+
+JSON report: results/test_gtdb/fastp/AVC10.fastp.json
+HTML report: results/test_gtdb/fastp/AVC10.fastp.html
+
+fastp -i resources/test_data/reads/AVC10.R1.fastq.gz -I resources/test_data/reads/AVC10.R2.fastq.gz -o results/test_gtdb/fastp/AVC10.R1.fastq.gz -O results/test_gtdb/fastp/AVC10.R2.fastq.gz --thread 3 -j results/test_gtdb/fastp/AVC10.fastp.json -h results/test_gtdb/fastp/AVC10.fastp.html logs/test_gtdb/fastp/run/AVC10.log 
+fastp v0.20.1, time used: 17 seconds

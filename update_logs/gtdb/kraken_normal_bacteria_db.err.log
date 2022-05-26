@@ -1,0 +1,173 @@
+nohup: ignoring input
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 50
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	5	bracken
+	1	run_bracken_summarise
+	5	run_fastp
+	5	run_kraken2
+	16
+Select jobs to execute...
+
+[Thu May 26 11:28:06 2022]
+rule run_fastp:
+    input: resources/test_data/reads/AVC2.R1.fastq.gz, resources/test_data/reads/AVC2.R2.fastq.gz
+    output: results/test_gtdb/fastp/AVC2.R1.fastq.gz, results/test_gtdb/fastp/AVC2.R2.fastq.gz, results/test_gtdb/fastp/AVC2.fastp.json, results/test_gtdb/fastp/AVC2.fastp.html
+    log: logs/test_gtdb/fastp/run/AVC2.log
+    jobid: 15
+    wildcards: prefix=test_gtdb, sample=AVC2
+    threads: 3
+
+
+            fastp -i resources/test_data/reads/AVC2.R1.fastq.gz -I resources/test_data/reads/AVC2.R2.fastq.gz -o results/test_gtdb/fastp/AVC2.R1.fastq.gz -O results/test_gtdb/fastp/AVC2.R2.fastq.gz --thread 3 -j results/test_gtdb/fastp/AVC2.fastp.json -h results/test_gtdb/fastp/AVC2.fastp.html 2>&1 logs/test_gtdb/fastp/run/AVC2.log
+            
+
+[Thu May 26 11:28:06 2022]
+rule run_fastp:
+    input: resources/test_data/reads/AVC111.R1.fastq.gz, resources/test_data/reads/AVC111.R2.fastq.gz
+    output: results/test_gtdb/fastp/AVC111.R1.fastq.gz, results/test_gtdb/fastp/AVC111.R2.fastq.gz, results/test_gtdb/fastp/AVC111.fastp.json, results/test_gtdb/fastp/AVC111.fastp.html
+    log: logs/test_gtdb/fastp/run/AVC111.log
+    jobid: 9
+    wildcards: prefix=test_gtdb, sample=AVC111
+    threads: 3
+
+
+            fastp -i resources/test_data/reads/AVC111.R1.fastq.gz -I resources/test_data/reads/AVC111.R2.fastq.gz -o results/test_gtdb/fastp/AVC111.R1.fastq.gz -O results/test_gtdb/fastp/AVC111.R2.fastq.gz --thread 3 -j results/test_gtdb/fastp/AVC111.fastp.json -h results/test_gtdb/fastp/AVC111.fastp.html 2>&1 logs/test_gtdb/fastp/run/AVC111.log
+            
+
+[Thu May 26 11:28:06 2022]
+rule run_fastp:
+    input: resources/test_data/reads/AVC199.R1.fastq.gz, resources/test_data/reads/AVC199.R2.fastq.gz
+    output: results/test_gtdb/fastp/AVC199.R1.fastq.gz, results/test_gtdb/fastp/AVC199.R2.fastq.gz, results/test_gtdb/fastp/AVC199.fastp.json, results/test_gtdb/fastp/AVC199.fastp.html
+    log: logs/test_gtdb/fastp/run/AVC199.log
+    jobid: 12
+    wildcards: prefix=test_gtdb, sample=AVC199
+    threads: 3
+
+
+            fastp -i resources/test_data/reads/AVC199.R1.fastq.gz -I resources/test_data/reads/AVC199.R2.fastq.gz -o results/test_gtdb/fastp/AVC199.R1.fastq.gz -O results/test_gtdb/fastp/AVC199.R2.fastq.gz --thread 3 -j results/test_gtdb/fastp/AVC199.fastp.json -h results/test_gtdb/fastp/AVC199.fastp.html 2>&1 logs/test_gtdb/fastp/run/AVC199.log
+            
+
+[Thu May 26 11:28:06 2022]
+rule run_fastp:
+    input: resources/test_data/reads/AVC209.R1.fastq.gz, resources/test_data/reads/AVC209.R2.fastq.gz
+    output: results/test_gtdb/fastp/AVC209.R1.fastq.gz, results/test_gtdb/fastp/AVC209.R2.fastq.gz, results/test_gtdb/fastp/AVC209.fastp.json, results/test_gtdb/fastp/AVC209.fastp.html
+    log: logs/test_gtdb/fastp/run/AVC209.log
+    jobid: 3
+    wildcards: prefix=test_gtdb, sample=AVC209
+    threads: 3
+
+
+            fastp -i resources/test_data/reads/AVC209.R1.fastq.gz -I resources/test_data/reads/AVC209.R2.fastq.gz -o results/test_gtdb/fastp/AVC209.R1.fastq.gz -O results/test_gtdb/fastp/AVC209.R2.fastq.gz --thread 3 -j results/test_gtdb/fastp/AVC209.fastp.json -h results/test_gtdb/fastp/AVC209.fastp.html 2>&1 logs/test_gtdb/fastp/run/AVC209.log
+            
+
+[Thu May 26 11:28:06 2022]
+rule run_fastp:
+    input: resources/test_data/reads/AVC10.R1.fastq.gz, resources/test_data/reads/AVC10.R2.fastq.gz
+    output: results/test_gtdb/fastp/AVC10.R1.fastq.gz, results/test_gtdb/fastp/AVC10.R2.fastq.gz, results/test_gtdb/fastp/AVC10.fastp.json, results/test_gtdb/fastp/AVC10.fastp.html
+    log: logs/test_gtdb/fastp/run/AVC10.log
+    jobid: 6
+    wildcards: prefix=test_gtdb, sample=AVC10
+    threads: 3
+
+
+            fastp -i resources/test_data/reads/AVC10.R1.fastq.gz -I resources/test_data/reads/AVC10.R2.fastq.gz -o results/test_gtdb/fastp/AVC10.R1.fastq.gz -O results/test_gtdb/fastp/AVC10.R2.fastq.gz --thread 3 -j results/test_gtdb/fastp/AVC10.fastp.json -h results/test_gtdb/fastp/AVC10.fastp.html 2>&1 logs/test_gtdb/fastp/run/AVC10.log
+            
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/cf61379a
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/cf61379a
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/cf61379a
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/cf61379a
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/cf61379a
+[Thu May 26 11:29:10 2022]
+Finished job 15.
+1 of 16 steps (6%) done
+Select jobs to execute...
+
+[Thu May 26 11:29:10 2022]
+rule run_kraken2:
+    input: /projects/AusGEM/databases/kraken2/bacteria, results/test_gtdb/fastp/AVC2.R1.fastq.gz, results/test_gtdb/fastp/AVC2.R2.fastq.gz
+    output: results/test_gtdb/QC_workflow/kraken2/AVC2.out, results/test_gtdb/QC_workflow/kraken2/AVC2.report
+    log: logs/test_gtdb/QC_workflow/kraken2/run/AVC2_err.log
+    jobid: 14
+    wildcards: prefix=test_gtdb, sample=AVC2
+    threads: 6
+
+
+            kraken2 --db /projects/AusGEM/databases/kraken2/bacteria --use-names --memory-mapping --threads 6 --report results/test_gtdb/QC_workflow/kraken2/AVC2.report --output results/test_gtdb/QC_workflow/kraken2/AVC2.out results/test_gtdb/fastp/AVC2.R1.fastq.gz results/test_gtdb/fastp/AVC2.R2.fastq.gz  2> logs/test_gtdb/QC_workflow/kraken2/run/AVC2_err.log
+            
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/a938ebb9
+[Thu May 26 11:29:12 2022]
+Finished job 3.
+2 of 16 steps (12%) done
+Select jobs to execute...
+
+[Thu May 26 11:29:12 2022]
+rule run_kraken2:
+    input: /projects/AusGEM/databases/kraken2/bacteria, results/test_gtdb/fastp/AVC209.R1.fastq.gz, results/test_gtdb/fastp/AVC209.R2.fastq.gz
+    output: results/test_gtdb/QC_workflow/kraken2/AVC209.out, results/test_gtdb/QC_workflow/kraken2/AVC209.report
+    log: logs/test_gtdb/QC_workflow/kraken2/run/AVC209_err.log
+    jobid: 2
+    wildcards: prefix=test_gtdb, sample=AVC209
+    threads: 6
+
+
+            kraken2 --db /projects/AusGEM/databases/kraken2/bacteria --use-names --memory-mapping --threads 6 --report results/test_gtdb/QC_workflow/kraken2/AVC209.report --output results/test_gtdb/QC_workflow/kraken2/AVC209.out results/test_gtdb/fastp/AVC209.R1.fastq.gz results/test_gtdb/fastp/AVC209.R2.fastq.gz  2> logs/test_gtdb/QC_workflow/kraken2/run/AVC209_err.log
+            
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/a938ebb9
+[Thu May 26 11:29:13 2022]
+Finished job 12.
+3 of 16 steps (19%) done
+Select jobs to execute...
+
+[Thu May 26 11:29:13 2022]
+rule run_kraken2:
+    input: /projects/AusGEM/databases/kraken2/bacteria, results/test_gtdb/fastp/AVC199.R1.fastq.gz, results/test_gtdb/fastp/AVC199.R2.fastq.gz
+    output: results/test_gtdb/QC_workflow/kraken2/AVC199.out, results/test_gtdb/QC_workflow/kraken2/AVC199.report
+    log: logs/test_gtdb/QC_workflow/kraken2/run/AVC199_err.log
+    jobid: 11
+    wildcards: prefix=test_gtdb, sample=AVC199
+    threads: 6
+
+
+            kraken2 --db /projects/AusGEM/databases/kraken2/bacteria --use-names --memory-mapping --threads 6 --report results/test_gtdb/QC_workflow/kraken2/AVC199.report --output results/test_gtdb/QC_workflow/kraken2/AVC199.out results/test_gtdb/fastp/AVC199.R1.fastq.gz results/test_gtdb/fastp/AVC199.R2.fastq.gz  2> logs/test_gtdb/QC_workflow/kraken2/run/AVC199_err.log
+            
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/a938ebb9
+[Thu May 26 11:29:14 2022]
+Finished job 9.
+4 of 16 steps (25%) done
+Select jobs to execute...
+
+[Thu May 26 11:29:14 2022]
+rule run_kraken2:
+    input: /projects/AusGEM/databases/kraken2/bacteria, results/test_gtdb/fastp/AVC111.R1.fastq.gz, results/test_gtdb/fastp/AVC111.R2.fastq.gz
+    output: results/test_gtdb/QC_workflow/kraken2/AVC111.out, results/test_gtdb/QC_workflow/kraken2/AVC111.report
+    log: logs/test_gtdb/QC_workflow/kraken2/run/AVC111_err.log
+    jobid: 8
+    wildcards: prefix=test_gtdb, sample=AVC111
+    threads: 6
+
+
+            kraken2 --db /projects/AusGEM/databases/kraken2/bacteria --use-names --memory-mapping --threads 6 --report results/test_gtdb/QC_workflow/kraken2/AVC111.report --output results/test_gtdb/QC_workflow/kraken2/AVC111.out results/test_gtdb/fastp/AVC111.R1.fastq.gz results/test_gtdb/fastp/AVC111.R2.fastq.gz  2> logs/test_gtdb/QC_workflow/kraken2/run/AVC111_err.log
+            
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/a938ebb9
+[Thu May 26 11:29:20 2022]
+Finished job 6.
+5 of 16 steps (31%) done
+Select jobs to execute...
+
+[Thu May 26 11:29:20 2022]
+rule run_kraken2:
+    input: /projects/AusGEM/databases/kraken2/bacteria, results/test_gtdb/fastp/AVC10.R1.fastq.gz, results/test_gtdb/fastp/AVC10.R2.fastq.gz
+    output: results/test_gtdb/QC_workflow/kraken2/AVC10.out, results/test_gtdb/QC_workflow/kraken2/AVC10.report
+    log: logs/test_gtdb/QC_workflow/kraken2/run/AVC10_err.log
+    jobid: 5
+    wildcards: prefix=test_gtdb, sample=AVC10
+    threads: 6
+
+
+            kraken2 --db /projects/AusGEM/databases/kraken2/bacteria --use-names --memory-mapping --threads 6 --report results/test_gtdb/QC_workflow/kraken2/AVC10.report --output results/test_gtdb/QC_workflow/kraken2/AVC10.out results/test_gtdb/fastp/AVC10.R1.fastq.gz results/test_gtdb/fastp/AVC10.R2.fastq.gz  2> logs/test_gtdb/QC_workflow/kraken2/run/AVC10_err.log
+            
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/a938ebb9
