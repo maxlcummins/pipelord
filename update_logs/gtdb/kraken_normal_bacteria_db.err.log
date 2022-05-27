@@ -1,4 +1,3 @@
-nohup: ignoring input
 Building DAG of jobs...
 Using shell: /usr/bin/bash
 Provided cores: 50
@@ -171,3 +170,114 @@ rule run_kraken2:
             kraken2 --db /projects/AusGEM/databases/kraken2/bacteria --use-names --memory-mapping --threads 6 --report results/test_gtdb/QC_workflow/kraken2/AVC10.report --output results/test_gtdb/QC_workflow/kraken2/AVC10.out results/test_gtdb/fastp/AVC10.R1.fastq.gz results/test_gtdb/fastp/AVC10.R2.fastq.gz  2> logs/test_gtdb/QC_workflow/kraken2/run/AVC10_err.log
             
 Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/a938ebb9
+[Thu May 26 13:22:03 2022]
+Finished job 11.
+6 of 16 steps (38%) done
+Select jobs to execute...
+
+[Thu May 26 13:22:03 2022]
+rule bracken:
+    input: results/test_gtdb/QC_workflow/kraken2/AVC199.report
+    output: results/test_gtdb/QC_workflow/bracken/AVC199.bracken.txt, results/test_gtdb/QC_workflow/bracken/AVC199_bracken_species_report.txt
+    log: logs/test_gtdb/QC_workflow/bracken/AVC199.bracken.log
+    jobid: 10
+    wildcards: prefix=test_gtdb, sample=AVC199
+    threads: 4
+
+resources/tools/Bracken/bracken -d /projects/AusGEM/databases/kraken2/bacteria -i results/test_gtdb/QC_workflow/kraken2/AVC199.report -o results/test_gtdb/QC_workflow/bracken/AVC199.bracken.txt -w results/test_gtdb/QC_workflow/bracken/AVC199_bracken_species_report.txt -r 100 -l S -t 4 2>&1 logs/test_gtdb/QC_workflow/bracken/AVC199.bracken.log
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/a938ebb9
+[Thu May 26 13:22:06 2022]
+Finished job 14.
+7 of 16 steps (44%) done
+Select jobs to execute...
+
+[Thu May 26 13:22:06 2022]
+rule bracken:
+    input: results/test_gtdb/QC_workflow/kraken2/AVC2.report
+    output: results/test_gtdb/QC_workflow/bracken/AVC2.bracken.txt, results/test_gtdb/QC_workflow/bracken/AVC2_bracken_species_report.txt
+    log: logs/test_gtdb/QC_workflow/bracken/AVC2.bracken.log
+    jobid: 13
+    wildcards: prefix=test_gtdb, sample=AVC2
+    threads: 4
+
+resources/tools/Bracken/bracken -d /projects/AusGEM/databases/kraken2/bacteria -i results/test_gtdb/QC_workflow/kraken2/AVC2.report -o results/test_gtdb/QC_workflow/bracken/AVC2.bracken.txt -w results/test_gtdb/QC_workflow/bracken/AVC2_bracken_species_report.txt -r 100 -l S -t 4 2>&1 logs/test_gtdb/QC_workflow/bracken/AVC2.bracken.log
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/a938ebb9
+[Thu May 26 13:22:08 2022]
+Finished job 8.
+8 of 16 steps (50%) done
+Select jobs to execute...
+
+[Thu May 26 13:22:08 2022]
+rule bracken:
+    input: results/test_gtdb/QC_workflow/kraken2/AVC111.report
+    output: results/test_gtdb/QC_workflow/bracken/AVC111.bracken.txt, results/test_gtdb/QC_workflow/bracken/AVC111_bracken_species_report.txt
+    log: logs/test_gtdb/QC_workflow/bracken/AVC111.bracken.log
+    jobid: 7
+    wildcards: prefix=test_gtdb, sample=AVC111
+    threads: 4
+
+resources/tools/Bracken/bracken -d /projects/AusGEM/databases/kraken2/bacteria -i results/test_gtdb/QC_workflow/kraken2/AVC111.report -o results/test_gtdb/QC_workflow/bracken/AVC111.bracken.txt -w results/test_gtdb/QC_workflow/bracken/AVC111_bracken_species_report.txt -r 100 -l S -t 4 2>&1 logs/test_gtdb/QC_workflow/bracken/AVC111.bracken.log
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/a938ebb9
+[Thu May 26 13:22:08 2022]
+Finished job 2.
+9 of 16 steps (56%) done
+Select jobs to execute...
+
+[Thu May 26 13:22:08 2022]
+rule bracken:
+    input: results/test_gtdb/QC_workflow/kraken2/AVC209.report
+    output: results/test_gtdb/QC_workflow/bracken/AVC209.bracken.txt, results/test_gtdb/QC_workflow/bracken/AVC209_bracken_species_report.txt
+    log: logs/test_gtdb/QC_workflow/bracken/AVC209.bracken.log
+    jobid: 1
+    wildcards: prefix=test_gtdb, sample=AVC209
+    threads: 4
+
+resources/tools/Bracken/bracken -d /projects/AusGEM/databases/kraken2/bacteria -i results/test_gtdb/QC_workflow/kraken2/AVC209.report -o results/test_gtdb/QC_workflow/bracken/AVC209.bracken.txt -w results/test_gtdb/QC_workflow/bracken/AVC209_bracken_species_report.txt -r 100 -l S -t 4 2>&1 logs/test_gtdb/QC_workflow/bracken/AVC209.bracken.log
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/a938ebb9
+[Thu May 26 13:22:10 2022]
+Finished job 10.
+10 of 16 steps (62%) done
+[Thu May 26 13:22:10 2022]
+Finished job 13.
+11 of 16 steps (69%) done
+[Thu May 26 13:22:10 2022]
+Finished job 7.
+12 of 16 steps (75%) done
+[Thu May 26 13:22:10 2022]
+Finished job 1.
+13 of 16 steps (81%) done
+[Thu May 26 13:22:10 2022]
+Finished job 5.
+14 of 16 steps (88%) done
+Select jobs to execute...
+
+[Thu May 26 13:22:10 2022]
+rule bracken:
+    input: results/test_gtdb/QC_workflow/kraken2/AVC10.report
+    output: results/test_gtdb/QC_workflow/bracken/AVC10.bracken.txt, results/test_gtdb/QC_workflow/bracken/AVC10_bracken_species_report.txt
+    log: logs/test_gtdb/QC_workflow/bracken/AVC10.bracken.log
+    jobid: 4
+    wildcards: prefix=test_gtdb, sample=AVC10
+    threads: 4
+
+resources/tools/Bracken/bracken -d /projects/AusGEM/databases/kraken2/bacteria -i results/test_gtdb/QC_workflow/kraken2/AVC10.report -o results/test_gtdb/QC_workflow/bracken/AVC10.bracken.txt -w results/test_gtdb/QC_workflow/bracken/AVC10_bracken_species_report.txt -r 100 -l S -t 4 2>&1 logs/test_gtdb/QC_workflow/bracken/AVC10.bracken.log
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/a938ebb9
+[Thu May 26 13:22:12 2022]
+Finished job 4.
+15 of 16 steps (94%) done
+Select jobs to execute...
+
+[Thu May 26 13:22:12 2022]
+rule run_bracken_summarise:
+    input: results/test_gtdb/QC_workflow/bracken/AVC209.bracken.txt, results/test_gtdb/QC_workflow/bracken/AVC10.bracken.txt, results/test_gtdb/QC_workflow/bracken/AVC111.bracken.txt, results/test_gtdb/QC_workflow/bracken/AVC199.bracken.txt, results/test_gtdb/QC_workflow/bracken/AVC2.bracken.txt
+    output: results/test/QC_workflow/summaries/bracken_report.txt
+    log: logs/test/QC_workflow/summaries/combine_bracken.log
+    jobid: 0
+    wildcards: prefix=test
+
+/home/malcummi/Data/miniconda3/envs/snakemake/bin/python3.9 /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/scripts/tmpg404mw9f.combine_bracken.py
+[Thu May 26 13:22:29 2022]
+Finished job 0.
+16 of 16 steps (100%) done
+Complete log: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/log/2022-05-26T112803.321652.snakemake.log
+echo Your Snakemake job with prefix 'test_gtdb' has finished. It has been written to 'results/test_gtdb/summaries/' | mail -s 'Snakemake job has finished' None
