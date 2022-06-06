@@ -33,6 +33,7 @@ genotype_modules:
   run_genome_assembly: Yes
   run_assembly_stats: Yes
   run_abricate: Yes
+  run_abritamr: Yes
   run_abricate_plasmid: Yes
   run_pointfinder: Yes
   run_kraken2_and_bracken: Yes
@@ -61,6 +62,13 @@ qc_modules:
 # #E. coli
 pointfinder_species: "-s escherichia_coli"
 #pointfinder_species: "-s salmonella"
+
+### abritamr config
+#Options:
+#Acinetobacter_baumannii,Campylobacter,Enterococcus_faecalis,Enterococcus_faecium
+#Escherichia,Klebsiella,Salmonella,Staphylococcus_aureus,Staphylococcus_pseudintermedius
+#Streptococcus_agalactiae,Streptococcus_pneumoniae,Streptococcus_pyogenes,Vibrio_cholerae
+abritamr_species: "Escherichia"
 
 ### Kraken2lord
 krakendb: /projects/AusGEM/databases/kraken2/bacteria

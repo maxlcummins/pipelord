@@ -1,0 +1,60 @@
+nohup: ignoring input
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	run_abritamr
+	1
+Select jobs to execute...
+
+[Tue May 31 12:35:20 2022]
+rule run_abritamr:
+    input: results/test/abritamr/fofns/full_fofn.txt, results/test/abritamr/dummy_out.txt
+    output: results/test/abritamr/summary_matches.txt, results/test/abritamr/summary_partials.txt, results/test/abritamr/summary_virulence.txt
+    log: logs/test/summaries/combine_abritamr.log
+    jobid: 0
+    wildcards: prefix=test
+    threads: 16
+
+
+        abritamr run --prefix results/test/abritamr --contigs results/test/abritamr/fofns/full_fofn.txt  --jobs 16 --species Escherichia
+        mv summary_matches.txt results/test/abritamr/summary_matches.txt
+        mv summary_partials.txt results/test/abritamr/summary_partials.txt
+        mv summary_virulence.txt results/test/abritamr/summary_virulence.txt
+        
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/27553335
+[38;21m[INFO:05/31/2022 12:35:24 PM] The input file seems to be in the correct format. Thank you.[0m
+[38;21m[INFO:05/31/2022 12:35:24 PM] Checking that the input data is present.[0m
+[38;21m[INFO:05/31/2022 12:35:24 PM] Checking if file results/test/shovill/assemblies/AVC209.fasta exists[0m
+[38;21m[INFO:05/31/2022 12:35:24 PM] Checking if file results/test/shovill/assemblies/AVC10.fasta exists[0m
+[38;21m[INFO:05/31/2022 12:35:24 PM] Checking if file results/test/shovill/assemblies/AVC111.fasta exists[0m
+[38;21m[INFO:05/31/2022 12:35:24 PM] Checking if file results/test/shovill/assemblies/AVC199.fasta exists[0m
+[38;21m[INFO:05/31/2022 12:35:24 PM] Checking if file results/test/shovill/assemblies/AVC2.fasta exists[0m
+[38;21m[INFO:05/31/2022 12:35:24 PM] Now checking AMRfinder setup.[0m
+[38;21m[INFO:05/31/2022 12:35:24 PM] All check complete now running AMRFinder[0m
+[38;21m[INFO:05/31/2022 12:35:24 PM] You are running abritamr in batch mode. Now executing : parallel -j 16 --colsep '\t' 'mkdir -p {1} && amrfinder -n {2} -o {1}/amrfinder.out --plus --organism Escherichia --threads 1' :::: results/test/abritamr/fofns/full_fofn.txt[0m
+[38;21m[INFO:05/31/2022 12:39:44 PM] AMRfinder completed successfully. Will now move on to collation.[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] You are running abritamr in batch mode. Your collated results will be saved.[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Collating results for AVC209[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Opened amrfinder output for AVC209[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Collating results for AVC10[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Opened amrfinder output for AVC10[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Collating results for AVC111[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Opened amrfinder output for AVC111[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Collating results for AVC199[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Opened amrfinder output for AVC199[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Collating results for AVC2[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Opened amrfinder output for AVC2[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Saving files now.[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Saving summary_matches.txt[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Saving summary_partials.txt[0m
+[38;21m[INFO:05/31/2022 12:39:45 PM] Saving summary_virulence.txt[0m
+Removing temporary output file results/test/abritamr/fofns/full_fofn.txt.
+Removing temporary output file results/test/abritamr/dummy_out.txt.
+[Tue May 31 12:39:45 2022]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/log/2022-05-31T123518.932022.snakemake.log
+echo Your Snakemake job with prefix 'test' has finished. It has been written to 'results/test/summaries/' | mail -s 'Snakemake job has finished' None
