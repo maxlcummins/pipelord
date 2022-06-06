@@ -80,6 +80,7 @@ rule all:
         expand(config["outdir"]+"/{prefix}/dfast/gffs/{sample}.gff",sample=sample_ids,prefix=prefix) if config["genotype_modules"]['genome_annotater'] == "dfast" else [],
         expand(config["outdir"]+"/{prefix}/prokka/gffs/{sample}.gff",sample=sample_ids,prefix=prefix) if config["genotype_modules"]['genome_annotater'] == "prokka" else [],
         expand(config["outdir"]+"/{prefix}/abricate_plasmids/{plasmid_screen_db}/{sample}.tab",sample=sample_ids, plasmid_screen_db=plasmid_screen_db,prefix=prefix) if config["genotype_modules"]["run_abricate_plasmid"] else [],
+        expand(config["outdir"]+"/{prefix}/summaries/abritamr_summary_matches.txt", prefix=prefix) if config["genotype_modules"]["run_abricate_plasmid"] else [],
         "resources/dbs/dfast" if config["genotype_modules"]['genome_annotater'] == "dfast" and path.exists("resources/dbs/dfast") == False else [],
 
 
@@ -127,4 +128,6 @@ if config["genotype_modules"]["run_spifinder"]:
     include: "rules/spifinder.smk"
 if config["genotype_modules"]["run_summarise"]:
     include: "rules/summarise.smk"
+if config["genotype_modules"]["run_abritamr"]:
+    include: "rules/abritamr.smk"
 

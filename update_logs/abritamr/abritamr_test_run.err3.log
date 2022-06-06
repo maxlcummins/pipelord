@@ -1,0 +1,119 @@
+nohup: ignoring input
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	abritamr_fofn
+	5	abritamr_single_fofn
+	6
+Select jobs to execute...
+
+[Mon Jun  6 12:22:56 2022]
+rule abritamr_single_fofn:
+    input: results/test/shovill/assemblies/AVC209.fasta
+    output: results/test/abritamr/fofns/separate/AVC209_fofn.txt
+    jobid: 1
+    wildcards: prefix=test, sample=AVC209
+
+
+        sample_name=$(basename results/test/shovill/assemblies/AVC209.fasta | sed 's/\.fasta//')
+        sample_path=$(realpath --relative-to="." results/test/shovill/assemblies/AVC209.fasta)
+        echo -e results/test/abritamr/${sample_name}'	'${sample_path} >> results/test/abritamr/fofns/separate/AVC209_fofn.txt
+        
+
+[Mon Jun  6 12:22:56 2022]
+rule abritamr_single_fofn:
+    input: results/test/shovill/assemblies/AVC199.fasta
+    output: results/test/abritamr/fofns/separate/AVC199_fofn.txt
+    jobid: 10
+    wildcards: prefix=test, sample=AVC199
+
+
+        sample_name=$(basename results/test/shovill/assemblies/AVC199.fasta | sed 's/\.fasta//')
+        sample_path=$(realpath --relative-to="." results/test/shovill/assemblies/AVC199.fasta)
+        echo -e results/test/abritamr/${sample_name}'	'${sample_path} >> results/test/abritamr/fofns/separate/AVC199_fofn.txt
+        
+
+[Mon Jun  6 12:22:56 2022]
+rule abritamr_single_fofn:
+    input: results/test/shovill/assemblies/AVC111.fasta
+    output: results/test/abritamr/fofns/separate/AVC111_fofn.txt
+    jobid: 7
+    wildcards: prefix=test, sample=AVC111
+
+
+        sample_name=$(basename results/test/shovill/assemblies/AVC111.fasta | sed 's/\.fasta//')
+        sample_path=$(realpath --relative-to="." results/test/shovill/assemblies/AVC111.fasta)
+        echo -e results/test/abritamr/${sample_name}'	'${sample_path} >> results/test/abritamr/fofns/separate/AVC111_fofn.txt
+        
+
+[Mon Jun  6 12:22:56 2022]
+rule abritamr_single_fofn:
+    input: results/test/shovill/assemblies/AVC2.fasta
+    output: results/test/abritamr/fofns/separate/AVC2_fofn.txt
+    jobid: 13
+    wildcards: prefix=test, sample=AVC2
+
+
+        sample_name=$(basename results/test/shovill/assemblies/AVC2.fasta | sed 's/\.fasta//')
+        sample_path=$(realpath --relative-to="." results/test/shovill/assemblies/AVC2.fasta)
+        echo -e results/test/abritamr/${sample_name}'	'${sample_path} >> results/test/abritamr/fofns/separate/AVC2_fofn.txt
+        
+
+[Mon Jun  6 12:22:56 2022]
+rule abritamr_single_fofn:
+    input: results/test/shovill/assemblies/AVC10.fasta
+    output: results/test/abritamr/fofns/separate/AVC10_fofn.txt
+    jobid: 4
+    wildcards: prefix=test, sample=AVC10
+
+
+        sample_name=$(basename results/test/shovill/assemblies/AVC10.fasta | sed 's/\.fasta//')
+        sample_path=$(realpath --relative-to="." results/test/shovill/assemblies/AVC10.fasta)
+        echo -e results/test/abritamr/${sample_name}'	'${sample_path} >> results/test/abritamr/fofns/separate/AVC10_fofn.txt
+        
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/27553335
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/27553335
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/27553335
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/27553335
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/27553335
+[Mon Jun  6 12:22:57 2022]
+Finished job 1.
+1 of 6 steps (17%) done
+[Mon Jun  6 12:22:57 2022]
+Finished job 4.
+2 of 6 steps (33%) done
+[Mon Jun  6 12:22:57 2022]
+Finished job 10.
+3 of 6 steps (50%) done
+[Mon Jun  6 12:22:57 2022]
+Finished job 13.
+4 of 6 steps (67%) done
+[Mon Jun  6 12:22:57 2022]
+Finished job 7.
+5 of 6 steps (83%) done
+Select jobs to execute...
+
+[Mon Jun  6 12:22:57 2022]
+rule abritamr_fofn:
+    input: results/test/abritamr/fofns/separate/AVC209_fofn.txt, results/test/abritamr/fofns/separate/AVC10_fofn.txt, results/test/abritamr/fofns/separate/AVC111_fofn.txt, results/test/abritamr/fofns/separate/AVC199_fofn.txt, results/test/abritamr/fofns/separate/AVC2_fofn.txt
+    output: results/test/abritamr/fofns/full_fofn.txt
+    jobid: 0
+    wildcards: prefix=test
+
+
+        cat results/test/abritamr/fofns/separate/AVC209_fofn.txt results/test/abritamr/fofns/separate/AVC10_fofn.txt results/test/abritamr/fofns/separate/AVC111_fofn.txt results/test/abritamr/fofns/separate/AVC199_fofn.txt results/test/abritamr/fofns/separate/AVC2_fofn.txt > results/test/abritamr/fofns/full_fofn.txt
+        
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/27553335
+Removing temporary output file results/test/abritamr/fofns/separate/AVC209_fofn.txt.
+Removing temporary output file results/test/abritamr/fofns/separate/AVC10_fofn.txt.
+Removing temporary output file results/test/abritamr/fofns/separate/AVC111_fofn.txt.
+Removing temporary output file results/test/abritamr/fofns/separate/AVC199_fofn.txt.
+Removing temporary output file results/test/abritamr/fofns/separate/AVC2_fofn.txt.
+[Mon Jun  6 12:22:58 2022]
+Finished job 0.
+6 of 6 steps (100%) done
+Complete log: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/log/2022-06-06T122256.044184.snakemake.log
+echo Your Snakemake job with prefix 'test' has finished. It has been written to 'results/test/summaries/' | mail -s 'Snakemake job has finished' None
