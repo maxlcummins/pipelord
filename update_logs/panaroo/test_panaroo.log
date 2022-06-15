@@ -1,0 +1,572 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	iqtree_snp_sites
+	1	snp_dists_full
+	1	snp_dists_snp_sites
+	1	snp_sites
+	5
+Select jobs to execute...
+
+[Thu Jun  9 11:38:56 2022]
+rule snp_sites:
+    input: results/test/panaroo/test1
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log
+    jobid: 4
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+
+[Thu Jun  9 11:38:56 2022]
+rule snp_dists_full:
+    input: results/test/panaroo/test1
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    jobid: 10
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+This is snp-dists 0.6.3
+ERROR: Could not open filename 'results/test/panaroo/test1/core_gene_alignment.aln'
+ERROR: cannot access input alignment file 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:57 2022]
+[Thu Jun  9 11:38:57 2022]
+Error in rule snp_sites:
+Error in rule snp_dists_full:
+    jobid: 4
+    jobid: 10
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    log: logs/test/panaroo/logs/test1/snp_sites.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+    shell:
+        snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    shell:
+        snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+
+Removing output files of failed job snp_dists_full since they might be corrupted:
+results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Trying to restart job 10.
+Removing output files of failed job snp_sites since they might be corrupted:
+results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Trying to restart job 4.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:57 2022]
+rule snp_sites:
+    input: results/test/panaroo/test1
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log
+    jobid: 4
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+
+[Thu Jun  9 11:38:57 2022]
+rule snp_dists_full:
+    input: results/test/panaroo/test1
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    jobid: 10
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+ERROR: cannot access input alignment file 'results/test/panaroo/test1/core_gene_alignment.aln'
+This is snp-dists 0.6.3
+ERROR: Could not open filename 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:57 2022]
+[Thu Jun  9 11:38:57 2022]
+Error in rule snp_sites:
+Error in rule snp_dists_full:
+    jobid: 4
+    jobid: 10
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    log: logs/test/panaroo/logs/test1/snp_sites.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+    shell:
+        snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+    shell:
+        snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+
+Removing output files of failed job snp_dists_full since they might be corrupted:
+results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Trying to restart job 10.
+Removing output files of failed job snp_sites since they might be corrupted:
+results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Trying to restart job 4.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:57 2022]
+rule snp_sites:
+    input: results/test/panaroo/test1
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log
+    jobid: 4
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+
+[Thu Jun  9 11:38:57 2022]
+rule snp_dists_full:
+    input: results/test/panaroo/test1
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    jobid: 10
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+ERROR: cannot access input alignment file 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:57 2022]
+Error in rule snp_sites:
+    jobid: 4
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+    shell:
+        snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_sites since they might be corrupted:
+results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Trying to restart job 4.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:57 2022]
+rule snp_sites:
+    input: results/test/panaroo/test1
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log
+    jobid: 4
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+This is snp-dists 0.6.3
+ERROR: Could not open filename 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:57 2022]
+Error in rule snp_dists_full:
+    jobid: 10
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+    shell:
+        snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_dists_full since they might be corrupted:
+results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+Trying to restart job 10.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:57 2022]
+rule snp_dists_full:
+    input: results/test/panaroo/test1
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    jobid: 10
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+ERROR: cannot access input alignment file 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:57 2022]
+Error in rule snp_sites:
+    jobid: 4
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+    shell:
+        snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_sites since they might be corrupted:
+results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Trying to restart job 4.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_sites:
+    input: results/test/panaroo/test1
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log
+    jobid: 4
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+This is snp-dists 0.6.3
+ERROR: Could not open filename 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_dists_full:
+    jobid: 10
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+    shell:
+        snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_dists_full since they might be corrupted:
+results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Trying to restart job 10.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_dists_full:
+    input: results/test/panaroo/test1
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    jobid: 10
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+ERROR: cannot access input alignment file 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_sites:
+    jobid: 4
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+    shell:
+        snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_sites since they might be corrupted:
+results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Trying to restart job 4.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_sites:
+    input: results/test/panaroo/test1
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log
+    jobid: 4
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+This is snp-dists 0.6.3
+ERROR: Could not open filename 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_dists_full:
+    jobid: 10
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+    shell:
+        snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_dists_full since they might be corrupted:
+results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+Trying to restart job 10.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_dists_full:
+    input: results/test/panaroo/test1
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    jobid: 10
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+ERROR: cannot access input alignment file 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_sites:
+    jobid: 4
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+    shell:
+        snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_sites since they might be corrupted:
+results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Trying to restart job 4.
+Select jobs to execute...
+This is snp-dists 0.6.3
+ERROR: Could not open filename 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_dists_full:
+    jobid: 10
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+    shell:
+        snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_dists_full since they might be corrupted:
+results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Trying to restart job 10.
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_sites:
+    input: results/test/panaroo/test1
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log
+    jobid: 4
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Select jobs to execute...
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_dists_full:
+    input: results/test/panaroo/test1
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    jobid: 10
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+ERROR: cannot access input alignment file 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_sites:
+    jobid: 4
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+    shell:
+        snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_sites since they might be corrupted:
+results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Trying to restart job 4.
+Select jobs to execute...
+This is snp-dists 0.6.3
+ERROR: Could not open filename 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_dists_full:
+    jobid: 10
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+    shell:
+        snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_dists_full since they might be corrupted:
+results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Trying to restart job 10.
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_sites:
+    input: results/test/panaroo/test1
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log
+    jobid: 4
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Select jobs to execute...
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_dists_full:
+    input: results/test/panaroo/test1
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    jobid: 10
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+ERROR: cannot access input alignment file 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_sites:
+    jobid: 4
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+    shell:
+        snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_sites since they might be corrupted:
+results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Trying to restart job 4.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_sites:
+    input: results/test/panaroo/test1
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log
+    jobid: 4
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+This is snp-dists 0.6.3
+ERROR: Could not open filename 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_dists_full:
+    jobid: 10
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+    shell:
+        snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_dists_full since they might be corrupted:
+results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+Trying to restart job 10.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_dists_full:
+    input: results/test/panaroo/test1
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    jobid: 10
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+ERROR: cannot access input alignment file 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_sites:
+    jobid: 4
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+    shell:
+        snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_sites since they might be corrupted:
+results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Trying to restart job 4.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_sites:
+    input: results/test/panaroo/test1
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log
+    jobid: 4
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+This is snp-dists 0.6.3
+ERROR: Could not open filename 'results/test/panaroo/test1/core_gene_alignment.aln'
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_dists_full:
+    jobid: 10
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+    shell:
+        snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_dists_full since they might be corrupted:
+results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Trying to restart job 10.
+Select jobs to execute...
+
+[Thu Jun  9 11:38:58 2022]
+rule snp_dists_full:
+    input: results/test/panaroo/test1
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    jobid: 10
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+ERROR: cannot access input alignment file 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:58 2022]
+Error in rule snp_sites:
+    jobid: 4
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+    shell:
+        snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_sites since they might be corrupted:
+results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Trying to restart job 4.
+Select jobs to execute...
+This is snp-dists 0.6.3
+ERROR: Could not open filename 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:59 2022]
+Error in rule snp_dists_full:
+    jobid: 10
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+    shell:
+        snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_dists_full since they might be corrupted:
+results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Trying to restart job 10.
+
+[Thu Jun  9 11:38:59 2022]
+rule snp_sites:
+    input: results/test/panaroo/test1
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log
+    jobid: 4
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+Select jobs to execute...
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+
+[Thu Jun  9 11:38:59 2022]
+rule snp_dists_full:
+    input: results/test/panaroo/test1
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    jobid: 10
+    wildcards: prefix=test, subset_prefix=test1
+
+snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+ERROR: cannot access input alignment file 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:59 2022]
+Error in rule snp_sites:
+    jobid: 4
+    output: results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+    log: logs/test/panaroo/logs/test1/snp_sites.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/80cbf271
+    shell:
+        snp-sites -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_sites since they might be corrupted:
+results/test/snp_sites/test1/core_gene_alignment_snp_sites.aln
+This is snp-dists 0.6.3
+ERROR: Could not open filename 'results/test/panaroo/test1/core_gene_alignment.aln'
+[Thu Jun  9 11:38:59 2022]
+Error in rule snp_dists_full:
+    jobid: 10
+    output: results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/c803a6ab
+    shell:
+        snp-dists -c results/test/panaroo/test1/core_gene_alignment.aln > results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job snp_dists_full since they might be corrupted:
+results/test/snp_dists/test1/CGA_full_pairwise_snps_counts.csv
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+echo Your Snakemake job with prefix 'test' has failed. | mail -s 'Snakemake job has failed' None
+Complete log: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/log/2022-06-09T113855.514384.snakemake.log

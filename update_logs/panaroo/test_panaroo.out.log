@@ -1,0 +1,368 @@
+pre-processing gff3 files...
+Error reading prokka input!
+pre-processing gff3 files...
+================================================================
+Program: CD-HIT, V4.8.1 (+OpenMP), Feb 22 2022, 21:26:56
+Command: cd-hit -T 8 -i
+         results/test/panaroo/test2/combined_protein_CDS.fasta
+         -o
+         results/test/panaroo/test2/combined_protein_cdhit_out.txt
+         -c 0.98 -s 0.98 -aL 0.0 -AL 99999999 -aS 0.0 -AS
+         99999999 -M 0 -d 999 -g 1 -n 2
+
+Started: Thu Jun  9 11:44:04 2022
+================================================================
+                            Output                              
+----------------------------------------------------------------
+Your word length is 2, using 5 may be faster!
+total seq: 19975
+longest and shortest : 6925 and 29
+Total letters: 6195045
+Sequences have been sorted
+
+Approximated minimal memory consumption:
+Sequence        : 8M
+Buffer          : 8 X 12M = 97M
+Table           : 2 X 0M = 0M
+Miscellaneous   : 0M
+Total           : 107M
+
+Table limit with the given memory limit:
+Max number of representatives: 957106
+Max number of word counting entries: 59810200
+
+# comparing sequences from          0  to       1997
+.---------- new table with      895 representatives
+# comparing sequences from       1997  to       3794
+.....................----------   1549 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       2245  to       4018
+....................----------   1543 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       2475  to       4225
+....................----------   1488 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       2737  to       4460
+....................----------   1481 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       2979  to       4678
+.....................----------   1453 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       3225  to       4900
+....................----------   1425 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       3475  to       5125
+....................----------   1389 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       3736  to       5359
+....................----------   1365 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       3994  to       5592
+.....................----------   1348 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       4244  to       5817
+....................----------   1325 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       4492  to       6040
+....................----------   1302 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       4738  to       6261
+....................----------   1275 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       4986  to       6484
+.....................----------   1270 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       5214  to       6690
+....................----------   1245 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       5445  to       6898
+....................----------   1230 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       5668  to       7098
+....................----------   1221 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       5877  to       7286
+.....................----------   1188 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       6098  to       7485
+...................----------   1156 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       6329  to       7693
+....................----------   1157 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       6536  to       7879
+...................----------   1095 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       6784  to       8103
+.....................----------   1095 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       7008  to       8304
+....................----------   1051 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       7253  to       8525
+....................----------   1023 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       7502  to       8749
+...................----------   1039 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       7710  to       8936
+....................----------    983 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       7953  to       9155
+.....................----------    931 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       8224  to       9399
+....................----------    938 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       8461  to       9612
+....................----------    910 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       8702  to       9829
+....................----------    920 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       8909  to      10015
+....................----------    894 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       9121  to      10206
+....................----------    854 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       9352  to      10414
+...................----------    832 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       9582  to      10621
+....................----------    806 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       9815  to      10831
+...............................    10000  finished       4274  clusters
+----------    779 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      10052  to      11044
+...................----------    759 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      10285  to      11254
+....................----------    744 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      10510  to      11456
+....................----------    717 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      10739  to      11662
+....................----------    714 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      10948  to      11850
+.....................----------    678 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      11172  to      12052
+...................----------    648 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      11404  to      12261
+....................----------    657 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      11604  to      12441
+....................----------    623 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      11818  to      12633
+.....................----------    629 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      12004  to      12801
+....................----------    573 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      12228  to      13002
+....................----------    543 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      12459  to      13210
+....................----------    537 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      12673  to      13403
+....................----------    496 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      12907  to      13613
+.....................----------    514 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      13099  to      13786
+...................----------    494 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      13292  to      13960
+....................----------    448 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      13512  to      14158
+....................----------    454 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      13704  to      14331
+...................----------    434 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      13897  to      14504
+....................----------    411 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      14093  to      14681
+....................----------    406 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      14275  to      14845
+...................----------    369 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      14476  to      15025
+....................----------    362 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      14663  to      15194
+...................----------    323 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      14871  to      15381
+.....................----------    298 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      15083  to      15572
+...................----------    291 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      15281  to      15750
+....................----------    275 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      15475  to      15925
+....................----------    279 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      15646  to      16078
+...................----------    259 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      15819  to      16234
+.....................----------    199 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16035  to      16429
+....................----------    200 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16229  to      16603
+...................----------    175 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16428  to      16782
+....................----------    196 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16586  to      16924
+....................----------    132 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16792  to      17110
+....................----------    140 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16970  to      17270
+....................----------     96 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      17174  to      17454
+...................----------     67 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      17387  to      17645
+....................----------     79 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      17566  to      17806
+..................----------     59 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      17747  to      17969
+...................----------     54 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      17915  to      18121
+....................----------     50 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      18071  to      18261
+...................----------      6 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      18255  to      18427
+...................----------      1 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      18426  to      18580
+...................---------- new table with       94 representatives
+# comparing sequences from      18580  to      18719
+....................---------- new table with       85 representatives
+# comparing sequences from      18719  to      18844
+.................---------- new table with       68 representatives
+# comparing sequences from      18844  to      18957
+...................---------- new table with       71 representatives
+# comparing sequences from      18957  to      19058
+..................---------- new table with       58 representatives
+# comparing sequences from      19058  to      19975
+....................---------- new table with      580 representatives
+
+    19975  finished       9451  clusters
+
+Approximated maximum memory consumption: 109M
+writing new database
+writing clustering information
+program completed !
+
+Total CPU time 6.82
+running cmd: cd-hit -T 8 -i results/test/panaroo/test2/combined_protein_CDS.fasta -o results/test/panaroo/test2/combined_protein_cdhit_out.txt -c 0.98 -s 0.98 -aL 0.0 -AL 99999999 -aS 0.0 -AS 99999999 -M 0 -d 999 -g 1 -n 2
+generating initial network...
+Processing paralogs...
+collapse mistranslations...
+Processing depth:  1
+Iteration:  1
+Iteration:  2
+Iteration:  3
+Iteration:  4
+Processing depth:  2
+Iteration:  1
+Iteration:  2
+Iteration:  3
+Processing depth:  3
+Iteration:  1
+Iteration:  2
+collapse gene families...
+Processing depth:  1
+Iteration:  1
+Iteration:  2
+Iteration:  3
+Iteration:  4
+Iteration:  5
+Iteration:  6
+Iteration:  7
+Iteration:  8
+Iteration:  9
+Iteration:  10
+Processing depth:  2
+Iteration:  1
+Iteration:  2
+Iteration:  3
+Processing depth:  3
+Iteration:  1
+Iteration:  2
+Iteration:  3
+Iteration:  4
+Iteration:  5
+Iteration:  6
+trimming contig ends...
+refinding genes...
+Number of searches to perform:  2579
+Searching...
+translating hits...
+removing by consensus...
+Updating output...
+Number of refound genes:  40
+collapse gene families with refound genes...
+Processing depth:  1
+Iteration:  1
+Processing depth:  2
+Iteration:  1
+Processing depth:  3
+Iteration:  1
+writing output...
+generating core genome MSAs...
+pre-processing gff3 files...
+Error reading prokka input!
+pre-processing gff3 files...
+Error reading prokka input!
+pre-processing gff3 files...
+Error reading prokka input!
+pre-processing gff3 files...
+Error reading prokka input!
+pre-processing gff3 files...
+Error reading prokka input!
+pre-processing gff3 files...
+Error reading prokka input!
+pre-processing gff3 files...
+Error reading prokka input!
+pre-processing gff3 files...
+Error reading prokka input!
+pre-processing gff3 files...
+Error reading prokka input!
+pre-processing gff3 files...
+Error reading prokka input!
+Subset with prefix 'test1' contains the following genomes:
+['AVC111', 'AVC199', 'AVC2', 'AVC10', 'AVC209']
+Subset with prefix 'test2' contains the following genomes:
+['AVC111', 'AVC2', 'AVC10', 'AVC209']
+[['results/test/prokka/gffs/AVC111.gff', 'results/test/prokka/gffs/AVC199.gff', 'results/test/prokka/gffs/AVC2.gff', 'results/test/prokka/gffs/AVC10.gff', 'results/test/prokka/gffs/AVC209.gff'], ['results/test/prokka/gffs/AVC111.gff', 'results/test/prokka/gffs/AVC2.gff', 'results/test/prokka/gffs/AVC10.gff', 'results/test/prokka/gffs/AVC209.gff']]
+['test1', 'test2']
+An error occurred

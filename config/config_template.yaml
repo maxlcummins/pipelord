@@ -44,7 +44,9 @@ genotype_modules:
 
 #Module selection - treebuilding pipeline
 treebuild_modules:
-  run_roary: Yes
+  run_roary: No
+  run_panaroo: Yes
+  run_panaroo_QC: Yes
   run_core_genome_treebuild_snp_sites: Yes
   run_core_genome_treebuild_full: Yes
 
@@ -132,14 +134,25 @@ pMLST_db_path: resources/tools/pmlst/pmlst_db
 pMLST_script_path: resources/tools/pmlst/pmlst.py
 
 ## ## Configuration for roary
+#Percent of genomes required to carry a gene for it to be considered core
 roary_core_req: 99
+
+## ## Configuration for panaroo
+panaroo:
+  #Percent of genomes required to carry a gene for it to be considered core
+  core_req: 0.98
+  ## Panaroo aligner for core genome alignment. Options: prank, clustal, mafft
+  aligner: "mafft"
+  ## Panaroo strictness options: 'strict', 'moderate', 'sensitive'
+  strictness: "strict"
+
 #Subset file of file names
 subset_fofn:
-  - resources/test_data/test_subset.txt
+  #  - resources/test_data/test_subset.txt
   - resources/test_data/test_subset2.txt
 #Subset name
 subset_name:
-  - test1
+  #  - test1
   - test2
 
 gunc_db_path: /projects/AusGEM/databases/gunc_db
