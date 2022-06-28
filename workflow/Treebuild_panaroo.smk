@@ -111,7 +111,7 @@ rule panaroo_mash_db_dl:
     conda:
         "envs/panaroo.yaml"
     log:
-        config['base_log_outdir']+"/"+config['base_log_outdir']+"/panaroo/QC_mash_db_dl.log"
+        config['base_log_outdir']+"/"+config['prefix']+"/panaroo/QC_mash_db_dl.log"
     threads: 1
     shell:
         """
