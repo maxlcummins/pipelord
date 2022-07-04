@@ -1,0 +1,460 @@
+pre-processing gff3 files...
+================================================================
+Program: CD-HIT, V4.8.1 (+OpenMP), Feb 22 2022, 21:26:56
+Command: cd-hit -T 8 -i
+         results/test/panaroo/test2/combined_protein_CDS.fasta
+         -o
+         results/test/panaroo/test2/combined_protein_cdhit_out.txt
+         -c 0.98 -s 0.98 -aL 0.0 -AL 99999999 -aS 0.0 -AS
+         99999999 -M 0 -d 999 -g 1 -n 2
+
+Started: Thu Jun  9 12:22:18 2022
+================================================================
+                            Output                              
+----------------------------------------------------------------
+Your word length is 2, using 5 may be faster!
+total seq: 19975
+longest and shortest : 6925 and 29
+Total letters: 6195045
+Sequences have been sorted
+
+Approximated minimal memory consumption:
+Sequence        : 8M
+Buffer          : 8 X 12M = 97M
+Table           : 2 X 0M = 0M
+Miscellaneous   : 0M
+Total           : 107M
+
+Table limit with the given memory limit:
+Max number of representatives: 957106
+Max number of word counting entries: 59810200
+
+# comparing sequences from          0  to       1997
+.---------- new table with      895 representatives
+# comparing sequences from       1997  to       3794
+.....................----------   1549 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       2245  to       4018
+....................----------   1543 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       2475  to       4225
+....................----------   1488 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       2737  to       4460
+....................----------   1481 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       2979  to       4678
+.....................----------   1453 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       3225  to       4900
+....................----------   1425 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       3475  to       5125
+....................----------   1389 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       3736  to       5359
+....................----------   1365 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       3994  to       5592
+.....................----------   1348 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       4244  to       5817
+....................----------   1325 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       4492  to       6040
+....................----------   1302 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       4738  to       6261
+....................----------   1275 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       4986  to       6484
+.....................----------   1270 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       5214  to       6690
+....................----------   1245 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       5445  to       6898
+....................----------   1230 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       5668  to       7098
+....................----------   1221 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       5877  to       7286
+.....................----------   1188 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       6098  to       7485
+...................----------   1156 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       6329  to       7693
+....................----------   1157 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       6536  to       7879
+...................----------   1095 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       6784  to       8103
+.....................----------   1095 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       7008  to       8304
+....................----------   1051 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       7253  to       8525
+....................----------   1023 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       7502  to       8749
+...................----------   1039 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       7710  to       8936
+....................----------    983 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       7953  to       9155
+.....................----------    931 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       8224  to       9399
+....................----------    938 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       8461  to       9612
+....................----------    910 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       8702  to       9829
+....................----------    920 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       8909  to      10015
+....................----------    894 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       9121  to      10206
+....................----------    854 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       9352  to      10414
+...................----------    832 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       9582  to      10621
+....................----------    806 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from       9815  to      10831
+...............................    10000  finished       4274  clusters
+----------    779 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      10052  to      11044
+...................----------    759 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      10285  to      11254
+....................----------    744 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      10510  to      11456
+....................----------    717 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      10739  to      11662
+....................----------    714 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      10948  to      11850
+.....................----------    678 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      11172  to      12052
+...................----------    648 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      11404  to      12261
+....................----------    657 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      11604  to      12441
+....................----------    623 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      11818  to      12633
+.....................----------    629 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      12004  to      12801
+....................----------    573 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      12228  to      13002
+....................----------    543 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      12459  to      13210
+....................----------    537 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      12673  to      13403
+....................----------    496 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      12907  to      13613
+.....................----------    514 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      13099  to      13786
+...................----------    494 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      13292  to      13960
+....................----------    448 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      13512  to      14158
+....................----------    454 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      13704  to      14331
+...................----------    434 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      13897  to      14504
+....................----------    411 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      14093  to      14681
+....................----------    406 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      14275  to      14845
+...................----------    369 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      14476  to      15025
+....................----------    362 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      14663  to      15194
+...................----------    323 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      14871  to      15381
+.....................----------    298 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      15083  to      15572
+...................----------    291 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      15281  to      15750
+....................----------    275 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      15475  to      15925
+....................----------    279 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      15646  to      16078
+...................----------    259 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      15819  to      16234
+.....................----------    199 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16035  to      16429
+....................----------    200 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16229  to      16603
+...................----------    175 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16428  to      16782
+....................----------    196 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16586  to      16924
+....................----------    132 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16792  to      17110
+....................----------    140 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      16970  to      17270
+....................----------     96 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      17174  to      17454
+...................----------     67 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      17387  to      17645
+....................----------     79 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      17566  to      17806
+..................----------     59 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      17747  to      17969
+...................----------     54 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      17915  to      18121
+....................----------     50 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      18071  to      18261
+...................----------      6 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      18255  to      18427
+...................----------      1 remaining sequences to the next cycle
+---------- new table with      100 representatives
+# comparing sequences from      18426  to      18580
+...................---------- new table with       94 representatives
+# comparing sequences from      18580  to      18719
+....................---------- new table with       85 representatives
+# comparing sequences from      18719  to      18844
+.................---------- new table with       68 representatives
+# comparing sequences from      18844  to      18957
+...................---------- new table with       71 representatives
+# comparing sequences from      18957  to      19058
+..................---------- new table with       58 representatives
+# comparing sequences from      19058  to      19975
+....................---------- new table with      580 representatives
+
+    19975  finished       9451  clusters
+
+Approximated maximum memory consumption: 109M
+writing new database
+writing clustering information
+program completed !
+
+Total CPU time 6.70
+running cmd: cd-hit -T 8 -i results/test/panaroo/test2/combined_protein_CDS.fasta -o results/test/panaroo/test2/combined_protein_cdhit_out.txt -c 0.98 -s 0.98 -aL 0.0 -AL 99999999 -aS 0.0 -AS 99999999 -M 0 -d 999 -g 1 -n 2
+generating initial network...
+Processing paralogs...
+collapse mistranslations...
+Processing depth:  1
+Iteration:  1
+Iteration:  2
+Iteration:  3
+Iteration:  4
+Processing depth:  2
+Iteration:  1
+Iteration:  2
+Iteration:  3
+Processing depth:  3
+Iteration:  1
+Iteration:  2
+collapse gene families...
+Processing depth:  1
+Iteration:  1
+Iteration:  2
+Iteration:  3
+Iteration:  4
+Iteration:  5
+Iteration:  6
+Iteration:  7
+Iteration:  8
+Iteration:  9
+Iteration:  10
+Processing depth:  2
+Iteration:  1
+Iteration:  2
+Iteration:  3
+Processing depth:  3
+Iteration:  1
+Iteration:  2
+Iteration:  3
+Iteration:  4
+Iteration:  5
+Iteration:  6
+trimming contig ends...
+refinding genes...
+Number of searches to perform:  2579
+Searching...
+translating hits...
+removing by consensus...
+Updating output...
+Number of refound genes:  40
+collapse gene families with refound genes...
+Processing depth:  1
+Iteration:  1
+Processing depth:  2
+Iteration:  1
+Processing depth:  3
+Iteration:  1
+writing output...
+generating core genome MSAs...
+IQ-TREE multicore version 2.0.3 for Linux 64-bit built Dec 20 2020
+Developed by Bui Quang Minh, Nguyen Lam Tung, Olga Chernomor,
+Heiko Schmidt, Dominik Schrempf, Michael Woodhams.
+
+Host:    jupiter11.ihpc.uts.edu.au (AVX2, FMA3, 503 GB RAM)
+Command: iqtree -s results/test/snp_sites/test2/core_gene_alignment_snp_sites.aln -pre results/test/trees/test2/CGA_snp_sites -m GTR+ASC -ntmax 8 -bb 1000
+Seed:    189439 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Thu Jun  9 12:28:44 2022
+Kernel:  AVX+FMA - 1 threads (64 CPU cores detected)
+
+HINT: Use -nt option to specify number of threads because your CPU has 64 cores!
+HINT: -nt AUTO will automatically determine the best number of threads to use.
+
+Reading alignment file results/test/snp_sites/test2/core_gene_alignment_snp_sites.aln ... Fasta format detected
+Alignment most likely contains DNA/RNA sequences
+Alignment has 4 sequences with 150860 columns, 248 distinct patterns
+35575 parsimony-informative, 115285 singleton sites, 0 constant sites
+        Gap/Ambiguity  Composition  p-value
+   1  AVC209    0.00%    failed      0.00%
+   2  AVC10     0.00%    failed      0.00%
+   3  AVC111    0.00%    failed      0.00%
+   4  AVC2      0.00%    passed     65.59%
+****  TOTAL     0.00%  3 sequences failed composition chi2 test (p-value<5%; df=3)
+NOTE: minimal branch length is reduced to 0.000000662866 for long alignment
+
+Create initial parsimony tree by phylogenetic likelihood library (PLL)... 0.003 seconds
+Generating 1000 samples for ultrafast bootstrap (seed: 189439)...
+
+NOTE: 0 MB RAM (0 GB) is required!
+Estimate model parameters (epsilon = 0.100)
+1. Initial log-likelihood: -730227.144
+2. Current log-likelihood: -634527.296
+3. Current log-likelihood: -634252.650
+4. Current log-likelihood: -634251.911
+Optimal log-likelihood: -634251.858
+Rate parameters:  A-C: 0.89140  A-G: 6.00603  A-T: 1.14266  C-G: 0.52420  C-T: 5.19036  G-T: 1.00000
+Base frequencies:  A: 0.198  C: 0.301  G: 0.243  T: 0.258
+Parameters optimization took 4 rounds (0.003 sec)
+Computing ML distances based on estimated model parameters... 0.000 sec
+Computing BIONJ tree...
+0.004 seconds
+Log-likelihood of BIONJ tree: -634251.852
+--------------------------------------------------------------------
+|             INITIALIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Generating 99 parsimony trees... 0.989 second
+Computing log-likelihood of 2 initial trees ... 0.000 seconds
+Current best score: -634251.852
+
+Do NNI search on 3 best initial trees
+Finish initializing candidate tree set (3)
+Current best tree score: -634251.852 / CPU time: 0.998
+Number of iterations: 3
+--------------------------------------------------------------------
+|               OPTIMIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+UPDATE BEST LOG-LIKELIHOOD: -634251.852
+UPDATE BEST LOG-LIKELIHOOD: -634251.852
+Iteration 10 / LogL: -634339.758 / Time: 0h:0m:1s
+UPDATE BEST LOG-LIKELIHOOD: -634251.852
+UPDATE BEST LOG-LIKELIHOOD: -634251.852
+UPDATE BEST LOG-LIKELIHOOD: -634251.852
+UPDATE BEST LOG-LIKELIHOOD: -634251.852
+Iteration 20 / LogL: -634435.178 / Time: 0h:0m:1s
+Iteration 30 / LogL: -634339.758 / Time: 0h:0m:1s (0h:0m:2s left)
+Iteration 40 / LogL: -634342.140 / Time: 0h:0m:1s (0h:0m:1s left)
+Iteration 50 / LogL: -634342.140 / Time: 0h:0m:1s (0h:0m:1s left)
+Log-likelihood cutoff on original alignment: -634251.852
+Iteration 60 / LogL: -634257.280 / Time: 0h:0m:1s (0h:0m:0s left)
+Iteration 70 / LogL: -634251.852 / Time: 0h:0m:1s (0h:0m:0s left)
+Iteration 80 / LogL: -634339.758 / Time: 0h:0m:1s (0h:0m:0s left)
+Iteration 90 / LogL: -634435.178 / Time: 0h:0m:1s (0h:0m:0s left)
+Iteration 100 / LogL: -634342.140 / Time: 0h:0m:1s (0h:0m:0s left)
+Log-likelihood cutoff on original alignment: -634251.852
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 1.000
+TREE SEARCH COMPLETED AFTER 101 ITERATIONS / Time: 0h:0m:1s
+
+--------------------------------------------------------------------
+|                    FINALIZING TREE SEARCH                        |
+--------------------------------------------------------------------
+Performs final model parameters optimization
+Estimate model parameters (epsilon = 0.010)
+1. Initial log-likelihood: -634251.852
+Optimal log-likelihood: -634251.851
+Rate parameters:  A-C: 0.89150  A-G: 6.00599  A-T: 1.14288  C-G: 0.52459  C-T: 5.19013  G-T: 1.00000
+Base frequencies:  A: 0.198  C: 0.301  G: 0.243  T: 0.258
+Parameters optimization took 1 rounds (0.000 sec)
+BEST SCORE FOUND : -634251.851
+Creating bootstrap support values...
+Split supports printed to NEXUS file results/test/trees/test2/CGA_snp_sites.splits.nex
+Total tree length: 0.677
+
+Total number of iterations: 101
+CPU time used for tree search: 1.300 sec (0h:0m:1s)
+Wall-clock time used for tree search: 1.435 sec (0h:0m:1s)
+Total CPU time used: 1.353 sec (0h:0m:1s)
+Total wall-clock time used: 1.508 sec (0h:0m:1s)
+
+Computing bootstrap consensus tree...
+Reading input file results/test/trees/test2/CGA_snp_sites.splits.nex...
+4 taxa and 5 splits.
+Consensus tree written to results/test/trees/test2/CGA_snp_sites.contree
+Reading input trees file results/test/trees/test2/CGA_snp_sites.contree
+Log-likelihood of consensus tree: -634251.851
+
+Analysis results written to: 
+  IQ-TREE report:                results/test/trees/test2/CGA_snp_sites.iqtree
+  Maximum-likelihood tree:       results/test/trees/test2/CGA_snp_sites.treefile
+  Likelihood distances:          results/test/trees/test2/CGA_snp_sites.mldist
+
+Ultrafast bootstrap approximation results written to:
+  Split support values:          results/test/trees/test2/CGA_snp_sites.splits.nex
+  Consensus tree:                results/test/trees/test2/CGA_snp_sites.contree
+  Screen log file:               results/test/trees/test2/CGA_snp_sites.log
+
+Date and Time: Thu Jun  9 12:28:45 2022
+Subset with prefix 'test2' contains the following genomes:
+['AVC111', 'AVC2', 'AVC10', 'AVC209']
+[['results/test/prokka/gffs/AVC111.gff', 'results/test/prokka/gffs/AVC2.gff', 'results/test/prokka/gffs/AVC10.gff', 'results/test/prokka/gffs/AVC209.gff']]
+['test2']
+Job finished

@@ -1,0 +1,91 @@
+nohup: ignoring input
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	2	iqtree_snp_sites
+	1	panaroo
+	2	snp_dists_full
+	2	snp_dists_snp_sites
+	2	snp_sites
+	10
+Select jobs to execute...
+
+[Thu Jun  9 11:52:33 2022]
+rule panaroo:
+    input: results/test/subsets/test1_gff_locations.txt
+    output: results/test/panaroo/test1
+    log: logs/test/panaroo/test1.log
+    jobid: 2
+    wildcards: prefix=test, subset_prefix=test1
+    threads: 8
+
+cat results/test/subsets/test1_gff_locations.txt | xargs panaroo -o results/test/panaroo/test1 --clean-mode strict -a core --aligner mafft --core_threshold 0.98 -t 8 -i
+Activating conda environment: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db
+  0%|          | 0/1 [00:00<?, ?it/s]  0%|          | 0/1 [00:02<?, ?it/s]
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py", line 436, in _process_worker
+    r = call_item()
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py", line 288, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/joblib/_parallel_backends.py", line 595, in __call__
+    return self.func(*args, **kwargs)
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/joblib/parallel.py", line 263, in __call__
+    for func, args, kwargs in self.items]
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/joblib/parallel.py", line 263, in <listcomp>
+    for func, args, kwargs in self.items]
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/panaroo/prokka.py", line 175, in get_gene_sequences
+    return sequence_dictionary, translate_sequences(sequence_dictionary, table)
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/panaroo/prokka.py", line 192, in translate_sequences
+    raise ValueError("Premature stop codon in a gene!")
+ValueError: Premature stop codon in a gene!
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/panaroo/prokka.py", line 247, in process_prokka_input
+    for gff_no, gff in job)
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/joblib/parallel.py", line 1056, in __call__
+    self.retrieve()
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/joblib/parallel.py", line 935, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/joblib/_parallel_backends.py", line 542, in wrap_future_result
+    return future.result(timeout=timeout)
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/concurrent/futures/_base.py", line 428, in result
+    return self.__get_result()
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+ValueError: Premature stop codon in a gene!
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/bin/panaroo", line 10, in <module>
+    sys.exit(main())
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/panaroo/__main__.py", line 288, in main
+    args.n_cpu, args.table)
+  File "/data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db/lib/python3.7/site-packages/panaroo/prokka.py", line 257, in process_prokka_input
+    raise RuntimeError("Error reading prokka input!")
+RuntimeError: Error reading prokka input!
+[Thu Jun  9 11:52:39 2022]
+Error in rule panaroo:
+    jobid: 2
+    output: results/test/panaroo/test1
+    log: logs/test/panaroo/test1.log (check log file(s) for error message)
+    conda-env: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/conda/6daaf4db
+    shell:
+        cat results/test/subsets/test1_gff_locations.txt | xargs panaroo -o results/test/panaroo/test1 --clean-mode strict -a core --aligner mafft --core_threshold 0.98 -t 8 -i
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job panaroo since they might be corrupted:
+results/test/panaroo/test1
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+echo Your Snakemake job with prefix 'test' has failed. | mail -s 'Snakemake job has failed' None
+Complete log: /data/malcummi/pipelord2_new/pipelord2_0/.snakemake/log/2022-06-09T115232.816852.snakemake.log
