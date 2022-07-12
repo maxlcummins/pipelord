@@ -36,10 +36,11 @@ genotype_modules:
   run_abritamr: Yes
   run_abricate_plasmid: Yes
   run_pointfinder: Yes
-  run_kraken2_and_bracken: Yes
+  run_kraken2_and_bracken: No
   run_mlst: Yes
   run_spifinder: No
   run_cgmlstfinder: No
+  run_fimtyper: Yes
   run_summarise: No # in development
 
 #Module selection - treebuilding pipeline
