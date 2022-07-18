@@ -32,7 +32,7 @@ rule validate_db:
 
 rule fimtyper_run:
     input:
-        dummy = temp(config['outdir']+"/{prefix}/fimtyper/dummy_out.txt"),
+        dummy = config['outdir']+"/{prefix}/fimtyper/dummy_out.txt",
         assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
     output:
         raw = config['outdir']+"/{prefix}/fimtyper/{sample}/results_tab.txt",
@@ -56,13 +56,12 @@ rule name_append_fimtyper:
         config['outdir']+"/{prefix}/fimtyper/{sample}/{sample}.txt"
     output:
         trimmed = config['outdir']+"/{prefix}/fimtyper/{sample}/{sample}_trimmed.txt",
-        cleaned = config['outdir']+"/{prefix}/fimtyper/{sample}/{sample}_cleaned.txt",
         named = config['outdir']+"/{prefix}/fimtyper/{sample}/{sample}_named.txt"
     threads: 1
     shell:
         """
         sed '0,/^FimH type -/d' {input} > {output.trimmed}
-        awk 'NR == 1 {{print "name\t" $0; next;}}{{print FILENAME "\t" $0;}}' {output.cleaned} > {output.named}
+        awk 'NR == 1 {{print "name\t" $0; next;}}{{print FILENAME "\t" $0;}}' {output.trimmed} > {output.named}
         """
 
 rule run_fimtyper_summarise:
