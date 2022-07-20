@@ -22,7 +22,7 @@ if path.exists("resources/tools/Bracken/bracken") == False:
 if config['input_type'] == 'assemblies':
     rule run_kraken2:
         input:
-            db = krakendb,
+            db = config['krakendb'] if path.exists(config['krakendb']), else db = "resources/dbs/kraken2/minikraken2_v2_8GB_201904_UPDATE",
             assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
         output:
             out = config['outdir']+"/{prefix}/QC_workflow/kraken2/{sample}.out",
@@ -42,7 +42,7 @@ if config['input_type'] == 'assemblies':
 elif config["input_type"] == "reads":
     rule run_kraken2:
         input:
-            db = config['krakendb'],
+            db = config['krakendb'] if path.exists(config['krakendb']), else db = "resources/dbs/kraken2/minikraken2_v2_8GB_201904_UPDATE",
             r1_filt = config['outdir']+"/{prefix}/fastp/{sample}.R1.fastq.gz",
             r2_filt = config['outdir']+"/{prefix}/fastp/{sample}.R2.fastq.gz"
         output:
