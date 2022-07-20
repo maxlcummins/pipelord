@@ -63,14 +63,13 @@ elif config["input_type"] == "reads":
 
 rule bracken:
     input:
-        config['outdir']+"/{prefix}/QC_workflow/kraken2/{sample}.report"
+        db = config['krakendb'] if path.exists(config['krakendb']) else "resources/dbs/kraken2/minikraken2_v2_8GB_201904_UPDATE",
+        report = config['outdir']+"/{prefix}/QC_workflow/kraken2/{sample}.report"
     output:
-        #Assembly statistics
-        #assembly_stats=config['output_dir']+"/assembly-stats/{assembler}/{sample}.txt"
         bracken=config['outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.txt",
         species=config['outdir']+"/{prefix}/QC_workflow/bracken/{sample}_bracken_species_report.txt"
     params:
-        krakendb=krakendb
+        #krakendb=krakendb
         #extra="-t",
     log:
         config['base_log_outdir']+"/{prefix}/QC_workflow/bracken/{sample}.bracken.log",
@@ -81,7 +80,7 @@ rule bracken:
     conda:
         "../envs/kraken2.yaml"
     shell:
-        "resources/tools/Bracken/bracken -d {params.krakendb} -i {input} -o {output.bracken} -w {output.species} -r 100 -l S -t {threads} 2>&1 {log}"
+        "resources/tools/Bracken/bracken -d {input.db} -i {input.report} -o {output.bracken} -w {output.species} -r 100 -l S -t {threads} 2>&1 {log}"
     #wrapper:
         #"0.2.0/bio/assembly-stats"
     #    "https://raw.githubusercontent.com/maxlcummins/snakemake-wrappers/assembly-stats/bio/assembly-stats/wrapper.py"
