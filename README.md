@@ -1,7 +1,13 @@
-# pipelord2.0
+# pipelord
+
+## About
+
+This repo contains a genomic analysis pipeline used for analysing mostly *E. coli* genomes, though it also sees use in analysing *Salmonella* genomes and some other species as well, however note that using this tool for analysing other species may cause certain tools to either break or will otherwise just limit the usefullness of this tool in the first place.
 
 ## Disclaimer
-While I have made every effort to ensure these scripts produce reliable and accurate output, it is important that you spot check your outputs to ensure they are correct.
+While I have made every effort to ensure these scripts produce reliable and accurate output, it is important that you spot check your outputs to ensure they are correct :)
+
+
 
 ## Installation and setup
 
