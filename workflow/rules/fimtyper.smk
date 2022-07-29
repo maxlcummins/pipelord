@@ -16,7 +16,7 @@ rule validate_db:
     input:
         "resources/tools/fimtyper/fimtyper_db"
     output:
-        temp(config['outdir']+"/{prefix}/fimtyper/dummy_out.txt")
+        config['outdir']+"/{prefix}/fimtyper/dummy_out.txt"
     conda:
         "../envs/fimtyper.yaml"
     log:
