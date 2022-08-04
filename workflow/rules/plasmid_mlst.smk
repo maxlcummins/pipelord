@@ -19,7 +19,6 @@ rule pMLST_run:
         assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta"
     output:
         results = config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results.txt",
-        results_simple = config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results_simple.txt"
     conda:
         "../envs/pMLST.yaml"
     threads: 4
@@ -35,18 +34,48 @@ rule pMLST_run:
         """
         python3 {params.pmlst_script_path} -i {input} -o {params.output_dir} -p {params.pmlst_db_path} {params.pmlst_tool} $CONDA_PREFIX/bin/blastn -s {params.db} -x -t {params.tmp}
         rm -rf {params.tmp}
-        grep "Sequence Type" {output.results} | perl -p -e 's/(\[|\])//g' | perl -p -e 's/Sequence Type://g' > {output.results_simple}
         """
 
 rule run_pmlst_summarise:
     input:
-        pMLST_summary=expand(config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results_simple.txt", prefix=prefix, scheme=scheme, sample=sample_ids)
+        pMLST_summary=expand(config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results.txt", prefix=prefix, scheme=scheme, sample=sample_ids)
     output:
-        combine_pMLST=config["outdir"]+"/{prefix}/summaries/pMLST.txt"
+        combine_pMLST=config["outdir"]+"/{prefix}/summaries/pMLST.txt",
     params:
         extra="",
     log:
         "logs/{prefix}/summaries/combine_pMLST.log",
+    conda:
+        "../envs/abritamr.yaml"
     threads: 1
     script:
         "../../scripts/combine_pMLST.py"
+
+if 'incf' in config['pmlst_scheme']:
+    rule incf_touch:
+        input:
+            incf_results = config['outdir']+"/{prefix}/pMLST/incf/{sample}.out/results.txt",
+        output:
+            incf_tab = config['outdir']+"/{prefix}/pMLST/incf/{sample}.out/results_tab.tsv"
+        threads: 1
+        shell:
+            """
+            touch {input}
+            """
+
+if 'incf' in config['pmlst_scheme']:
+    rule run_incf_summarise:
+        input:
+            pMLST_summary=expand(config['outdir']+"/{prefix}/pMLST/{scheme}/{sample}.out/results.txt", prefix=prefix, scheme=scheme, sample=sample_ids)
+        output:
+            IncF_RST_simple=config["outdir"]+"/{prefix}/summaries/IncF_RST.txt",
+            IncF_RST_full=config["outdir"]+"/{prefix}/summaries/IncF_RST_full.txt"
+        params:
+            extra="",
+        log:
+            "logs/{prefix}/summaries/combine_incF.log",
+        conda:
+            "../envs/abritamr.yaml"
+        threads: 1
+        script:
+            "../../scripts/combine_IncF_RST.py"
