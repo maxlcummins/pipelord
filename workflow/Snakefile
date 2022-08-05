@@ -84,6 +84,7 @@ rule all:
         expand(config["outdir"]+"/{prefix}/summaries/abritamr_resistance.txt", prefix=prefix) if config["genotype_modules"]["run_abritamr"] else [],
         expand(config["outdir"]+"/{prefix}/summaries/amrfinder_raw.txt", prefix=prefix) if config["genotype_modules"]["run_abritamr"] else [],
         expand(config["outdir"]+"/{prefix}/summaries/fimtyper.txt", prefix=prefix) if config["genotype_modules"]["run_fimtyper"] else [],
+        expand(config["outdir"]+"/{prefix}/summaries/ectyper.txt", prefix=prefix) if config["genotype_modules"]["run_ectyper"] else [],
         #expand(config["outdir"]+"/{prefix}/summaries/abritamr_summary_matches.txt", prefix=prefix) if config["genotype_modules"]["run_abritamr"] else [],
         "resources/dbs/dfast" if config["genotype_modules"]['genome_annotater'] == "dfast" and path.exists("resources/dbs/dfast") == False else [],
 
@@ -136,3 +137,5 @@ if config["genotype_modules"]["run_abritamr"]:
     include: "rules/abritamr.smk"
 if config["genotype_modules"]["run_fimtyper"]:
     include: "rules/fimtyper.smk"
+if config["genotype_modules"]["run_ectyper"]:
+    include: "rules/ectyper.smk"
