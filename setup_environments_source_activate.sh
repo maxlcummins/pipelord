@@ -23,11 +23,11 @@ if which conda > /dev/null; then
     printf "Located conda"
     printf "\n"
     printf "Attepting to load environment \`snakemake\`..."
-    conda activate snakemake
+    source activate snakemake
 elif test ~/bin/my_python_path; then
     printf "Attempting to load wrapper script \`~/bin/my_python_path..."
     my_conda_path
-    conda activate snakemake && printf "Successfully loaded snakemake environment"
+    source activate snakemake && printf "Successfully loaded snakemake environment"
 else
     printf "\n"
     printf "Unable to load wrapper script or load snakemake environment."
