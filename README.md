@@ -13,8 +13,8 @@ While I have made every effort to ensure these scripts produce reliable and accu
 
 ```
 # Clone the git repository and enter it
-git clone https://github.com/maxlcummins/pipelord2_0.git
-cd pipelord2_0
+git clone https://github.com/maxlcummins/pipelord.git
+cd pipelord
 
 # Setup and installation - this may take some time
 snakemake -j --use-conda
