@@ -11,6 +11,7 @@ else
     SCRIPT=$(realpath "$0")
     SCRIPTPATH=$(dirname "$SCRIPT")
     echo "Cannot locate pipelord directory. Please change directory to $SCRIPTPATH"
+fi
 
 if which conda; then
     echo "Located conda"
@@ -54,3 +55,4 @@ elif which conda; then
     echo "Successfully installed dependencies for all three modules!"
     echo "You can now perform a test run with the command:"
     echo "snakemake -j12 --use-conda"
+fi
