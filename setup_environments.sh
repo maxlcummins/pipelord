@@ -3,6 +3,14 @@
 if test config/config_template.yaml; then
     echo "Detected pipelord config file at \`config/config_template.yaml\`"
     echo "Continuing with set-up"
+elif test pipelord/config/config_template.yaml && mv pipelord; then
+    echo "Detected pipelord config file at \`pipelord/config/config_template.yaml\`"
+    echo "Moved into the pipelord directory with \`cd pipelord\`"
+    echo "Continuing with set-up"
+else
+    SCRIPT=$(realpath "$0")
+    SCRIPTPATH=$(dirname "$SCRIPT")
+    echo "Cannot locate pipelord directory. Please change directory to $SCRIPTPATH"
 
 if which conda; then
     echo "Located conda"
