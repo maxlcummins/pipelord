@@ -78,6 +78,7 @@ rule checkm_tree_and_tree_qa:
         12
     shell:
         """
+        checkm data setRoot resources/dbs/checkm
         checkm tree {input.assemblies} -x fasta {output.checkm_out} -t {threads}
         checkm tree_qa {output.checkm_out}
         touch {output.pseudo_output}
