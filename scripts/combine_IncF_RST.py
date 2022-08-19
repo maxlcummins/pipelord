@@ -66,7 +66,9 @@ combined['Allele'] = combined['Allele'].str.replace('No hit found', '-', regex=F
 
 #Create a column for a simplified allele call
 combined['Simple Allele'] = combined['Allele']
-combined['Simple Allele'] = combined['Simple Allele'].str.replace('FII[S|Y|K]', '', regex=True)
+combined['Simple Allele'] = combined['Simple Allele'].str.replace('FIIS', 'S', regex=True)
+combined['Simple Allele'] = combined['Simple Allele'].str.replace('FIIY', 'Y', regex=True)
+combined['Simple Allele'] = combined['Simple Allele'].str.replace('FIIK', 'K', regex=True)
 combined['Simple Allele'] = combined['Simple Allele'].str.replace('FI', '', regex=True)
 combined['Simple Allele'] = combined['Simple Allele'].str.replace('I', 'F', regex=True)
 combined['Simple Allele'] = combined['Simple Allele'].str.replace('_', '', regex=True)
