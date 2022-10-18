@@ -57,28 +57,55 @@ Pairwise SNP distances are also determined using SNP-dists.
 
 ## Installation and setup
 
+Because there are many dependencies to install across all of the different analytical tools the first time you run the tool it can take some time to install everything via conda. Because of this I have added a script to install environments for the three modules `setup_environments.sh`
+
 ```
 # Clone the git repository and enter it
 git clone https://github.com/maxlcummins/pipelord.git
 cd pipelord
 
 # Setup and installation - this may take some time
-snakemake -j --use-conda
+sh setup_environments.sh
 ```
 
 ## Configuration
 
-Configuration of the snakemake workflow can be done via the configuration file in `config`
+Configuration of the snakemake workflow can be done via the configuration file in `config`. It is a good idea to just make a new one though by copying the template and editing it accordingly, then specifying it in the snakemake command (e.g. `--configfile config/new_template.yaml`).
 
 ## Usage
 
-Change your config file accordingly if you create a new one
+Note: Change your config file accordingly if you created a new one.
+
+### QC Workflow
 
 ```
-nohup snakemake --resources mem_mb={max_memory_per_rule} -j 20 -p --use-conda --configfile config/config_template.yaml --use-conda 1> snakemake_out.log 2> snakemake_err.log &
+#Run job in the background
+nohup snakemake --resources mem_mb={max_memory_per_rule} -j 20 -p --use-conda --configfile config/config_template.yaml --use-conda -s workflows/QC_workflow.smk 1> QC.log 2> QC.log &
 
+#Save the job ID so you can cancel it later if need be
 PROCESS_ID=$!
-echo "JOB_ID =" "$PROCESS_ID" > mostrecentjobid.txt
+echo "JOB_ID =" "$PROCESS_ID" > QC_jobID.txt
+```
+
+### Genotyping
+
+```
+#Run job in the background
+nohup snakemake --resources mem_mb={max_memory_per_rule} -j 20 -p --use-conda --configfile config/config_template.yaml --use-conda -s workflows/Snakefile 1> genotype.log 2> genotype.log &
+
+#Save the job ID so you can cancel it later if need be
+PROCESS_ID=$!
+echo "JOB_ID =" "$PROCESS_ID" > genotype_jobID.txt
+```
+### Pangenomic Phylogenetics
+
+```
+#Run job in the background
+nohup snakemake --resources mem_mb={max_memory_per_rule} -j 20 -p --use-conda --configfile config/config_template.yaml --use-conda -s workflows/Treebuild_panaroo.smk 1> treebuild.log 2> treebuild.log &
+
+#Save the job ID so you can cancel it later if need be
+PROCESS_ID=$!
+echo "JOB_ID =" "$PROCESS_ID" > treebuild_jobID.txt
 ```
 
 ## Database update
