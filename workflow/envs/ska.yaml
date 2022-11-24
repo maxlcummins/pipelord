@@ -1,0 +1,15 @@
+name: ska
+channels:
+  - bioconda
+  - r
+  - defaults
+  - conda-forge
+dependencies:
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=2_kmp_llvm
+  - libgcc-ng=12.1.0=h8d9b700_16
+  - libstdcxx-ng=11.2.0=h1234567_1
+  - libzlib=1.2.12=h166bdaf_2
+  - llvm-openmp=14.0.4=he0ac6c6_0
+  - ska=1.0=hd03093a_3
+prefix: /home/malcummi/Data/miniconda3/envs/ska
