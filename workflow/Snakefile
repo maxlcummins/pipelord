@@ -4,7 +4,6 @@ import os
 from os import path
 import platform
 
-
 configfile: "config/config_template.yaml"
 
 if path.exists("resources/tools/kma") == False:
@@ -46,10 +45,6 @@ if len([i for i in sample_ids if "." in i]) > 0:
     print("\n\n")
     sys.exit()
 
-# if any(r.match(sample_ids) for sample_ids in sample_ids):
-#   print(r.match(sample_ids) for sample_ids in sample_ids)
-
-
 rule all:
     input:
         expand( config["outdir"]+"/{prefix}/shovill/assemblies/{sample}.fasta", sample=sample_ids, prefix=prefix) if config["genotype_modules"]["run_genome_assembly"] else [],
@@ -77,8 +72,8 @@ rule all:
         expand(config['outdir']+"/{prefix}/clermontyping/{sample}/{sample}_phylogroups.txt",sample=sample_ids, prefix=prefix) if config["genotype_modules"]["run_phylogrouping"] else [],
         expand(config["outdir"]+"/{prefix}/summaries/clermontyping.txt", prefix=prefix) if config["genotype_modules"]["run_phylogrouping"] else [],
         #expand(config["outdir"]+"/{prefix}/summaries/abritamr_summary_matches.txt", prefix=prefix) if config["genotype_modules"]["run_abritamr"] else [],
+        expand(config['outdir']+"/{prefix}/mobsuite/mobtyper_results.txt", prefix=prefix) if config["genotype_modules"]["run_mobsuite"] else [],
         "resources/dbs/dfast" if config["genotype_modules"]['genome_annotater'] == "dfast" and path.exists("resources/dbs/dfast") == False else [],
-
 
 onerror:
     print("An error occurred")
@@ -98,7 +93,6 @@ onsuccess:
         shell(
             "echo Your Snakemake job with prefix '{prefix}' has finished. It has been written to '{outdir}/{prefix}/summaries/' | mail -s 'Snakemake job has finished' {email}"
         )
-
 
 # include: "rules/roary_pangenome.smk"
 if config["input_type"] == "reads":
@@ -132,3 +126,5 @@ if config["genotype_modules"]["run_ectyper"]:
     include: "rules/ectyper.smk"
 if config["genotype_modules"]["run_phylogrouping"]:
     include: "rules/phylogrouping.smk"
+if config["genotype_modules"]["run_mobsuite"]:
+    include: "rules/mobsuite.smk"
