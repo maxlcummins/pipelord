@@ -3,19 +3,19 @@ email:
 
 ### General configuration variables
 #Input type - assemblies or reads
-input_type: reads
+input_type: assemblies
 
 # Prefix for output files - here the collection name or an abbreviation for the relevant manuscript might be a good choice
 prefix: test
 
 # Path to your genomic data
-genome_path: resources/test_data/reads
+genome_path: resources/test_data/assemblies
 
 # Path to blast executable
 blast_bin: resources/tools/ncbi-blast-2.13.0+/bin
 
 # Path to project directory where you want your output to go
-outdir: results
+outdir: results_assemblies
 
 # Base output directory for logs
 base_log_outdir: logs
@@ -43,6 +43,7 @@ genotype_modules:
   run_fimtyper: Yes
   run_ectyper: Yes
   run_phylogrouping: Yes
+  run_mobsuite: Yes
   run_summarise: No # in development
 
 #Module selection - treebuilding pipeline
