@@ -72,6 +72,7 @@ rule all:
         expand(config['outdir']+"/{prefix}/clermontyping/{sample}/{sample}_phylogroups.txt",sample=sample_ids, prefix=prefix) if config["genotype_modules"]["run_phylogrouping"] else [],
         expand(config["outdir"]+"/{prefix}/summaries/clermontyping.txt", prefix=prefix) if config["genotype_modules"]["run_phylogrouping"] else [],
         #expand(config["outdir"]+"/{prefix}/summaries/abritamr_summary_matches.txt", prefix=prefix) if config["genotype_modules"]["run_abritamr"] else [],
+        expand(config['outdir']+"/{prefix}/summaries/mobtyper_results.txt", prefix=prefix) if config["genotype_modules"]["run_mobsuite"] else [],
         "resources/dbs/dfast" if config["genotype_modules"]['genome_annotater'] == "dfast" and path.exists("resources/dbs/dfast") == False else [],
 
 onerror:
@@ -125,3 +126,5 @@ if config["genotype_modules"]["run_ectyper"]:
     include: "rules/ectyper.smk"
 if config["genotype_modules"]["run_phylogrouping"]:
     include: "rules/phylogrouping.smk"
+if config["genotype_modules"]["run_mobsuite"]:
+    include: "rules/mobsuite.smk"
