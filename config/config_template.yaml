@@ -28,7 +28,7 @@ cgmlst_schemes: "" #['ecoli','salmonella']
 #Module selection - default genotyping pipeline
 genotype_modules:
   run_genome_annotation: Yes
-  genome_annotater: "prokka"
+  genome_annotater: "bakta"
   run_plasmid_mlst: Yes
   run_genome_assembly: Yes
   run_assembly_stats: Yes
@@ -159,4 +159,8 @@ subset_name:
   #  - test1
   - test2
 
+#Path to gunc database
 gunc_db_path: /projects/AusGEM/databases/gunc_db
+
+#Path to bakta database
+bakta_db: update_logs/bakta/db-light
