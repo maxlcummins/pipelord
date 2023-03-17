@@ -63,7 +63,7 @@ rule clermontyping_run:
         config['outdir']+"/{prefix}/clermontyping/{sample}"
     shell:
         """
-        sh {input.github_repo}/clermonTyping.sh --fasta {input.assembly} --name {wildcards.sample} --minimal &> {log}
+        {input.github_repo}/clermonTyping.sh --fasta {input.assembly} --name {wildcards.sample} --minimal &> {log}
         ls {params}
         mv {wildcards.sample}/* {params}
         rmdir {wildcards.sample}
