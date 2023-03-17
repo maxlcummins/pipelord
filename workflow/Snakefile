@@ -63,6 +63,7 @@ rule all:
         expand(config["outdir"]+"/{prefix}/summaries/mlst.txt", prefix=prefix) if config["genotype_modules"]["run_mlst"] else [],
         expand(config["outdir"]+"/{prefix}/dfast/gffs/{sample}.gff",sample=sample_ids,prefix=prefix) if config["genotype_modules"]['genome_annotater'] == "dfast" else [],
         expand(config["outdir"]+"/{prefix}/prokka/gffs/{sample}.gff",sample=sample_ids,prefix=prefix) if config["genotype_modules"]['run_genome_annotation'] and config["genotype_modules"]['genome_annotater'] == "prokka" else [],
+        expand(config["outdir"]+"/{prefix}/bakta/gffs/{sample}.gff3",sample=sample_ids,prefix=prefix) if config["genotype_modules"]['run_genome_annotation'] and config["genotype_modules"]['genome_annotater'] == "bakta" else [],
         expand(config["outdir"]+"/{prefix}/abricate_plasmids/{plasmid_screen_db}/{sample}.tab",sample=sample_ids, plasmid_screen_db=plasmid_screen_db,prefix=prefix) if config["genotype_modules"]["run_abricate_plasmid"] else [],
         expand(config["outdir"]+"/{prefix}/summaries/abritamr_resistance.txt", prefix=prefix) if config["genotype_modules"]["run_abritamr"] else [],
         expand(config["outdir"]+"/{prefix}/summaries/amrfinder_raw.txt", prefix=prefix) if config["genotype_modules"]["run_abritamr"] else [],
@@ -72,7 +73,7 @@ rule all:
         expand(config['outdir']+"/{prefix}/clermontyping/{sample}/{sample}_phylogroups.txt",sample=sample_ids, prefix=prefix) if config["genotype_modules"]["run_phylogrouping"] else [],
         expand(config["outdir"]+"/{prefix}/summaries/clermontyping.txt", prefix=prefix) if config["genotype_modules"]["run_phylogrouping"] else [],
         #expand(config["outdir"]+"/{prefix}/summaries/abritamr_summary_matches.txt", prefix=prefix) if config["genotype_modules"]["run_abritamr"] else [],
-        expand(config['outdir']+"/{prefix}/mobsuite/mobtyper_results.txt", prefix=prefix) if config["genotype_modules"]["run_mobsuite"] else [],
+        expand(config['outdir']+"/{prefix}/summaries/mobtyper_results.txt", prefix=prefix) if config["genotype_modules"]["run_mobsuite"] else [],
         "resources/dbs/dfast" if config["genotype_modules"]['genome_annotater'] == "dfast" and path.exists("resources/dbs/dfast") == False else [],
 
 onerror:
