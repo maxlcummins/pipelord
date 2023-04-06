@@ -103,7 +103,22 @@ elif config["genotype_modules"]['genome_annotater'] == "prokka":
                             line_fix = re.sub(config['outdir']+"/"+config['prefix']+"/prokka/gffs/"+'.gff\n', "", line_fix)
                             print(line_fix)
                             f_out.write(line.replace(line, line_fix))
-else: print("Please set the genome annotater in the config file to either 'dfast' or 'prokka'")
+elif config["genotype_modules"]['genome_annotater'] == "bakta":
+    rule make_fofns:
+        input: config['subset_fofn'],
+        output: expand(config['outdir']+"/{prefix}/subsets/{subset_prefix}_gff_locations.txt", prefix=prefix, subset_prefix=subset_prefixes)
+        run:
+            for f, o in zip(input,output):
+                with open(f, 'r') as f_in:
+                    with open(o, 'w') as f_out:
+                        for line in f_in:
+                            line_fix = re.sub('^', config['outdir']+"/"+config['prefix']+"/bakta/gffs/", line)
+                            line_fix = re.sub('\n', '', line_fix)
+                            line_fix = re.sub('$', ".gff\n", line_fix)
+                            line_fix = re.sub(config['outdir']+"/"+config['prefix']+"/bakta/gffs/"+'.gff3\n', "", line_fix)
+                            print(line_fix)
+                            f_out.write(line.replace(line, line_fix))
+else: print("Please set the genome annotater in the config file to either 'dfast', 'bakta' or 'prokka'")
 
 rule panaroo_mash_db_dl:
     output:
