@@ -93,7 +93,7 @@ elif config["genotype_modules"]['genome_annotater'] == "bakta":
                 config['base_log_outdir']+"/"+config["prefix"]+"/bakta/bakta_db_dl.log"
             shell:
                 """
-                if [ ! -d "{output}" ]; then echo 'bakta db not located, downloading to resources/dbs/bakta/db-light'
+                if [ ! -d "{output}" ]; then echo 'bakta db not located, downloading to {output}'
                 bakta_db download --output {output} 1&2> {log}
                 fi
                 """

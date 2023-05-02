@@ -24,7 +24,7 @@ rule mobsuite_recon:
         assembly = config['outdir']+"/{prefix}/shovill/assemblies/{sample}.fasta",
         db = "resources/dbs/mobsuite/ncbi_plasmid_full_seqs.fas.msh"
     output:
-        config['outdir']+"/{prefix}/mobsuite/{sample}/mobtyper_results.txt"
+        config['outdir']+"/{prefix}/mobsuite/{sample}/contig_report.txt"
     log:
         err = config['base_log_outdir']+"/{prefix}/mobsuite/recon/{sample}.err.log",
         out = config['base_log_outdir']+"/{prefix}/mobsuite/recon/{sample}.out.log"
@@ -39,7 +39,7 @@ rule mobsuite_recon:
         
 rule mobsuite_summarise:
     input:
-        mobsuite = expand(config['outdir']+"/{prefix}/mobsuite/{sample}/mobtyper_results.txt", prefix=prefix, sample=sample_ids)
+        mobsuite = expand(config['outdir']+"/{prefix}/mobsuite/{sample}/contig_report.txt", prefix=prefix, sample=sample_ids)
     output:
         config['outdir']+"/{prefix}/summaries/mobtyper_results.txt"
     log:
