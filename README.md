@@ -1,5 +1,7 @@
 # pipelord
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14048334.svg)](https://doi.org/10.5281/zenodo.14048334)
+
 ## About
 
 This repo contains a genomic analysis pipeline used for analysing mostly *E. coli* genomes, though it also sees use in analysing *Salmonella* genomes and some other species as well, however note that using this tool for analysing other species may cause certain tools to either break or will otherwise just limit the usefullness of this tool in the first place.
